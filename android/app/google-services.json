@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "286128112173",
+    "firebase_url": "https://testlaravel-8c5b7-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "testlaravel-8c5b7",
+    "storage_bucket": "testlaravel-8c5b7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:286128112173:android:2f5263e6b2521d86786ea4",
+        "android_client_info": {
+          "package_name": "com.barocars.barocars"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "286128112173-fgsj48f5asmsl2ctkhe23e55rd6nqsdj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCJ7k8ytNXKn3dxv5dy7cb8o3AAUVM5o1M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "286128112173-fgsj48f5asmsl2ctkhe23e55rd6nqsdj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
