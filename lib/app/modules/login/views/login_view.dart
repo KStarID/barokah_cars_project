@@ -1,5 +1,6 @@
 import 'package:barokah_cars_project/utils/constants/image_strings.dart';
 import 'package:barokah_cars_project/utils/constants/text_strings.dart';
+import 'package:barokah_cars_project/utils/validators/validation.dart';
 import 'package:barokah_cars_project/utils/widgets/google_authentication.dart';
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
@@ -30,12 +31,7 @@ class LoginView extends GetView<LoginController> {
               const SizedBox(height: 16,),
               TextFormField(
                 controller: TextEditingController(),
-                validator: (value) {
-                  if (value == null || value.isEmpty){
-                    return 'Username tidak boleh kosong.';
-                  }
-                  return null;
-                },
+                validator: (value) => BaroValidator.usernameValidate(value),
                 decoration: InputDecoration(
                   labelText: BaroTexts.usernameLogin,
                   labelStyle: GoogleFonts.plusJakartaSans(fontSize: 16, color: const Color(0xFFB0B0B0)),
@@ -54,12 +50,7 @@ class LoginView extends GetView<LoginController> {
               TextFormField(
                 controller: TextEditingController(),
                 obscureText: true,
-                validator: (value) {
-                  if (value == null || value.isEmpty){
-                    return 'Password tidak boleh kosong.';
-                  }
-                  return null;
-                },
+                validator: (value) => BaroValidator.passwordValidate(value),
                 decoration: InputDecoration(
                   labelText: BaroTexts.passwordLogin,
                   labelStyle: GoogleFonts.plusJakartaSans(fontSize: 16, color: const Color(0xFFB0B0B0)),
