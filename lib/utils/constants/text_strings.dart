@@ -18,4 +18,5 @@ class BaroTexts {
   static const String or = 'Atau';
   static const String dontHaveAccount = 'Belum memiliki akun?';
   static const String registerHere = 'Daftar disini';
+  static const String continueWithGoogle = 'Lanjutkan dengan Google';
 }

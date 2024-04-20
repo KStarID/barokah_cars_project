@@ -1,3 +1,5 @@
+import 'package:barokah_cars_project/utils/constants/image_strings.dart';
+import 'package:barokah_cars_project/utils/constants/text_strings.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -25,9 +27,9 @@ class LogInWithGoogle extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Image(image: AssetImage('assets/logos/google.png'), height: 20,),
+              const Image(image: AssetImage(BaroImages.google), height: 20,),
               const SizedBox(width: 16,),
-              Text('Lanjutkan dengan Google', style: GoogleFonts.plusJakartaSans(textStyle: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: Color(0xFF3D3D3D))),)
+              Text(BaroTexts.continueWithGoogle, style: GoogleFonts.plusJakartaSans(textStyle: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: Color(0xFF3D3D3D))),)
             ],
           ),
           ),
