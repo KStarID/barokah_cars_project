@@ -1,3 +1,4 @@
+import 'package:barokah_cars_project/utils/constants/image_strings.dart';
 import 'package:barokah_cars_project/utils/constants/text_strings.dart';
 import 'package:barokah_cars_project/utils/widgets/google_authentication.dart';
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
@@ -19,7 +20,7 @@ class LoginView extends GetView<LoginController> {
             children: [
               const Center(
                 child: Image(
-                  image: AssetImage("assets/logos/barocars_logo.png")
+                  image: AssetImage(BaroImages.appLogo),
                 ),
               ),
               const SizedBox(height: 44,),
