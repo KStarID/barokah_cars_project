@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 import '../controllers/search_screen_controller.dart';
 
 class SearchScreenView extends GetView<SearchScreenController> {
-  const SearchScreenView({Key? key}) : super(key: key);
+  const SearchScreenView({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -13,7 +13,7 @@ class SearchScreenView extends GetView<SearchScreenController> {
         title: const Text('SearchScreenView'),
         centerTitle: true,
       ),
-      body: Center(
+      body: const Center(
         child: Text(
           'SearchScreenView is working',
           style: TextStyle(fontSize: 20),

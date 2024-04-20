@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 import '../controllers/splash_screen_controller.dart';
 
 class SplashScreenView extends GetView<SplashScreenController> {
-  const SplashScreenView({Key? key}) : super(key: key);
+  const SplashScreenView({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -13,7 +13,7 @@ class SplashScreenView extends GetView<SplashScreenController> {
         title: const Text('SplashScreenView'),
         centerTitle: true,
       ),
-      body: Center(
+      body: const Center(
         child: Text(
           'SplashScreenView is working',
           style: TextStyle(fontSize: 20),

@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 import '../controllers/register_controller.dart';
 
 class RegisterView extends GetView<RegisterController> {
-  const RegisterView({Key? key}) : super(key: key);
+  const RegisterView({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -13,7 +13,7 @@ class RegisterView extends GetView<RegisterController> {
         title: const Text('RegisterView'),
         centerTitle: true,
       ),
-      body: Center(
+      body: const Center(
         child: Text(
           'RegisterView is working',
           style: TextStyle(fontSize: 20),
