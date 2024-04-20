@@ -24,6 +24,7 @@ class LoginView extends GetView<LoginController> {
               children: [
                 // -- Header
                 const BaroLoginHeader(),
+                const SizedBox(height: 16,),
                 
                 // -- Form
                 const BaroLoginForm(),
