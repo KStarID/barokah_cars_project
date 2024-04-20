@@ -12,7 +12,9 @@ class BaroValidator {
   // -- Password Validation
   static String? passwordValidate(String? value){
     if (value == null || value.isEmpty){
-      return 'Password tidak boleh kosong.';
+      return 'ⓘ Oops, password kamu salah';
+    } else if (value.length < 6){
+        return 'Password terdiri dari minimal 6 karakter';
     }
     return null;
   }

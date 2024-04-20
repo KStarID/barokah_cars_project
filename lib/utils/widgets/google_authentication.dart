@@ -3,8 +3,8 @@ import 'package:barokah_cars_project/utils/constants/text_strings.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class LogInWithGoogle extends StatelessWidget {
-  const LogInWithGoogle({
+class ContinueWithGoogle extends StatelessWidget {
+  const ContinueWithGoogle({
     super.key,
   });
 
