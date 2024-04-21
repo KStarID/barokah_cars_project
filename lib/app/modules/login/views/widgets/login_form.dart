@@ -11,16 +11,16 @@ class BaroLoginForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final controller = Get.put(LoginController());
+    final loginController = Get.put(LoginController());
     return Column(
       children: [
 
         // -- Username
         TextFormField(
-          controller: controller.username,
+          controller: loginController.username,
           validator: (value) => BaroValidator.usernameValidate(value),
           decoration: InputDecoration(
-            labelText: BaroTexts.usernameLogin,
+            labelText: BaroTexts.username,
             labelStyle: GoogleFonts.plusJakartaSans(fontSize: 16, color: const Color(0xFFB0B0B0)),
             fillColor: const Color(0xFFF6F6F6),
             filled: true,
@@ -37,12 +37,12 @@ class BaroLoginForm extends StatelessWidget {
 
         // -- Password
         TextFormField(
-          controller: controller.password,
+          controller: loginController.password,
           autovalidateMode: AutovalidateMode.onUserInteraction,
           obscureText: true,
           validator: (value) => BaroValidator.passwordValidate(value),
           decoration: InputDecoration(
-            labelText: BaroTexts.passwordLogin,
+            labelText: BaroTexts.password,
             labelStyle: GoogleFonts.plusJakartaSans(fontSize: 16, color: const Color(0xFFB0B0B0)),
             fillColor: const Color(0xFFF6F6F6),
             filled: true,

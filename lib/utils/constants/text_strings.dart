@@ -8,11 +8,15 @@ class BaroTexts {
 
   // -- Authentication Heading
   static const String loginTitle = 'Selamat Datang!';
+  static const String registerTitle = 'Buat Akun';
   static const String loginDesc = 'Silahkan masuk untuk memulai.';
+  static const String registerDesc = 'Silahkan mengisi form berikut dengan benar.';
 
   // -- Authentication Form
-  static const String usernameLogin = 'Username';
-  static const String passwordLogin = 'Password';
+  static const String username = 'Username';
+  static const String fullnameRegister = 'Nama Lengkap';
+  static const String password = 'Password';
+  static const String confirmPasswordRegister = 'Konfirmasi Password';
   static const String forgetPassword = 'Lupa password?';
   static const String login = 'Masuk';
   static const String or = 'Atau';

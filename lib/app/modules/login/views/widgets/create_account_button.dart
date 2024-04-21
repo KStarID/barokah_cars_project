@@ -1,5 +1,7 @@
+import 'package:barokah_cars_project/app/routes/app_pages.dart';
 import 'package:barokah_cars_project/utils/constants/text_strings.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class BaroCreateAccountButton extends StatelessWidget {
@@ -13,7 +15,7 @@ class BaroCreateAccountButton extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Text(BaroTexts.dontHaveAccount, style: GoogleFonts.plusJakartaSans(textStyle: const TextStyle(color: Color(0xFF3D3D3D), fontSize: 14, fontWeight: FontWeight.w500)),),
-        TextButton(onPressed: (){}, child: Text(BaroTexts.registerHere, style: GoogleFonts.plusJakartaSans(textStyle: const TextStyle(color: Color(0xFFE82027), fontWeight: FontWeight.w700, fontSize: 14)))),
+        TextButton(onPressed: () => Get.toNamed(Routes.REGISTER), child: Text(BaroTexts.registerHere, style: GoogleFonts.plusJakartaSans(textStyle: const TextStyle(color: Color(0xFFE82027), fontWeight: FontWeight.w700, fontSize: 14)))),
       ],
     );
   }
