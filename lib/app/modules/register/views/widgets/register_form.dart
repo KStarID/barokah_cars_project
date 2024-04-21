@@ -36,8 +36,8 @@ class BaroRegisterForm extends StatelessWidget {
 
         // -- Username
         TextFormField(
-          controller: registerController.fullname,
-          validator: (value) => BaroValidator.fullnameValidate(value),
+          controller: registerController.username,
+          validator: (value) => BaroValidator.usernameValidate (value),
           decoration: InputDecoration(
             labelText: BaroTexts.username,
             labelStyle: GoogleFonts.plusJakartaSans(textStyle: TextStyle(fontSize: 16, fontWeight: FontWeight.w500, color: const Color(0xFFB0B0B0))),
@@ -57,7 +57,6 @@ class BaroRegisterForm extends StatelessWidget {
         // -- Password
         TextFormField(
           controller: registerController.password,
-          autovalidateMode: AutovalidateMode.onUserInteraction,
           obscureText: true,
           validator: (value) => BaroValidator.passwordValidate(value),
           decoration: InputDecoration(
@@ -83,10 +82,9 @@ class BaroRegisterForm extends StatelessWidget {
         ),
         const SizedBox(height: 16,),
 
-        // -- Password
+        // -- Confirmation Password
         TextFormField(
           controller: registerController.confirmPassword,
-          autovalidateMode: AutovalidateMode.onUserInteraction,
           obscureText: true,
           validator: (value) => BaroValidator.confirmPasswordValidate(value, registerController.password.text),
           decoration: InputDecoration(

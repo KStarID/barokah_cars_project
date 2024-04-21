@@ -19,6 +19,7 @@ class BaroTexts {
   static const String confirmPasswordRegister = 'Konfirmasi Password';
   static const String forgetPassword = 'Lupa password?';
   static const String login = 'Masuk';
+  static const String register = 'Daftar';
   static const String or = 'Atau';
   static const String dontHaveAccount = 'Belum memiliki akun?';
   static const String registerHere = 'Daftar disini';
