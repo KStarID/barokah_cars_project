@@ -26,7 +26,7 @@ class LoginView extends GetView<LoginController> {
                 Center(
                   child: Image.asset(BaroImages.appLogo),
                 ),
-                const SizedBox(height: 44,),
+                const SizedBox(height: 44.47,),
                 Text(BaroTexts.loginTitle, style: GoogleFonts.plusJakartaSans(textStyle: TextStyle(fontSize: 24, fontWeight: FontWeight.w700, color: Color(0xFF3D3D3D))),),
                 const SizedBox(height: 4,),
                 Text(BaroTexts.loginDesc, style: GoogleFonts.plusJakartaSans(textStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Color(0xFF3D3D3D))),),
@@ -115,7 +115,6 @@ class LoginView extends GetView<LoginController> {
                     child: Text('Masuk', style: GoogleFonts.plusJakartaSans(textStyle: TextStyle(fontSize: 18, fontWeight: FontWeight.w600, color: Color(0xFFFFFFFF)))),
                   ),
                 ),
-                const SizedBox(height: 16,),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -123,7 +122,6 @@ class LoginView extends GetView<LoginController> {
                     TextButton(onPressed: () => Get.toNamed(Routes.REGISTER), child: Text("Daftar disini", style: GoogleFonts.plusJakartaSans(textStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.w700, color: Color(0xFFE82027))),))
                   ],
                 ),
-                const SizedBox(height: 20,),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -160,7 +158,6 @@ class LoginView extends GetView<LoginController> {
             ),
         ),
       ),
-
     );
   }
 }

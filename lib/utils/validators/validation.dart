@@ -4,7 +4,7 @@ class BaroValidator {
   // -- fullname Validation
   static String? fullnameValidate(String? value){
     if (value == null || value.isEmpty){
-      return 'Nama panjang tidak boleh kosong.';
+      return 'Nama lengkap tidak boleh kosong.';
     }
     return null;
   }
