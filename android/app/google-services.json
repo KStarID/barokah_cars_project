@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "224497967482",
+    "project_id": "barokah-cars-project",
+    "storage_bucket": "barokah-cars-project.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:224497967482:android:352aa70daa8591889a76c3",
+        "android_client_info": {
+          "package_name": "com.example.barokah_cars_project"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD8RxqmERkyCrCrg4Yk45f4xyNSFxrvVy4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
