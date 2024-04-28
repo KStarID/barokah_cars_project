@@ -2,10 +2,12 @@ import 'package:barokah_cars_project/app/routes/app_pages.dart';
 import 'package:barokah_cars_project/utils/constants/image_strings.dart';
 import 'package:barokah_cars_project/utils/constants/text_strings.dart';
 import 'package:barokah_cars_project/utils/validators/validation.dart';
+import 'package:barokah_cars_project/utils/widgets/widget_button.dart';
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../controllers/register_controller.dart';
 
@@ -13,6 +15,7 @@ class RegisterView extends GetView<RegisterController> {
   const RegisterView({super.key});
   @override
   Widget build(BuildContext context) {
+    final registerController = RegisterController();
     return Form(
       key: controller.registerFormKey,
       child: Scaffold(
@@ -33,7 +36,7 @@ class RegisterView extends GetView<RegisterController> {
 
               // -- Nama Lengkap
               TextFormField(
-                controller: controller.fullname,
+                controller: registerController.fullname,
                 validator: (value) => BaroValidator.fullnameValidate(value),
                 decoration: InputDecoration(
                   labelText: BaroTexts.fullnameRegister,
@@ -53,7 +56,7 @@ class RegisterView extends GetView<RegisterController> {
 
               // -- Username
               TextFormField(
-                controller: controller.username,
+                controller: registerController.username,
                 validator: (value) => BaroValidator.usernameValidate(value),
                 decoration: InputDecoration(
                   labelText: BaroTexts.username,
@@ -73,7 +76,7 @@ class RegisterView extends GetView<RegisterController> {
 
               // -- Password
               TextFormField(
-                controller: controller.password,
+                controller: registerController.password,
                 autovalidateMode: AutovalidateMode.onUserInteraction,
                 validator: (value) => BaroValidator.passwordValidate(value),
                 obscureText: true,
@@ -100,9 +103,9 @@ class RegisterView extends GetView<RegisterController> {
 
               // -- Confirm Password
               TextFormField(
-                controller: controller.confirmPassword,
+                controller: registerController.confirmPassword,
                 autovalidateMode: AutovalidateMode.onUserInteraction,
-                validator: (value) => BaroValidator.confirmPasswordValidate(value, controller.password.text),
+                validator: (value) => BaroValidator.confirmPasswordValidate(value, registerController.password.text),
                 obscureText: true,
                 decoration: InputDecoration(
                   labelText: BaroTexts.confirmPasswordRegister,
@@ -125,23 +128,17 @@ class RegisterView extends GetView<RegisterController> {
               ),
               const SizedBox(height: 16,),
 
-              SizedBox(
-                height: 52,
-                width: double.infinity,
-                child: ElevatedButton(
-                  onPressed: () => Get.toNamed(Routes.LOGIN),
-                  style: ButtonStyle(
-                    shape: MaterialStatePropertyAll<RoundedRectangleBorder>(
-                      RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10)
-                      ),
-                    ),
-                    backgroundColor: MaterialStatePropertyAll(
-                      Color(0xFFE82027)
-                    )
-                  ),
-                  child: Text("Daftar", style: GoogleFonts.plusJakartaSans(textStyle: TextStyle(fontSize: 18, fontWeight: FontWeight.w600, color: Colors.white)),)
-                ),
+              // -- Register Button
+              BaroWidgetButton(
+                buttonName: 'Daftar', 
+                onPressed: (){
+                  if (controller.registerFormKey.currentState!.validate()){
+                    GetStorage().write('username', registerController.username.text);
+                    GetStorage().write('password', registerController.password.text);
+
+                    Get.toNamed(Routes.LOGIN);
+                  }
+                }
               ),
               // -- sudah punya akun ?
               Row(
