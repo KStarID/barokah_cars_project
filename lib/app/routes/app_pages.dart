@@ -2,12 +2,12 @@ import 'package:get/get.dart';
 
 import '../modules/all_brand/bindings/all_brand_binding.dart';
 import '../modules/all_brand/views/all_brand_view.dart';
-import '../modules/edit_profile/bindings/edit_profile_binding.dart';
-import '../modules/edit_profile/views/edit_profile_view.dart';
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
 import '../modules/login/bindings/login_binding.dart';
 import '../modules/login/views/login_view.dart';
+import '../modules/navigation_bar/bindings/navigation_bar_binding.dart';
+import '../modules/navigation_bar/views/navigation_bar_view.dart';
 import '../modules/onboarding_screen/bindings/onboarding_screen_binding.dart';
 import '../modules/onboarding_screen/views/onboarding_screen_view.dart';
 import '../modules/profile_screen/bindings/profile_screen_binding.dart';
@@ -58,11 +58,6 @@ class AppPages {
       binding: ProfileScreenBinding(),
     ),
     GetPage(
-      name: _Paths.EDIT_PROFILE,
-      page: () => const EditProfileView(),
-      binding: EditProfileBinding(),
-    ),
-    GetPage(
       name: _Paths.SEARCH_SCREEN,
       page: () => const SearchScreenView(),
       binding: SearchScreenBinding(),
@@ -71,6 +66,11 @@ class AppPages {
       name: _Paths.ALL_BRAND,
       page: () => const AllBrandView(),
       binding: AllBrandBinding(),
+    ),
+    GetPage(
+      name: _Paths.NAVIGATION_BAR,
+      page: () => const NavigationBarView(),
+      binding: NavigationBarBinding(),
     ),
   ];
 }

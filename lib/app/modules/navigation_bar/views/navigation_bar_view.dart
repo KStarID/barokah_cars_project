@@ -2,20 +2,20 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 
-import '../controllers/edit_profile_controller.dart';
+import '../controllers/navigation_bar_controller.dart';
 
-class EditProfileView extends GetView<EditProfileController> {
-  const EditProfileView({Key? key}) : super(key: key);
+class NavigationBarView extends GetView<NavigationBarController> {
+  const NavigationBarView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('EditProfileView'),
+        title: const Text('NavigationBarView'),
         centerTitle: true,
       ),
       body: Center(
         child: Text(
-          'EditProfileView is working',
+          'NavigationBarView is working',
           style: TextStyle(fontSize: 20),
         ),
       ),

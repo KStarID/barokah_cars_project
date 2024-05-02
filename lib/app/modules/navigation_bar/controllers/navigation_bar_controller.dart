@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
 
-class EditProfileController extends GetxController {
-  //TODO: Implement EditProfileController
+class NavigationBarController extends GetxController {
+  //TODO: Implement NavigationBarController
 
   final count = 0.obs;
   @override
