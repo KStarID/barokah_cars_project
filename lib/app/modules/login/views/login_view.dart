@@ -6,12 +6,14 @@ import 'package:barokah_cars_project/utils/widgets/widget_button.dart';
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../controllers/login_controller.dart';
 
 class LoginView extends GetView<LoginController> {
   const LoginView({super.key});
+
   @override
   Widget build(BuildContext context) {
     final loginController = LoginController();
@@ -55,32 +57,35 @@ class LoginView extends GetView<LoginController> {
                 const SizedBox(height: 16,),
 
                 // -- Password
-                TextFormField(
-                  controller: loginController.password,
-                  autovalidateMode: AutovalidateMode.onUserInteraction,
-                  validator: (value) => BaroValidator.passwordValidate(value),
-                  obscureText: true,
-                  decoration: InputDecoration(
-                    labelText: BaroTexts.password,
-                    labelStyle: GoogleFonts.plusJakartaSans(textStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500, color: Color(0xFFB0B0B0))),
-                    fillColor: const Color(0xFFF6F6F6),
-                    filled: true,
-                    border: OutlineInputBorder(
-                      borderSide: BorderSide.none,
-                      borderRadius: BorderRadius.circular(8),
+                Obx(
+                  () => TextFormField(
+                    controller: loginController.password,
+                    autovalidateMode: AutovalidateMode.onUserInteraction,
+                    validator: (value) => BaroValidator.passwordValidate(value),
+                    obscureText: loginController.hidePassword.value,
+                    decoration: InputDecoration(
+                      labelText: BaroTexts.password,
+                      labelStyle: GoogleFonts.plusJakartaSans(textStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500, color: Color(0xFFB0B0B0))),
+                      fillColor: const Color(0xFFF6F6F6),
+                      filled: true,
+                      border: OutlineInputBorder(
+                        borderSide: BorderSide.none,
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      focusedBorder: const OutlineInputBorder(
+                        borderSide: BorderSide(color: Color(0xFFE82027))
+                      ),
+                      suffixIcon: IconButton(
+                        onPressed: () => loginController.hidePassword.value = !loginController.hidePassword.value,
+                        icon: Icon(loginController.hidePassword.value ? FluentIcons.eye_off_20_regular : FluentIcons.eye_20_regular),
+                  
+                        )
                     ),
-                    focusedBorder: const OutlineInputBorder(
-                      borderSide: BorderSide(color: Color(0xFFE82027))
-                    ),
-                    suffixIcon: IconButton(
-                      onPressed: (){}, 
-                      icon: const Icon(FluentIcons.eye_off_20_regular),
+                    style: GoogleFonts.plusJakartaSans(
+                      textStyle: const TextStyle(
+                        fontSize: 14,
                       )
-                  ),
-                  style: GoogleFonts.plusJakartaSans(
-                    textStyle: const TextStyle(
-                      fontSize: 14,
-                    )
+                    ),
                   ),
                 ),
                 Row(
@@ -98,10 +103,14 @@ class LoginView extends GetView<LoginController> {
                   buttonName: 'Masuk',
                   onPressed: () {
                     if(loginController.loginFormKey.currentState!.validate()){
-                      GetStorage().write('username', loginController.username.text);
-                      GetStorage().write('password', loginController.password.text);
+                      String? storedUsername = GetStorage().read('username');
+                      String? storedPassword = GetStorage().read('password');
 
-                      Get.toNamed(Routes.HOME);
+                      if (loginController.username.text == storedUsername && loginController.password.text == storedPassword){
+                        Get.toNamed(Routes.HOME);
+                      }else{
+                        Get.snackbar('Error', 'Username atau password yang anda masukkan salah.', colorText: Colors.white, backgroundColor: Color(0xFFE82027), duration: Duration(seconds: 3));
+                      }
                     }
                   },
                 ),
@@ -142,7 +151,8 @@ class LoginView extends GetView<LoginController> {
                         Text("Lanjutkan dengan Google", style: GoogleFonts.plusJakartaSans(textStyle: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: Color(0xFF3D3D3D))),),
                       ],
                     )),
-                )
+                ),
+                
               ],
             ),
             ),

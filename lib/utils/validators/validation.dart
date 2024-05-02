@@ -17,8 +17,18 @@ class BaroValidator {
     return null;
   }
 
-  // -- Password Validation
+  // -- RegisterPassword Validation
   static String? passwordValidate(String? value){
+    if (value == null || value.isEmpty){
+      return 'Password tidak boleh kosong';
+    } else if (value.length < 6){
+        return 'Password terdiri dari minimal 6 karakter';
+    }
+    return null;
+  }
+
+  // -- Login Password Validation
+  static String? loginPasswordValidate(String? value){
     if (value == null || value.isEmpty){
       return 'ⓘ Oops, password kamu salah';
     } else if (value.length < 6){
@@ -30,7 +40,7 @@ class BaroValidator {
   // -- Confirm Password Validation
   static String? confirmPasswordValidate(String? value, String password){
     if (value == null || value.isEmpty){
-      return 'ⓘ Oops, password kamu salah';
+      return 'Konfirmasi Password tidak boleh kosong';
     } else if (value.length < 6){
         return 'Password terdiri dari minimal 6 karakter';
     } else if (value != password){

@@ -8,6 +8,8 @@ class RegisterController extends GetxController {
   final username = TextEditingController();
   final password = TextEditingController();
   final confirmPassword = TextEditingController();
+  final hidePassword = true.obs;
+  final hideConfirmPassword = true.obs;
   final registerFormKey = GlobalKey<FormState>();
 
   void clearForm(){

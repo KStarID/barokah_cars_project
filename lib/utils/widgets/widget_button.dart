@@ -27,7 +27,7 @@ class BaroWidgetButton extends StatelessWidget {
           Color(0xFFE82027),
           ),
         ),
-        child: Text(buttonName, style: GoogleFonts.plusJakartaSans(textStyle: const TextStyle(fontSize: 18, fontWeight: FontWeight.w600, color: Color(0xFFFFFFFF)))),
+        child: Text(buttonName, style: GoogleFonts.plusJakartaSans(textStyle: const TextStyle(fontSize: 18, fontWeight: FontWeight.w600, color: Colors.white))),
       ),
     );
   }
