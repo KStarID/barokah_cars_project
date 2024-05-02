@@ -67,6 +67,7 @@ class HomeView extends GetView<HomeController> {
                 const SizedBox(height: 16,),
 
                 Text("Offers", style: GoogleFonts.plusJakartaSans(textStyle: const TextStyle(fontSize: 19, fontWeight: FontWeight.w700, color: Colors.black)),),
+                const SizedBox(height: 8,),
                 Container(
                   width: double.infinity,
                   height: 150,

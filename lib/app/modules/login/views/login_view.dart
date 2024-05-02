@@ -107,7 +107,7 @@ class LoginView extends GetView<LoginController> {
                       String? storedPassword = GetStorage().read('password');
 
                       if (loginController.username.text == storedUsername && loginController.password.text == storedPassword){
-                        Get.toNamed(Routes.HOME);
+                        Get.toNamed(Routes.NAVIGATION_BAR);
                       }else{
                         Get.snackbar('Error', 'Username atau password yang anda masukkan salah.', colorText: Colors.white, backgroundColor: Color(0xFFE82027), duration: Duration(seconds: 3));
                       }
@@ -146,7 +146,7 @@ class LoginView extends GetView<LoginController> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        const Image(image: AssetImage("assets/logos/google.png"), height: 20,),
+                        const Image(image: AssetImage("assets/icons/google.png"), height: 20,),
                         const SizedBox(width: 16,),
                         Text("Lanjutkan dengan Google", style: GoogleFonts.plusJakartaSans(textStyle: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: Color(0xFF3D3D3D))),),
                       ],

@@ -179,7 +179,7 @@ class RegisterView extends GetView<RegisterController> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        const Image(image: AssetImage("assets/logos/google.png"), height: 20,),
+                        const Image(image: AssetImage("assets/icons/google.png"), height: 20,),
                         const SizedBox(width: 16,),
                         Text("Lanjutkan dengan Google", style: GoogleFonts.plusJakartaSans(textStyle: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: Color(0xFF3D3D3D))),),
                       ],

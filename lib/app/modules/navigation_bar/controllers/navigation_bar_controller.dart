@@ -1,23 +1,11 @@
+import 'package:barokah_cars_project/app/modules/home/views/home_view.dart';
+import 'package:barokah_cars_project/app/modules/login/views/login_view.dart';
+import 'package:barokah_cars_project/app/modules/profile_screen/views/profile_screen_view.dart';
+import 'package:barokah_cars_project/app/modules/search_screen/views/search_screen_view.dart';
 import 'package:get/get.dart';
 
 class NavigationBarController extends GetxController {
-  //TODO: Implement NavigationBarController
+  final Rx<int> selectedIndex = 0.obs;
 
-  final count = 0.obs;
-  @override
-  void onInit() {
-    super.onInit();
-  }
-
-  @override
-  void onReady() {
-    super.onReady();
-  }
-
-  @override
-  void onClose() {
-    super.onClose();
-  }
-
-  void increment() => count.value++;
+  final screens = [const HomeView(), const SearchScreenView (), const LoginView(), const ProfileScreenView()];
 }
