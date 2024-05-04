@@ -138,11 +138,13 @@ class RegisterView extends GetView<RegisterController> {
               BaroWidgetButton(
                 buttonName: 'Daftar', 
                 onPressed: (){
-                  if (controller.registerFormKey.currentState!.validate()){
+                  if (registerController.registerFormKey.currentState!.validate()){
                     GetStorage().write('username', registerController.username.text);
                     GetStorage().write('password', registerController.password.text);
 
                     Get.toNamed(Routes.LOGIN);
+
+                    Get.snackbar("Akun berhasil dibuat", "Akun anda telah berhasil dibuat, silahkan melakukan login", backgroundColor: Color(0xFFE82027), colorText: Colors.white, duration: Duration(seconds: 2));
                   }
                 }
               ),
