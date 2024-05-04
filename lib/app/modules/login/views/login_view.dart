@@ -78,7 +78,6 @@ class LoginView extends GetView<LoginController> {
                       suffixIcon: IconButton(
                         onPressed: () => loginController.hidePassword.value = !loginController.hidePassword.value,
                         icon: Icon(loginController.hidePassword.value ? FluentIcons.eye_off_20_regular : FluentIcons.eye_20_regular),
-                  
                         )
                     ),
                     style: GoogleFonts.plusJakartaSans(

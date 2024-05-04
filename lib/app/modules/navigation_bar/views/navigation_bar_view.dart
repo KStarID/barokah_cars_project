@@ -7,7 +7,7 @@ class NavigationBarView extends GetView<NavigationBarController> {
   const NavigationBarView({super.key});
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<NavigationBarController>(builder: (controller) {
+    final controller = Get.put(NavigationBarController());
     return Scaffold(
       bottomNavigationBar: Obx(
         () => NavigationBar(
@@ -30,6 +30,5 @@ class NavigationBarView extends GetView<NavigationBarController> {
       ),
       body: Obx(() => controller.screens[controller.selectedIndex.value]),
     );
-    });
   }
 }
