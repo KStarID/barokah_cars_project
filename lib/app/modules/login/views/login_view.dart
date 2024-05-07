@@ -6,7 +6,6 @@ import 'package:barokah_cars_project/utils/widgets/widget_button.dart';
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../controllers/login_controller.dart';
@@ -36,12 +35,12 @@ class LoginView extends GetView<LoginController> {
                 Text(BaroTexts.loginDesc, style: GoogleFonts.plusJakartaSans(textStyle: const TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Color(0xFF3D3D3D))),),
                 const SizedBox(height: 16,),
 
-                // -- Username
+                // -- Email
                 TextFormField(
-                  controller: loginController.username,
-                  validator: (value) => BaroValidator.usernameValidate(value),
+                  controller: loginController.email,
+                  validator: (value) => BaroValidator.emailValidate(value),
                   decoration: InputDecoration(
-                    labelText: BaroTexts.username,
+                    labelText: BaroTexts.email,
                     labelStyle: GoogleFonts.plusJakartaSans(textStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500, color: Color(0xFFB0B0B0))),
                     fillColor: const Color(0xFFF6F6F6),
                     filled: true,
@@ -102,11 +101,13 @@ class LoginView extends GetView<LoginController> {
                   buttonName: 'Masuk',
                   onPressed: () {
                     if(loginController.loginFormKey.currentState!.validate()){
-                      String? storedUsername = GetStorage().read('username');
+                      String? storedEmail = GetStorage().read('email');
                       String? storedPassword = GetStorage().read('password');
 
-                      if (loginController.username.text == storedUsername && loginController.password.text == storedPassword){
+                      if (loginController.email.text == storedEmail && loginController.password.text == storedPassword){
                         Get.toNamed(Routes.NAVIGATION_BAR);
+
+                        Get.snackbar("Login berhasil", "Selamat datang kembali! Anda berhasil masuk ke akun anda", backgroundColor: Color(0xFFE82027), colorText: Colors.white, duration: Duration(seconds: 5));
                       }else{
                         Get.snackbar('Error', 'Username atau password yang anda masukkan salah.', colorText: Colors.white, backgroundColor: Color(0xFFE82027), duration: Duration(seconds: 3));
                       }

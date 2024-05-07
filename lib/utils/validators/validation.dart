@@ -2,17 +2,24 @@
 
 class BaroValidator {
   // -- fullname Validation
-  static String? fullnameValidate(String? value){
+  static String? nameValidate(String? value){
     if (value == null || value.isEmpty){
-      return 'Nama lengkap tidak boleh kosong.';
+      return 'Nama tidak boleh kosong.';
     }
     return null;
   }
 
-  // -- Username Validation
-  static String? usernameValidate(String? value){
+  // -- Email Validation
+  static bool isValidEmail(String email) {
+    final RegExp emailRegex = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
+    return emailRegex.hasMatch(email);
+    }
+
+  static String? emailValidate(String? value){
     if (value == null || value.isEmpty){
-      return 'Username tidak boleh kosong.';
+      return 'Email tidak boleh kosong.';
+    } else if (!isValidEmail(value)){
+      return 'Silahkan masukkan format email yang valid';
     }
     return null;
   }

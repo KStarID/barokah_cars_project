@@ -33,12 +33,12 @@ class RegisterView extends GetView<RegisterController> {
               Text(BaroTexts.registerDesc, style: GoogleFonts.plusJakartaSans(textStyle: const TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Color(0xFF3D3D3D))),),
               const SizedBox(height: 16,),
 
-              // -- Nama Lengkap
+              // -- Name
               TextFormField(
-                controller: registerController.fullname,
-                validator: (value) => BaroValidator.fullnameValidate(value),
+                controller: registerController.name,
+                validator: (value) => BaroValidator.nameValidate(value),
                 decoration: InputDecoration(
-                  labelText: BaroTexts.fullnameRegister,
+                  labelText: BaroTexts.nameRegister,
                   labelStyle: GoogleFonts.plusJakartaSans(textStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500, color: Color(0xFFB0B0B0))),
                   fillColor: const Color(0xFFF6F6F6),
                   filled: true,
@@ -53,12 +53,12 @@ class RegisterView extends GetView<RegisterController> {
               ),
               const SizedBox(height: 16,),
 
-              // -- Username
+              // -- Email
               TextFormField(
-                controller: registerController.username,
-                validator: (value) => BaroValidator.usernameValidate(value),
+                controller: registerController.email,
+                validator: (value) => BaroValidator.emailValidate(value),
                 decoration: InputDecoration(
-                  labelText: BaroTexts.username,
+                  labelText: BaroTexts.email,
                   labelStyle: GoogleFonts.plusJakartaSans(textStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500, color: Color(0xFFB0B0B0))),
                   fillColor: const Color(0xFFF6F6F6),
                   filled: true,
@@ -139,12 +139,12 @@ class RegisterView extends GetView<RegisterController> {
                 buttonName: 'Daftar', 
                 onPressed: (){
                   if (registerController.registerFormKey.currentState!.validate()){
-                    GetStorage().write('username', registerController.username.text);
+                    GetStorage().write('email', registerController.email.text);
                     GetStorage().write('password', registerController.password.text);
 
                     Get.toNamed(Routes.LOGIN);
 
-                    Get.snackbar("Akun berhasil dibuat", "Akun anda telah berhasil dibuat, silahkan melakukan login", backgroundColor: Color(0xFFE82027), colorText: Colors.white, duration: Duration(seconds: 2));
+                    Get.snackbar("Registrasi berhasil", "Selamat! Anda berhasil melakukan Registrasi. Silahkan masuk dan temukan mobil impian anda.", backgroundColor: Color(0xFFE82027), colorText: Colors.white, duration: Duration(seconds: 4));
                   }
                 }
               ),

@@ -5,13 +5,13 @@ class ProductCustomCard extends StatelessWidget {
   const ProductCustomCard({
     super.key, 
     required this.image, 
-    required this.brand, 
-    required this.stock,
+    required this.name, 
+    required this.price,
   });
 
   final String image;
-  final String brand;
-  final String stock;
+  final String name;
+  final String price;
 
   @override
   Widget build(BuildContext context) {
@@ -26,16 +26,12 @@ class ProductCustomCard extends StatelessWidget {
         padding: const EdgeInsets.all(6.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Image(image: AssetImage(image)),
+            Center(child: Image(image: AssetImage(image))),
             const SizedBox(height: 16,),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(brand, style: GoogleFonts.plusJakartaSans(textStyle: const TextStyle(fontSize: 10, fontWeight: FontWeight.w600, color: Colors.black)),),
-                Text(stock, style: GoogleFonts.plusJakartaSans(textStyle: const TextStyle(fontSize: 10, fontWeight: FontWeight.w600, color: Color(0xFFB0B0B0))),),
-              ],
-            )
+            Text(name, style: GoogleFonts.plusJakartaSans(textStyle: const TextStyle(fontSize: 10, fontWeight: FontWeight.w600, color: Colors.black)),),
+            Text(price, style: GoogleFonts.plusJakartaSans(textStyle: const TextStyle(fontSize: 10, fontWeight: FontWeight.w600, color: Color(0xFFE82027))),)
           ],
         ),
       ),

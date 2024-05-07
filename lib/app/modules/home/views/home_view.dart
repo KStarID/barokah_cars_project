@@ -1,5 +1,4 @@
 import 'package:barokah_cars_project/app/modules/home/views/widgets/brand_card.dart';
-import 'package:barokah_cars_project/app/modules/home/views/widgets/product_brands_card.dart';
 import 'package:barokah_cars_project/app/modules/home/views/widgets/product_suggestions_card.dart';
 import 'package:barokah_cars_project/utils/constants/image_strings.dart';
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
@@ -9,7 +8,7 @@ import 'package:google_fonts/google_fonts.dart';
 import '../controllers/home_controller.dart';
 
 class HomeView extends GetView<HomeController> {
-  const HomeView({Key? key}) : super(key: key);
+  const HomeView({super.key});
   
   @override
   Widget build(BuildContext context) {
@@ -40,7 +39,7 @@ class HomeView extends GetView<HomeController> {
                 ),
                 const SizedBox(height: 16,),
                 
-                Container(
+                SizedBox(
                   height: 85,
                   width: double.infinity,
                   child: ListView(
@@ -147,27 +146,17 @@ class HomeView extends GetView<HomeController> {
                 const SizedBox(height: 16,),
                 
                 SizedBox(
-                  height: 105,
+                  height: 108,
                   width: double.infinity,
                   child: ListView(
                     clipBehavior: Clip.none,
                     scrollDirection: Axis.horizontal,
                     children: const [
-                      ProductCustomCard(brand: 'Toyota', stock: '12', image: BaroImages.toyota,),
+                      ProductCustomCard(image: BaroImages.bmwM2, name: "BMW M2", price: "Rp1.767.000.000"),
                       SizedBox(width: 12,),
-                      ProductCustomCard(brand: 'Nissan', stock: '8', image: BaroImages.nissan,),
+                      ProductCustomCard(image: BaroImages.fordMustang, name: "Ford Mustang 2018", price: "Rp2.850.000.000"),
                       SizedBox(width: 12,),
-                      ProductCustomCard(brand: 'Mercedez', stock: '6', image: BaroImages.mercedezBenz,),
-                      SizedBox(width: 12,),
-                      ProductCustomCard(brand: 'Lexus', stock: '11', image: BaroImages.lexus,),
-                      SizedBox(width: 12,),
-                      ProductCustomCard(brand: 'Toyota', stock: '12', image: BaroImages.toyota,),
-                      SizedBox(width: 12,),
-                      ProductCustomCard(brand: 'Nissan', stock: '8', image: BaroImages.nissan,),
-                      SizedBox(width: 12,),
-                      ProductCustomCard(brand: 'Mercedez', stock: '6', image: BaroImages.mercedezBenz,),
-                      SizedBox(width: 12,),
-                      ProductCustomCard(brand: 'Lexus', stock: '11', image: BaroImages.lexus,),
+                      ProductCustomCard(image: BaroImages.toyotaCHR, name: "Toyota C-HR 2023", price: "Rp602.000.000"),
                     ],
                   ),
                 ),
@@ -175,7 +164,7 @@ class HomeView extends GetView<HomeController> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text("Brands", style: GoogleFonts.plusJakartaSans(textStyle: const TextStyle(fontSize: 19, fontWeight: FontWeight.w700, color: Colors.black)),),
+                    Text("Recent Visits", style: GoogleFonts.plusJakartaSans(textStyle: const TextStyle(fontSize: 19, fontWeight: FontWeight.w700, color: Colors.black)),),
                     TextButton(
                       onPressed: (){}, 
                       child: Text("View all", style: GoogleFonts.plusJakartaSans(textStyle: const TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Color(0xFFE82027))),)),
@@ -183,28 +172,18 @@ class HomeView extends GetView<HomeController> {
                 ),
                 const SizedBox(height: 16,),
                 
-                Container(
-                  height: 105,
+                SizedBox(
+                  height: 108,
                   width: double.infinity,
                   child: ListView(
                     clipBehavior: Clip.none,
                     scrollDirection: Axis.horizontal,
                     children: const [
-                      ProductBrandCard(brand: 'Toyota', stock: '12', image: BaroImages.toyota,),
+                      ProductCustomCard(image: BaroImages.toyotaCHR, name: "Toyota C-HR 2023", price: "Rp1.767.000.000"),
                       SizedBox(width: 12,),
-                      ProductBrandCard(brand: 'Nissan', stock: '8', image: BaroImages.nissan,),
+                      ProductCustomCard(image: BaroImages.bmwM2, name: "BMW M2", price: "Rp2.850.000.000"),
                       SizedBox(width: 12,),
-                      ProductBrandCard(brand: 'Mercedez', stock: '6', image: BaroImages.mercedezBenz,),
-                      SizedBox(width: 12,),
-                      ProductBrandCard(brand: 'Lexus', stock: '11', image: BaroImages.lexus,),
-                      SizedBox(width: 12,),
-                      ProductBrandCard(brand: 'Toyota', stock: '12', image: BaroImages.toyota,),
-                      SizedBox(width: 12,),
-                      ProductBrandCard(brand: 'Nissan', stock: '8', image: BaroImages.nissan,),
-                      SizedBox(width: 12,),
-                      ProductBrandCard(brand: 'Mercedez', stock: '6', image: BaroImages.mercedezBenz,),
-                      SizedBox(width: 12,),
-                      ProductBrandCard(brand: 'Lexus', stock: '11', image: BaroImages.lexus,),
+                      ProductCustomCard(image: BaroImages.fordMustang, name: "Ford Mustang 2018", price: "Rp602.000.000"),
                     ],
                   ),
                 ),

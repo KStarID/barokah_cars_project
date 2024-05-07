@@ -3,11 +3,12 @@ version: 1.0.0+1
 publish_to: none
 description: A new Flutter project.
 environment:
-  sdk: '>=3.3.3 <4.0.0'
+  sdk: ">=3.3.3 <4.0.0"
 
 dependencies:
   cloud_firestore: ^4.17.0
   cupertino_icons: ^1.0.6
+  firebase_auth: ^4.19.4
   firebase_core: ^2.30.0
   fluentui_system_icons: ^1.0.0
   flutter:

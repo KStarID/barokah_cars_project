@@ -14,12 +14,12 @@ class BaroRegisterForm extends StatelessWidget {
     final registerController = Get.put(RegisterController());
     return Column(
       children: [
-        // -- Nama Lengkap
+        // -- Name
         TextFormField(
-          controller: registerController.fullname,
-          validator: (value) => BaroValidator.fullnameValidate(value),
+          controller: registerController.name,
+          validator: (value) => BaroValidator.nameValidate(value),
           decoration: InputDecoration(
-            labelText: BaroTexts.fullnameRegister,
+            labelText: BaroTexts.nameRegister,
             labelStyle: GoogleFonts.plusJakartaSans(textStyle: TextStyle(fontSize: 16, fontWeight: FontWeight.w500, color: const Color(0xFFB0B0B0))),
             fillColor: Color(0xFFF6F6F6),
             filled: true,
@@ -34,12 +34,12 @@ class BaroRegisterForm extends StatelessWidget {
         ),
         const SizedBox(height: 16,),
 
-        // -- Username
+        // -- Email
         TextFormField(
-          controller: registerController.username,
-          validator: (value) => BaroValidator.usernameValidate (value),
+          controller: registerController.email,
+          validator: (value) => BaroValidator.emailValidate(value),
           decoration: InputDecoration(
-            labelText: BaroTexts.username,
+            labelText: BaroTexts.email,
             labelStyle: GoogleFonts.plusJakartaSans(textStyle: TextStyle(fontSize: 16, fontWeight: FontWeight.w500, color: const Color(0xFFB0B0B0))),
             fillColor: Color(0xFFF6F6F6),
             filled: true,

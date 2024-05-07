@@ -4,8 +4,8 @@ import 'package:get/get.dart';
 class RegisterController extends GetxController {
 
   // -- Variables
-  final fullname = TextEditingController();
-  final username = TextEditingController();
+  final name = TextEditingController();
+  final email = TextEditingController();
   final password = TextEditingController();
   final confirmPassword = TextEditingController();
   final hidePassword = true.obs;
@@ -13,8 +13,8 @@ class RegisterController extends GetxController {
   final registerFormKey = GlobalKey<FormState>();
 
   void clearForm(){
-    fullname.clear();
-    username.clear();
+    name.clear();
+    email.clear();
     password.clear();
     confirmPassword.clear();
   }

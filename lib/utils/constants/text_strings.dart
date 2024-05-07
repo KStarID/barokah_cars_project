@@ -13,8 +13,8 @@ class BaroTexts {
   static const String registerDesc = 'Silahkan mengisi form berikut dengan benar.';
 
   // -- Authentication Form
-  static const String username = 'Username';
-  static const String fullnameRegister = 'Nama Lengkap';
+  static const String email = 'Email';
+  static const String nameRegister = 'Nama';
   static const String password = 'Password';
   static const String confirmPasswordRegister = 'Konfirmasi Password';
   static const String forgetPassword = 'Lupa password?';
