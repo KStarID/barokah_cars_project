@@ -20,8 +20,8 @@ class BaroRegisterForm extends StatelessWidget {
           validator: (value) => BaroValidator.nameValidate(value),
           decoration: InputDecoration(
             labelText: BaroTexts.nameRegister,
-            labelStyle: GoogleFonts.plusJakartaSans(textStyle: TextStyle(fontSize: 16, fontWeight: FontWeight.w500, color: const Color(0xFFB0B0B0))),
-            fillColor: Color(0xFFF6F6F6),
+            labelStyle: GoogleFonts.plusJakartaSans(textStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500, color: Color(0xFFB0B0B0))),
+            fillColor: const Color(0xFFF6F6F6),
             filled: true,
             border: OutlineInputBorder(
               borderSide: BorderSide.none,
@@ -40,8 +40,8 @@ class BaroRegisterForm extends StatelessWidget {
           validator: (value) => BaroValidator.emailValidate(value),
           decoration: InputDecoration(
             labelText: BaroTexts.email,
-            labelStyle: GoogleFonts.plusJakartaSans(textStyle: TextStyle(fontSize: 16, fontWeight: FontWeight.w500, color: const Color(0xFFB0B0B0))),
-            fillColor: Color(0xFFF6F6F6),
+            labelStyle: GoogleFonts.plusJakartaSans(textStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500, color: Color(0xFFB0B0B0))),
+            fillColor: const Color(0xFFF6F6F6),
             filled: true,
             border: OutlineInputBorder(
               borderSide: BorderSide.none,

@@ -24,4 +24,16 @@ class BaroTexts {
   static const String dontHaveAccount = 'Belum memiliki akun?';
   static const String registerHere = 'Daftar disini';
   static const String continueWithGoogle = 'Lanjutkan dengan Google';
+
+  // -- OnBoarding Texts
+  static const String onBoardingTitle1 = "Pilih produk Anda";
+  static const String onBoardingTitle2 = "Update Event Mobil";
+  static const String onBoardingTitle3 = "Kemudahan Berbelanja";
+
+  static const String onBoardingSubtitle1 = "Selamat Datang di Barokah Cars, tempat anda menemukan gaya mobil populer anda";
+  static const String onBoardingSubtitle2 = "Sumber terpercaya dan update terkini seputar event dan perkembangan mobil";
+  static const String onBoardingSubtitle3 = "Pilihan terbaik untuk menemukan pengalaman belanja mobil yang mudah dan lengkap bagi pembeli dan penjual";
+
+  static const String buttonTitle = "Selanjutnya";
+  static const String lastButtonTitle = "Mulai Sekarang";
 }

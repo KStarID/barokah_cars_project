@@ -17,4 +17,9 @@ class BaroImages {
   static const String bmwM2 = "assets/images/bmw_m2.png";
   static const String fordMustang = "assets/images/ford_mustang.png";
   static const String toyotaCHR = "assets/images/toyota_chr.png";
+
+  // -- OnBoarding Images
+  static const String onBoardingImage1 = "assets/onboardings/onboarding1.png";
+  static const String onBoardingImage2 = "assets/onboardings/onboarding2.png";
+  static const String onBoardingImage3 = "assets/onboardings/onboarding3.png";
 }
