@@ -35,7 +35,7 @@ class RegisterView extends GetView<RegisterController> {
               const SizedBox(height: 4,),
               Text(BaroTexts.registerDesc, style: GoogleFonts.plusJakartaSans(textStyle: const TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Color(0xFF3D3D3D))),),
               const SizedBox(height: 16,),
-
+    
               // -- Name
               TextFormField(
                 controller: registerController.name,
@@ -55,7 +55,7 @@ class RegisterView extends GetView<RegisterController> {
                 ),
               ),
               const SizedBox(height: 16,),
-
+    
               // -- Email
               TextFormField(
                 controller: registerController.email,
@@ -75,7 +75,7 @@ class RegisterView extends GetView<RegisterController> {
                 ),
               ),
               const SizedBox(height: 16,),
-
+    
               // -- Password
               Obx(
                 () => TextFormField(
@@ -105,7 +105,7 @@ class RegisterView extends GetView<RegisterController> {
                 ),
               ),
               const SizedBox(height: 16,),
-
+    
               // -- Confirm Password
               Obx(
                 () => TextFormField(
@@ -136,7 +136,7 @@ class RegisterView extends GetView<RegisterController> {
                 ),
               ),
               const SizedBox(height: 16,),
-
+    
               // -- Register Button
               BaroWidgetButton(
                 buttonName: 'Daftar', 
@@ -149,8 +149,8 @@ class RegisterView extends GetView<RegisterController> {
                   if (registerController.validateInputs(
                     name: name, 
                     email: email, 
-                    password: password)
-                  ){
+                    password: password
+                    )){
                     if (password != confirmPassword){
                       Get.snackbar("Terjadi kesalahan!", "Password dan Konfirmasi Password berbeda", backgroundColor: const Color(0xFFE92027), colorText: Colors.white);
                     }else{
@@ -160,6 +160,8 @@ class RegisterView extends GetView<RegisterController> {
                         password,
                       );
                       Get.snackbar("Registrasi berhasil", "Selamat! Anda berhasil melakukan Registrasi. Silahkan masuk dan temukan mobil impian anda.", backgroundColor: const Color(0xFFE82027), colorText: Colors.white, duration: const Duration(seconds: 4));
+    
+                      const CircularProgressIndicator(backgroundColor: Color(0xFFE92027),);
 
                       Get.off(
                         () => LoginView(),

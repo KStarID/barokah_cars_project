@@ -44,6 +44,7 @@ class RegisterController extends GetxController {
       });
 
     } catch (e) {
+      // ignore: avoid_print
       print(e);
     }
   }

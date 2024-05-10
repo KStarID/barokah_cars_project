@@ -24,7 +24,7 @@ class HomeView extends GetView<HomeController> {
               children: [
                 const SearchBar(
                   leading: Icon(FluentIcons.search_20_regular),
-                  hintText: "Cari mobil yang kamu inginkan",
+                  hintText: "Temukan mobil yang anda inginkan",
                   backgroundColor: MaterialStatePropertyAll(Colors.white),
                 ),
                 const SizedBox(height: 46,),
