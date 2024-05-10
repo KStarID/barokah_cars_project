@@ -1,4 +1,5 @@
 import 'package:barokah_cars_project/app/modules/login/views/login_view.dart';
+import 'package:barokah_cars_project/app/routes/app_pages.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -21,7 +22,7 @@ class OnboardingScreenController extends GetxController {
   // -- Update Current Index & Jump to next page
   void nextPage(){
     if(currentPageindex.value == 2){
-      Get.to(const LoginView());
+      Get.toNamed(Routes.LOGIN);
     }else{
       int page = currentPageindex.value + 1;
       pageController.jumpToPage(page);

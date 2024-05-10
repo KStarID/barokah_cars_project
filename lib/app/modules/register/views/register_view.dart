@@ -1,3 +1,4 @@
+import 'package:barokah_cars_project/app/modules/login/views/login_view.dart';
 import 'package:barokah_cars_project/app/routes/app_pages.dart';
 import 'package:barokah_cars_project/utils/constants/image_strings.dart';
 import 'package:barokah_cars_project/utils/constants/text_strings.dart';
@@ -6,17 +7,19 @@ import 'package:barokah_cars_project/utils/widgets/widget_button.dart';
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../controllers/register_controller.dart';
 
 class RegisterView extends GetView<RegisterController> {
-  const RegisterView({super.key});
+  RegisterView({super.key});
+
+
+  final GlobalKey<FormState> registerFormKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
-    final registerController = RegisterController();
+  final registerController = Get.put(RegisterController());
     return Form(
-      key: registerController.registerFormKey,
+      key: registerFormKey,
       child: Scaffold(
         body: SingleChildScrollView(
           child: Padding(padding: const EdgeInsets.only(top: 80, left: 16, right: 16),
@@ -123,7 +126,7 @@ class RegisterView extends GetView<RegisterController> {
                       borderSide: BorderSide(color: Color(0xFFE82027)),
                     ),
                     suffixIcon: IconButton(
-                      onPressed: () => registerController.hideConfirmPassword.value = !registerController.hideConfirmPassword.value, 
+                      onPressed: () => registerController.hideConfirmPassword.value = !controller.hideConfirmPassword.value, 
                       icon: Icon(registerController.hideConfirmPassword.value ? FluentIcons.eye_off_20_regular : FluentIcons.eye_20_regular
                       )
                     ),
@@ -137,15 +140,34 @@ class RegisterView extends GetView<RegisterController> {
               // -- Register Button
               BaroWidgetButton(
                 buttonName: 'Daftar', 
-                onPressed: (){
-                  if (registerController.registerFormKey.currentState!.validate()){
-                    GetStorage().write('email', registerController.email.text);
-                    GetStorage().write('password', registerController.password.text);
+                onPressed: () async {
+                  String name = registerController.name.text;
+                  String email = registerController.email.text;
+                  String password = registerController.password.text;
+                  String confirmPassword = registerController.confirmPassword.text;
+                
+                  if (registerController.validateInputs(
+                    name: name, 
+                    email: email, 
+                    password: password)
+                  ){
+                    if (password != confirmPassword){
+                      Get.snackbar("Terjadi kesalahan!", "Password dan Konfirmasi Password berbeda", backgroundColor: const Color(0xFFE92027), colorText: Colors.white);
+                    }else{
+                      await registerController.registerUser(
+                        name,
+                        email,
+                        password,
+                      );
+                      Get.snackbar("Registrasi berhasil", "Selamat! Anda berhasil melakukan Registrasi. Silahkan masuk dan temukan mobil impian anda.", backgroundColor: const Color(0xFFE82027), colorText: Colors.white, duration: const Duration(seconds: 4));
 
-                    Get.toNamed(Routes.LOGIN);
-
-                    Get.snackbar("Registrasi berhasil", "Selamat! Anda berhasil melakukan Registrasi. Silahkan masuk dan temukan mobil impian anda.", backgroundColor: Color(0xFFE82027), colorText: Colors.white, duration: Duration(seconds: 4));
-                  }
+                      Get.off(
+                        () => LoginView(),
+                        transition: Transition.fadeIn,
+                        duration: const Duration(seconds: 1),
+                      );
+                    }
+                }
                 }
               ),
               // -- sudah punya akun ?

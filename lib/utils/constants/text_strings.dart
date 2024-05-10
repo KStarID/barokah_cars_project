@@ -1,10 +1,6 @@
 // Menyimpan seluruh teks yang dibutuhkan
 
-import 'package:barokah_cars_project/app/modules/login/controllers/login_controller.dart';
-import 'package:get/get.dart';
-
 class BaroTexts {
-  final controller = Get.put(LoginController());
 
   // -- Authentication Heading
   static const String loginTitle = 'Selamat Datang!';

@@ -6,18 +6,20 @@ import 'package:barokah_cars_project/utils/widgets/widget_button.dart';
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../controllers/login_controller.dart';
 
 class LoginView extends GetView<LoginController> {
-  const LoginView({super.key});
+  LoginView({super.key});
+
+
+  final GlobalKey<FormState> loginFormKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
-    final loginController = LoginController();
+    final loginController = Get.put(LoginController());
     return Form(
-      key: loginController.loginFormKey,
+      key: loginFormKey,
       child: Scaffold(
         body: SingleChildScrollView(
           child: Padding(
@@ -37,7 +39,7 @@ class LoginView extends GetView<LoginController> {
 
                 // -- Email
                 TextFormField(
-                  controller: loginController.email,
+                  controller: loginController.emailController,
                   validator: (value) => BaroValidator.emailValidate(value),
                   decoration: InputDecoration(
                     labelText: BaroTexts.email,
@@ -58,7 +60,7 @@ class LoginView extends GetView<LoginController> {
                 // -- Password
                 Obx(
                   () => TextFormField(
-                    controller: loginController.password,
+                    controller: loginController.passwordController,
                     autovalidateMode: AutovalidateMode.onUserInteraction,
                     validator: (value) => BaroValidator.passwordValidate(value),
                     obscureText: loginController.hidePassword.value,
@@ -100,18 +102,7 @@ class LoginView extends GetView<LoginController> {
                 BaroWidgetButton(
                   buttonName: 'Masuk',
                   onPressed: () {
-                    if(loginController.loginFormKey.currentState!.validate()){
-                      String? storedEmail = GetStorage().read('email');
-                      String? storedPassword = GetStorage().read('password');
-
-                      if (loginController.email.text == storedEmail && loginController.password.text == storedPassword){
-                        Get.toNamed(Routes.NAVIGATION_BAR);
-
-                        Get.snackbar("Login berhasil", "Selamat datang kembali! Anda berhasil masuk ke akun anda", backgroundColor: Color(0xFFE82027), colorText: Colors.white, duration: Duration(seconds: 5));
-                      }else{
-                        Get.snackbar('Error', 'Username atau password yang anda masukkan salah.', colorText: Colors.white, backgroundColor: Color(0xFFE82027), duration: Duration(seconds: 3));
-                      }
-                    }
+                    loginController.loginValidation();
                   },
                 ),
                 Row(

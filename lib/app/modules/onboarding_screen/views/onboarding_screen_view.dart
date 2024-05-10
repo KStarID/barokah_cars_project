@@ -40,7 +40,6 @@ class OnboardingScreenView extends GetView<OnboardingScreenController> {
               ),
             ],
           ),
-          // -- Skip Button
 
           // -- Dot Navigation SmoothPageIndicator
           onBoardingDotNavigation(),
