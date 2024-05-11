@@ -101,8 +101,26 @@ class LoginView extends GetView<LoginController> {
                 // -- Login Button
                 BaroWidgetButton(
                   buttonName: 'Masuk',
-                  onPressed: () {
-                    loginController.loginValidation();
+                  onPressed: () async {
+                    Get.dialog(
+                        const Center(
+                          child: SizedBox(
+                            height: 100,
+                            width: 100,
+                            child: CircularProgressIndicator(
+                              valueColor: AlwaysStoppedAnimation<Color>(Color(0xFFE92027),),
+                              strokeWidth: 5,
+                            ),
+                          ),
+                        ),
+                        barrierDismissible: false,
+                      );
+
+                      await Future.delayed(const Duration(seconds: 2));
+
+                      loginController.loginValidation();
+
+                      Get.back();
                   },
                 ),
                 Row(
@@ -121,6 +139,8 @@ class LoginView extends GetView<LoginController> {
                   ],
                 ),
                 const SizedBox(height: 20,),
+
+                // -- Continue with Google
                 SizedBox(
                   width: double.infinity,
                   height: 52,

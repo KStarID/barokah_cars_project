@@ -149,27 +149,44 @@ class RegisterView extends GetView<RegisterController> {
                   if (registerController.validateInputs(
                     name: name, 
                     email: email, 
-                    password: password
+                    password: password,
                     )){
                     if (password != confirmPassword){
                       Get.snackbar("Terjadi kesalahan!", "Password dan Konfirmasi Password berbeda", backgroundColor: const Color(0xFFE92027), colorText: Colors.white);
                     }else{
+                      Get.dialog(
+                        const Center(
+                          child: SizedBox(
+                            height: 100,
+                            width: 100,
+                            child: CircularProgressIndicator(
+                              valueColor: AlwaysStoppedAnimation<Color>(Color(0xFFE92027),),
+                              strokeWidth: 5,
+                            ),
+                          ),
+                        ),
+                        barrierDismissible: false,
+                      );
+
+                      await Future.delayed(const Duration(seconds: 2));
+                      Get.back();
+
                       await registerController.registerUser(
                         name,
                         email,
                         password,
                       );
-                      Get.snackbar("Registrasi berhasil", "Selamat! Anda berhasil melakukan Registrasi. Silahkan masuk dan temukan mobil impian anda.", backgroundColor: const Color(0xFFE82027), colorText: Colors.white, duration: const Duration(seconds: 4));
-    
-                      const CircularProgressIndicator(backgroundColor: Color(0xFFE92027),);
-
                       Get.off(
                         () => LoginView(),
                         transition: Transition.fadeIn,
                         duration: const Duration(seconds: 1),
                       );
+
+                      Get.snackbar("Registrasi berhasil", "Selamat! Anda berhasil melakukan Registrasi. Silahkan masuk dan temukan mobil impian anda.", backgroundColor: const Color(0xFFE82027), colorText: Colors.white, duration: const Duration(seconds: 4));
+    
+                      registerController.clearForm();
                     }
-                }
+                  }
                 }
               ),
               // -- sudah punya akun ?
@@ -177,7 +194,8 @@ class RegisterView extends GetView<RegisterController> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text("Sudah memiliki akun?", style: GoogleFonts.plusJakartaSans(textStyle: const TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Color(0xFF3D3D3D))),),
-                  TextButton(onPressed: () => Get.toNamed(Routes.LOGIN), child: Text("Masuk", style: GoogleFonts.plusJakartaSans(textStyle: const TextStyle(fontSize: 14, fontWeight: FontWeight.w700, color: Color(0xFFE82027))),)),
+                  TextButton(
+                    onPressed: () => Get.toNamed(Routes.LOGIN), child: Text("Masuk", style: GoogleFonts.plusJakartaSans(textStyle: const TextStyle(fontSize: 14, fontWeight: FontWeight.w700, color: Color(0xFFE82027))),)),
                 ],
               ),
               Row(
