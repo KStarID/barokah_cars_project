@@ -4,6 +4,9 @@ class BaroImages {
   // -- App Logos
   static const String appLogo = "assets/logos/barocars_logo.png";
 
+  // -- Profile Example
+  static const String kemalas = "assets/icons/avatar.png";
+
   // -- Social Icons
   static const String google = "assets/icons/google.png";
 
@@ -18,8 +21,8 @@ class BaroImages {
   static const String fordMustang = "assets/images/ford_mustang.png";
   static const String toyotaCHR = "assets/images/toyota_chr.png";
 
-  // -- OnBoarding Images
-  static const String onBoardingImage1 = "assets/onboardings/onboarding1.png";
-  static const String onBoardingImage2 = "assets/onboardings/onboarding2.png";
-  static const String onBoardingImage3 = "assets/onboardings/onboarding3.png";
+  // -- OnBoarding Animation
+  static const String onBoardingAnimation1 = "assets/onboardings/onboarding_animation1.json";
+  static const String onBoardingAnimation2 = "assets/onboardings/onboarding_animation2.json";
+  static const String onBoardingAnimation3 = "assets/onboardings/onboarding_animation3.json";
 }

@@ -9,6 +9,7 @@ class NavigationBarView extends GetView<NavigationBarController> {
   Widget build(BuildContext context) {
     final controller = Get.put(NavigationBarController());
     return Scaffold(
+      backgroundColor: const Color(0xFFF2F1F6),
       bottomNavigationBar: Obx(
         () => NavigationBar(
           height: 60,
@@ -16,15 +17,15 @@ class NavigationBarView extends GetView<NavigationBarController> {
           selectedIndex: controller.selectedIndex.value,
           onDestinationSelected: (index) => controller.selectedIndex.value = index,
           backgroundColor: Colors.white,
-          indicatorColor: const Color(0xFFE82027),
+          indicatorColor: Colors.white,
           indicatorShape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(100)
           ),
           destinations: const [
-            NavigationDestination(icon: Icon(FluentIcons.home_20_regular, size: 25,), label: '', selectedIcon: Icon(FluentIcons.home_20_filled, size: 28,),),
-            NavigationDestination(icon: Icon(FluentIcons.search_20_filled, size: 25,), label: '', selectedIcon: Icon(FluentIcons.search_20_filled, size: 28,),),
-            NavigationDestination(icon: Icon(FluentIcons.receipt_20_regular, size: 25,), label: '', selectedIcon: Icon(FluentIcons.receipt_20_filled, size: 28,),),
-            NavigationDestination(icon: Icon(FluentIcons.person_20_regular, size: 25,), label: '', selectedIcon: Icon(FluentIcons.person_20_filled, size: 28,),),
+            NavigationDestination(icon: Icon(FluentIcons.home_20_regular, size: 25,), label: '', selectedIcon: Icon(FluentIcons.home_20_filled, size: 28, color: Color(0xFFE92027),),),
+            NavigationDestination(icon: Icon(FluentIcons.search_20_filled, size: 25,), label: '', selectedIcon: Icon(FluentIcons.search_20_filled, size: 28, color: Color(0xFFE92027)),),
+            NavigationDestination(icon: Icon(FluentIcons.receipt_20_regular, size: 25,), label: '', selectedIcon: Icon(FluentIcons.receipt_20_filled, size: 28, color: Color(0xFFE92027)),),
+            NavigationDestination(icon: Icon(FluentIcons.person_20_regular, size: 25,), label: '', selectedIcon: Icon(FluentIcons.person_20_filled, size: 28, color: Color(0xFFE92027)),),
           ]
           ),
       ),

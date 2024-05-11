@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:lottie/lottie.dart';
 
 class onBoardingPage extends StatelessWidget {
   const onBoardingPage({
-    super.key, required this.image, required this.title, required this.subtitle,
+    super.key,required this.lottie,required this.title, required this.subtitle, 
   });
 
-  final String image, title, subtitle;
+  final String lottie, title, subtitle;
 
   @override
   Widget build(BuildContext context) {
@@ -14,10 +16,10 @@ class onBoardingPage extends StatelessWidget {
       padding: const EdgeInsets.all(24),
       child: Column(
         children: [
-          Image(
-            width: MediaQuery.of(context).size.width * 0.8,
-            height: MediaQuery.of(context).size.height * 0.6,
-            image: AssetImage(image)
+          SizedBox(
+              width: MediaQuery.of(context).size.width * 0.8,
+              height: MediaQuery.of(context).size.height * 0.6,
+              child: Lottie.asset(lottie),
           ),
           Text(title, style: GoogleFonts.plusJakartaSans(textStyle: TextStyle(fontSize: 26, fontWeight: FontWeight.w700, color: Color(0xFF3D3D3D)),), textAlign: TextAlign.center,),
           const SizedBox(height: 16,),

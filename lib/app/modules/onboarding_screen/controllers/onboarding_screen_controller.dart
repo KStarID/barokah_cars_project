@@ -1,4 +1,3 @@
-import 'package:barokah_cars_project/app/modules/login/views/login_view.dart';
 import 'package:barokah_cars_project/app/routes/app_pages.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -27,10 +26,5 @@ class OnboardingScreenController extends GetxController {
       int page = currentPageindex.value + 1;
       pageController.jumpToPage(page);
     }
-  }
-
-  // -- Update Current index & Jump to last page
-  void skipPage(){
-
   }
 }

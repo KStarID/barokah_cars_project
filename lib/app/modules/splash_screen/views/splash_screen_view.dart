@@ -21,6 +21,7 @@ class SplashScreenView extends GetView<SplashScreenController> {
       },
       builder: (context){
         return const Scaffold(
+          backgroundColor: Color(0xFFF2F1F6),
           body: Padding(
             padding: EdgeInsets.only(bottom: 100),
             child: CenterLogo(

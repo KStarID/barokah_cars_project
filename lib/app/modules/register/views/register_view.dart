@@ -21,6 +21,7 @@ class RegisterView extends GetView<RegisterController> {
     return Form(
       key: registerFormKey,
       child: Scaffold(
+        backgroundColor: const Color(0xFFF2F1F6),
         body: SingleChildScrollView(
           child: Padding(padding: const EdgeInsets.only(top: 80, left: 16, right: 16),
           child: Column(

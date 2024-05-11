@@ -16,6 +16,7 @@ class OnboardingScreenView extends GetView<OnboardingScreenController> {
   Widget build(BuildContext context) {
     final onBoardingcontroller = Get.put(OnboardingScreenController());
     return Scaffold(
+      backgroundColor: const Color(0xFFF2F1F6),
       body: Stack(
         children: [
           // -- Horizontal Scrollable Pages
@@ -24,17 +25,17 @@ class OnboardingScreenView extends GetView<OnboardingScreenController> {
             onPageChanged: onBoardingcontroller.updatePageIndicator,
             children: const [
               onBoardingPage(
-                image: BaroImages.onBoardingImage1, 
+                lottie: BaroImages.onBoardingAnimation1, 
                 title: BaroTexts.onBoardingTitle1, 
-                subtitle: BaroTexts.onBoardingSubtitle1,
+                subtitle: BaroTexts.onBoardingSubtitle1
               ),
               onBoardingPage(
-                image: BaroImages.onBoardingImage2, 
+                lottie: BaroImages.onBoardingAnimation2, 
                 title: BaroTexts.onBoardingTitle2, 
                 subtitle: BaroTexts.onBoardingSubtitle2,
               ),
               onBoardingPage(
-                image: BaroImages.onBoardingImage3, 
+                lottie: BaroImages.onBoardingAnimation3, 
                 title: BaroTexts.onBoardingTitle3, 
                 subtitle: BaroTexts.onBoardingSubtitle3,
               ),
@@ -42,9 +43,9 @@ class OnboardingScreenView extends GetView<OnboardingScreenController> {
           ),
 
           // -- Dot Navigation SmoothPageIndicator
-          onBoardingDotNavigation(),
+          const onBoardingDotNavigation(),
           // -- Circular Button
-          onBoardingNextButton()
+          const onBoardingNextButton()
         ],
       ),
     );

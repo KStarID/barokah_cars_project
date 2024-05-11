@@ -21,6 +21,7 @@ class LoginView extends GetView<LoginController> {
     return Form(
       key: loginFormKey,
       child: Scaffold(
+      backgroundColor: const Color(0xFFF2F1F6),
         body: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.only(top: 80, left: 16, right: 16),
