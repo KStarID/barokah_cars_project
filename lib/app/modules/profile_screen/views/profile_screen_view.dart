@@ -1,7 +1,8 @@
+import 'package:barokah_cars_project/app/modules/profile_screen/views/widgets/edit_profile.dart';
+import 'package:barokah_cars_project/app/modules/profile_screen/views/widgets/profile_feature.dart';
 import 'package:barokah_cars_project/app/routes/app_pages.dart';
 import 'package:barokah_cars_project/utils/constants/image_strings.dart';
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
@@ -17,7 +18,8 @@ class ProfileScreenView extends GetView<ProfileScreenController> {
       appBar: AppBar(
         backgroundColor: const Color(0xFFE92027),
         title: Text("Profile Saya", style: GoogleFonts.plusJakartaSans(textStyle: const TextStyle(fontSize: 22, fontWeight: FontWeight.w600, color: Colors.white)),),
-        automaticallyImplyLeading: false,
+        // -- Back Button
+        //leading: IconButton(onPressed: () => Navigator.of(context).pop(), icon: Icon(FluentIcons.arrow_left_20_regular, color: Colors.white,)),
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -41,8 +43,7 @@ class ProfileScreenView extends GetView<ProfileScreenController> {
                       BoxShadow(
                         color: Colors.black.withOpacity(0.5),
                         spreadRadius: 1,
-                        blurRadius: 1,
-                        offset: const Offset(1, 1),
+                        offset: const Offset(0, 1),
                       )
                     ],
                     borderRadius: BorderRadius.circular(12),
@@ -62,8 +63,8 @@ class ProfileScreenView extends GetView<ProfileScreenController> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Text("Kemlas", style: GoogleFonts.plusJakartaSans(textStyle: const TextStyle(fontSize: 18, fontWeight: FontWeight.w600, color: Color(0xFF232323))),),
-                          Text("Kemlas21@gmail.com", style: GoogleFonts.plusJakartaSans(textStyle: const TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Color(0xFF80869A))),),
+                          Text("Kemalaz Hakim Ramadhan", style: GoogleFonts.plusJakartaSans(textStyle: const TextStyle(fontSize: 18, fontWeight: FontWeight.w600, color: Color(0xFF232323))),),
+                          Text("mkemalashakim@gmail.com", style: GoogleFonts.plusJakartaSans(textStyle: const TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Color(0xFF80869A))),),
                         ],
                       )
                     ],
@@ -78,67 +79,19 @@ class ProfileScreenView extends GetView<ProfileScreenController> {
             child: Column(
               children: [
                 // -- First Fiturs
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Row(
-                      children: [
-                        const Icon(FluentIcons.text_bullet_list_square_edit_20_regular),
-                        const SizedBox(width: 8,),
-                        Text("Edit Profil", style: GoogleFonts.plusJakartaSans(textStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600, color: Color(0xFF232323))),),
-                      ],
-                    ),
-                    const Icon(FluentIcons.ios_arrow_rtl_24_filled)
-                  ],
-                ),
+                BaroProfileFeature(fiturIcon: FluentIcons.text_bullet_list_square_edit_20_regular, fiturName: "Informasi Pribadi", onTap: () => Get.to(() => const BaroEditProfile()),),
                 const SizedBox(height: 40,),
 
                 // -- Second Fiturs
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Row(
-                      children: [
-                        const Icon(FluentIcons.history_20_regular),
-                        const SizedBox(width: 8,),
-                        Text("Riwayat Pembelian", style: GoogleFonts.plusJakartaSans(textStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600, color: Color(0xFF232323))),),
-                      ],
-                    ),
-                    const Icon(FluentIcons.ios_arrow_rtl_24_filled)
-                  ],
-                ),
+                BaroProfileFeature(fiturIcon: FluentIcons.history_20_regular, fiturName: "Riwayat Pembelian", onTap: () {},),
                 const SizedBox(height: 40,),
 
                 // -- Third Fiturs
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Row(
-                      children: [
-                        const Icon(FluentIcons.calendar_empty_20_regular),
-                        const SizedBox(width: 8,),
-                        Text("Menambah dan Menghapus Produk", style: GoogleFonts.plusJakartaSans(textStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600, color: Color(0xFF232323))),),
-                      ],
-                    ),
-                    const Icon(FluentIcons.ios_arrow_rtl_24_filled),
-                  ],
-                ),
+                BaroProfileFeature(fiturIcon: FluentIcons.calendar_empty_20_regular, fiturName: "Menambah dan Menghapus Produk", onTap: () {},),
                 const SizedBox(height: 40,),
 
                 // -- Fourth Fiturs
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Row(
-                      children: [
-                        const Icon(FluentIcons.location_20_regular),
-                        const SizedBox(width: 8,),
-                        Text("Lokasi Saya", style: GoogleFonts.plusJakartaSans(textStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600, color: Color(0xFF232323))),),
-                      ],
-                    ),
-                    const Icon(FluentIcons.ios_arrow_rtl_24_filled)
-                  ],
-                ),
+                BaroProfileFeature(fiturIcon: FluentIcons.location_20_regular, fiturName: "Lokasi Saya", onTap: () {},),
                 const SizedBox(height: 40,),
 
                 // -- Fifth Fiturs
