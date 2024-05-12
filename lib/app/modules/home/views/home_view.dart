@@ -1,9 +1,11 @@
 import 'package:barokah_cars_project/app/modules/home/views/widgets/brand_card.dart';
 import 'package:barokah_cars_project/app/modules/home/views/widgets/product_suggestions_card.dart';
+import 'package:barokah_cars_project/app/modules/profile_screen/views/profile_screen_view.dart';
 import 'package:barokah_cars_project/utils/constants/image_strings.dart';
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../controllers/home_controller.dart';
 
@@ -12,6 +14,7 @@ class HomeView extends GetView<HomeController> {
   
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(HomeController());
     return Scaffold(
       backgroundColor: const Color(0xFFF2F1F6),
       body: Padding(
@@ -22,10 +25,27 @@ class HomeView extends GetView<HomeController> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const SearchBar(
-                  leading: Icon(FluentIcons.search_20_regular),
-                  hintText: "Temukan mobil yang anda inginkan",
-                  backgroundColor: MaterialStatePropertyAll(Colors.white),
+                Row(
+                  children: [
+                    const SizedBox(
+                      width: 320,
+                      child: SearchBar(
+                        leading: Icon(FluentIcons.search_20_regular),
+                        hintText: "Temukan mobil impian anda.",
+                        backgroundColor: MaterialStatePropertyAll(Colors.white),
+                      ),
+                    ),
+                    // -- Foto
+                    const SizedBox(width: 18,),
+                    GestureDetector(
+                      onTap: () => Get.to(() => const ProfileScreenView()),
+                      child: CircleAvatar(
+                        radius: 30,
+                        backgroundColor: Colors.grey.shade800,
+                        backgroundImage: const AssetImage(BaroImages.kemalas),
+                      ),
+                    ),
+                  ],
                 ),
                 const SizedBox(height: 46,),
                 Row(
@@ -126,7 +146,7 @@ class HomeView extends GetView<HomeController> {
                           const SizedBox(width: 12,),
                           const Icon(FluentIcons.timer_20_regular, size: 15,),
                           const SizedBox(width: 3,),
-                          Text('12:30:15', style: GoogleFonts.plusJakartaSans(textStyle: const TextStyle(fontSize: 11, fontWeight: FontWeight.w600, color: Color(0xFFB0B0B0))),)
+                          Obx(() => Text(controller.formatTime(controller.seconds.value), style: GoogleFonts.plusJakartaSans(textStyle: const TextStyle(fontSize: 11, fontWeight: FontWeight.w600, color: Color(0xFFB0B0B0))),))
                         ],
                       ),
                     ],

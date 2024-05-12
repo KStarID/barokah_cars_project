@@ -99,9 +99,9 @@ class ProfileScreenView extends GetView<ProfileScreenController> {
                   onTap: () => Get.toNamed(Routes.LOGIN),
                   child: Row(
                     children: [
-                      const Icon(FluentIcons.sign_out_20_regular),
+                      const Icon(FluentIcons.sign_out_20_regular, color: Color(0xFFE92027),),
                       const SizedBox(width: 8,),
-                      Text("Keluar", style: GoogleFonts.plusJakartaSans(textStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600, color: Color(0xFF232323))),),
+                      Text("Keluar", style: GoogleFonts.plusJakartaSans(textStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600, color: Color(0xFFE92027))),),
                     ],
                   ),
                 ),
