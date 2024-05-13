@@ -170,13 +170,6 @@ class RegisterView extends GetView<RegisterController> {
                       );
 
                       await Future.delayed(const Duration(seconds: 2));
-                      Get.back();
-
-                      await registerController.registerUser(
-                        name,
-                        email,
-                        password,
-                      );
                       Get.off(
                         () => LoginView(),
                         transition: Transition.fadeIn,
@@ -184,7 +177,12 @@ class RegisterView extends GetView<RegisterController> {
                       );
 
                       Get.snackbar("Registrasi berhasil", "Selamat! Anda berhasil melakukan Registrasi. Silahkan masuk dan temukan mobil impian anda.", backgroundColor: const Color(0xFFE82027), colorText: Colors.white, duration: const Duration(seconds: 4));
-    
+
+                      await registerController.registerUser(
+                        name,
+                        email,
+                        password,
+                      );
                       registerController.clearForm();
                     }
                   }

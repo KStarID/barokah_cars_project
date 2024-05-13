@@ -1,5 +1,4 @@
 import 'package:barokah_cars_project/app/modules/navigation_bar/views/navigation_bar_view.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -11,23 +10,37 @@ class LoginController extends GetxController {
   final passwordController = TextEditingController();
   final hidePassword = true.obs;
 
-  final CollectionReference _userCollection =
-      FirebaseFirestore.instance.collection('user');
+  // final CollectionReference _userCollection =
+  //     FirebaseFirestore.instance.collection('user');
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
+  // Future<bool> checkCredentials(String email, String password) async {
+  //   try {
+  //     await _auth.signInWithEmailAndPassword(
+  //       email: email,
+  //       password: password,
+  //     );
+  //     QuerySnapshot querySnapshot =
+  //         await _userCollection.where('email', isEqualTo: email).get();
+  //     return querySnapshot.docs.isNotEmpty;
+  //   } catch (e) {
+  //     return false;
+  //   }
+  // }
   Future<bool> checkCredentials(String email, String password) async {
-    try {
-      await _auth.signInWithEmailAndPassword(
-        email: email,
-        password: password,
-      );
-      QuerySnapshot querySnapshot =
-          await _userCollection.where('email', isEqualTo: email).get();
-      return querySnapshot.docs.isNotEmpty;
-    } catch (e) {
-      return false;
-    }
+  try {
+    // Mencoba untuk login dengan email dan password
+    await _auth.signInWithEmailAndPassword(
+      email: email,
+      password: password,
+    );
+    // Jika berhasil login, mengembalikan true
+    return true;
+  } catch (e) {
+    // Jika terjadi kesalahan atau gagal login, mengembalikan false
+    return false;
   }
+}
 
   Future<void> loginValidation() async {
     String email = emailController.text;

@@ -1,7 +1,16 @@
 import 'dart:async';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class HomeController extends GetxController {
+  final CollectionReference _userCollection =
+      FirebaseFirestore.instance.collection('user');
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  TextEditingController nameController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
+
   RxInt seconds = 0.obs;
   int totalSeconds = 86400;
   
@@ -39,5 +48,26 @@ class HomeController extends GetxController {
     final minutesStr = minutes < 10 ? '0$minutes' : '$minutes';
     final secondsStr = remainingSeconds < 10 ? '0$remainingSeconds' : '$remainingSeconds';
     return '$hoursStr:$minutesStr:$secondsStr';
+  }
+
+  Future<void> fetchUserData() async {
+    try {
+      User? user = _auth.currentUser;
+      if (user != null) {
+        DocumentSnapshot userSnapshot =
+            await _userCollection.doc(user.uid).get();
+        if (userSnapshot.exists) {
+          var userData = userSnapshot.data() as Map<String, dynamic>;
+          nameController.text = userData['name'] ?? '';
+          emailController.text = userData['email'] ?? '';
+        } else {
+          print('No user data found.');
+        }
+      } else {
+        print('No user logged in.');
+      }
+    } catch (e) {
+      print('Error fetching user data: $e');
+    }
   }
 }

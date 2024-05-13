@@ -1,6 +1,9 @@
+import 'package:barokah_cars_project/app/modules/profile_screen/views/profile_screen_view.dart';
 import 'package:barokah_cars_project/utils/constants/image_strings.dart';
+import 'package:barokah_cars_project/utils/widgets/widget_button.dart';
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class BaroEditProfile extends StatelessWidget {
@@ -143,6 +146,10 @@ class BaroEditProfile extends StatelessWidget {
                   ),
                 ),
               ),
+              const SizedBox(height: 40,),
+
+              // -- Save Changes Button
+              BaroWidgetButton(buttonName: "Save Changes", onPressed: () => Get.to(() => const ProfileScreenView()))
             ],
           ),
           )
