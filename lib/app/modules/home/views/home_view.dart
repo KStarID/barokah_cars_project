@@ -28,7 +28,7 @@ class HomeView extends GetView<HomeController> {
                 Row(
                   children: [
                     const SizedBox(
-                      width: 320,
+                      width: 325,
                       child: SearchBar(
                         leading: Icon(FluentIcons.search_20_regular),
                         hintText: "Temukan mobil impian anda.",
@@ -36,11 +36,11 @@ class HomeView extends GetView<HomeController> {
                       ),
                     ),
                     // -- Foto
-                    const SizedBox(width: 18,),
+                    const SizedBox(width: 15,),
                     GestureDetector(
                       onTap: () => Get.to(() => const ProfileScreenView()),
                       child: CircleAvatar(
-                        radius: 30,
+                        radius: 28,
                         backgroundColor: Colors.grey.shade800,
                         backgroundImage: const AssetImage(BaroImages.kemalas),
                       ),

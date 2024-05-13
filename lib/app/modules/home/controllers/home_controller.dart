@@ -32,8 +32,8 @@ class HomeController extends GetxController {
   }
 
   String formatTime(int seconds) {
-    final hours = (seconds ~/ 3600) % 24; // Hitung jam dengan membagi total detik dengan 3600 (detik dalam satu jam)
-    final minutes = (seconds ~/ 60) % 60; // Hitung menit dengan membagi total detik dengan 60 (detik dalam satu menit)
+    final hours = (seconds ~/ 3600) % 24;
+    final minutes = (seconds ~/ 60) % 60;
     final remainingSeconds = seconds % 60;
     final hoursStr = hours < 10 ? '0$hours' : '$hours';
     final minutesStr = minutes < 10 ? '0$minutes' : '$minutes';
