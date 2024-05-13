@@ -1,3 +1,4 @@
+import 'package:barokah_cars_project/app/modules/forget_password/views/forget_password_view.dart';
 import 'package:barokah_cars_project/app/routes/app_pages.dart';
 import 'package:barokah_cars_project/utils/constants/image_strings.dart';
 import 'package:barokah_cars_project/utils/constants/text_strings.dart';
@@ -93,7 +94,7 @@ class LoginView extends GetView<LoginController> {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     TextButton(
-                      onPressed: (){}, 
+                      onPressed: () => Get.to(() => const ForgetPasswordView()), 
                       child: Text('Lupa password?', style: GoogleFonts.plusJakartaSans(textStyle: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: Color(0xFF3D3D3D)))),
                       )
                   ],

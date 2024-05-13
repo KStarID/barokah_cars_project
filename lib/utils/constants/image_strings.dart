@@ -25,4 +25,5 @@ class BaroImages {
   static const String onBoardingAnimation1 = "assets/animations/onboarding_animation1.json";
   static const String onBoardingAnimation2 = "assets/animations/onboarding_animation2.json";
   static const String onBoardingAnimation3 = "assets/animations/onboarding_animation3.json";
+  static const String forgetPasswordAnimation = "assets/animations/forgetPassword_animation.json";
 }
