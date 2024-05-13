@@ -12,6 +12,7 @@ abstract class Routes {
   static const EDIT_PROFILE = _Paths.EDIT_PROFILE;
   static const SEARCH_SCREEN = _Paths.SEARCH_SCREEN;
   static const ALL_BRAND = _Paths.ALL_BRAND;
+  static const NAVIGATION_BAR = _Paths.NAVIGATION_BAR;
 }
 
 abstract class _Paths {
@@ -25,4 +26,5 @@ abstract class _Paths {
   static const EDIT_PROFILE = '/edit-profile';
   static const SEARCH_SCREEN = '/search-screen';
   static const ALL_BRAND = '/all-brand';
+  static const NAVIGATION_BAR = '/navigation-bar';
 }
