@@ -16,6 +16,7 @@ class ProfileScreenView extends GetView<ProfileScreenController> {
     return Scaffold(
       backgroundColor: const Color(0xFFF2F1F6),
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         backgroundColor: const Color(0xFFE92027),
         title: Text("Profile Saya", style: GoogleFonts.plusJakartaSans(textStyle: const TextStyle(fontSize: 22, fontWeight: FontWeight.w600, color: Colors.white)),),
         // -- Back Button

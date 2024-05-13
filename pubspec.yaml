@@ -32,5 +32,5 @@ flutter:
     - assets/logos/
     - assets/images/
     - assets/icons/
-    - assets/onboardings/
+    - assets/animations/
   uses-material-design: true
