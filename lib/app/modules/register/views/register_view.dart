@@ -153,7 +153,7 @@ class RegisterView extends GetView<RegisterController> {
                     password: password,
                     )){
                     if (password != confirmPassword){
-                      Get.snackbar("Terjadi kesalahan!", "Password dan Konfirmasi Password berbeda", backgroundColor: const Color(0xFFE92027), colorText: Colors.white);
+                      Get.snackbar("Terjadi kesalahan!", "Password dan Konfirmasi Password berbeda.", backgroundColor: const Color(0xFFE92027), colorText: Colors.white);
                     }else{
                       Get.dialog(
                         const Center(

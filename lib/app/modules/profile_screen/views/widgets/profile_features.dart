@@ -2,8 +2,8 @@ import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class BaroProfileFeature extends StatelessWidget {
-  const BaroProfileFeature({
+class BaroProfileFeatures extends StatelessWidget {
+  const BaroProfileFeatures({
     super.key, 
     required this.fiturIcon, 
     required this.fiturName, required this.onTap,

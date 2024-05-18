@@ -1,11 +1,13 @@
 import 'package:barokah_cars_project/app/modules/home/views/widgets/brand_card.dart';
 import 'package:barokah_cars_project/app/modules/home/views/widgets/product_suggestions_card.dart';
 import 'package:barokah_cars_project/app/modules/profile_screen/views/profile_screen_view.dart';
+import 'package:barokah_cars_project/app/modules/search_screen/views/search_screen_view.dart';
 import 'package:barokah_cars_project/utils/constants/image_strings.dart';
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
-import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../controllers/home_controller.dart';
 
@@ -27,12 +29,24 @@ class HomeView extends GetView<HomeController> {
               children: [
                 Row(
                   children: [
-                    const SizedBox(
+                    SizedBox(
                       width: 325,
-                      child: SearchBar(
-                        leading: Icon(FluentIcons.search_20_regular),
-                        hintText: "Temukan mobil impian anda.",
-                        backgroundColor: MaterialStatePropertyAll(Colors.white),
+                      child: Stack(
+                        children: [
+                          SearchBar(
+                            leading: Icon(FluentIcons.search_20_regular),
+                            hintText: "Temukan mobil impian anda.",
+                            backgroundColor: MaterialStatePropertyAll(Colors.white),
+                          ),
+                          Positioned.fill(
+                            child: Material(
+                              color: Colors.transparent,
+                              child: InkWell(
+                                onTap: () => Get.to(() => SearchScreenView()),
+                              ),
+                            )
+                            )
+                        ],
                       ),
                     ),
                     // -- Foto

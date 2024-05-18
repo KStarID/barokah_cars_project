@@ -53,13 +53,13 @@ class RegisterController extends GetxController {
     if (name.isEmpty ||
         email.isEmpty ||
         password.isEmpty ) {
-      Get.snackbar('Error', 'Silahkan lengkapi semua kolom terlebih dahulu', backgroundColor: Colors.red, colorText: Colors.white);
+      Get.snackbar('Error', 'Silahkan lengkapi semua kolom terlebih dahulu.', backgroundColor: Colors.red, colorText: Colors.white);
       return false;
     } else if (!isValidEmail(email)) {
-      Get.snackbar('Error', 'Silahkan gunakan format email yang valid', backgroundColor: Colors.red, colorText: Colors.white);
+      Get.snackbar('Error', 'Silahkan gunakan format email yang valid.', backgroundColor: Colors.red, colorText: Colors.white);
       return false;
     } else if (password.length < 8) {
-      Get.snackbar('Error', 'Password terdiri dari minimal 8 karakter', backgroundColor: Colors.red, colorText: Colors.white);
+      Get.snackbar('Error', 'Password terdiri dari minimal 8 karakter.', backgroundColor: Colors.red, colorText: Colors.white);
       return false;
     }
     return true;
