@@ -3,6 +3,9 @@ import 'package:barokah_cars_project/app/modules/home/views/widgets/product_sugg
 import 'package:barokah_cars_project/app/modules/profile_screen/views/profile_screen_view.dart';
 import 'package:barokah_cars_project/app/modules/search_screen/views/search_screen_view.dart';
 import 'package:barokah_cars_project/utils/constants/image_strings.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_database/firebase_database.dart';
+import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -12,7 +15,9 @@ import 'package:google_fonts/google_fonts.dart';
 import '../controllers/home_controller.dart';
 
 class HomeView extends GetView<HomeController> {
-  const HomeView({super.key});
+  HomeView({super.key});
+
+  final databaseReferences = FirebaseDatabase.instance.ref("cars");
   
   @override
   Widget build(BuildContext context) {
@@ -33,7 +38,7 @@ class HomeView extends GetView<HomeController> {
                       width: 325,
                       child: Stack(
                         children: [
-                          SearchBar(
+                          const SearchBar(
                             leading: Icon(FluentIcons.search_20_regular),
                             hintText: "Temukan mobil impian anda.",
                             backgroundColor: MaterialStatePropertyAll(Colors.white),
@@ -42,7 +47,7 @@ class HomeView extends GetView<HomeController> {
                             child: Material(
                               color: Colors.transparent,
                               child: InkWell(
-                                onTap: () => Get.to(() => SearchScreenView()),
+                                onTap: () => Get.to(() => const SearchScreenView()),
                               ),
                             )
                             )
@@ -56,7 +61,10 @@ class HomeView extends GetView<HomeController> {
                       child: CircleAvatar(
                         radius: 28,
                         backgroundColor: Colors.grey.shade800,
-                        backgroundImage: const AssetImage(BaroImages.kemalas),
+                        child: Icon(
+                          FluentIcons.person_20_regular,
+                          color: Colors.white,
+                        ),
                       ),
                     ),
                   ],
@@ -223,9 +231,9 @@ class HomeView extends GetView<HomeController> {
                 ),
               ],
             ),
-          )
+          ),
         ),
-      ),
+      ), 
     );
   }
 }

@@ -7,5 +7,5 @@ import 'package:get/get.dart';
 class NavigationBarController extends GetxController {
   final Rx<int> selectedIndex = 0.obs;
 
-  final screens = [const HomeView(), const SearchScreenView (), LoginView(), const ProfileScreenView()];
+  final screens = [HomeView(), const SearchScreenView (), LoginView(), const ProfileScreenView()];
 }

@@ -49,7 +49,10 @@ class RegisterController extends GetxController {
     }
   }
 
-  bool validateInputs({required String name, required String email, required String password,}) {
+  bool validateInputs({
+    required String name, 
+    required String email, 
+    required String password }) {
     if (name.isEmpty ||
         email.isEmpty ||
         password.isEmpty ) {

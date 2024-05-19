@@ -1,8 +1,6 @@
 import 'package:barokah_cars_project/app/modules/forget_password/bindings/forget_password_binding.dart';
-import 'package:barokah_cars_project/app/modules/forget_password/controllers/forget_password_controller.dart';
 import 'package:barokah_cars_project/app/modules/forget_password/views/forget_password_view.dart';
 import 'package:get/get.dart';
-
 import '../modules/all_brand/bindings/all_brand_binding.dart';
 import '../modules/all_brand/views/all_brand_view.dart';
 import '../modules/home/bindings/home_binding.dart';
@@ -32,7 +30,7 @@ class AppPages {
   static final routes = [
     GetPage(
       name: _Paths.HOME,
-      page: () => const HomeView(),
+      page: () => HomeView(),
       binding: HomeBinding(),
     ),
     GetPage(
