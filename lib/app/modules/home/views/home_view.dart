@@ -54,6 +54,7 @@ class HomeView extends GetView<HomeController> {
                         ],
                       ),
                     ),
+                    
                     // -- Foto
                     const SizedBox(width: 15,),
                     GestureDetector(
