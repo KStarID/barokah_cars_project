@@ -1,9 +1,6 @@
 import 'package:barokah_cars_project/app/modules/login/views/login_view.dart';
-import 'package:barokah_cars_project/app/modules/navigation_bar/views/navigation_bar_view.dart';
 import 'package:barokah_cars_project/app/modules/profile_screen/views/widgets/edit_profile.dart';
 import 'package:barokah_cars_project/app/modules/profile_screen/views/widgets/profile_features.dart';
-import 'package:barokah_cars_project/app/routes/app_pages.dart';
-import 'package:barokah_cars_project/utils/constants/image_strings.dart';
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -21,7 +18,7 @@ class ProfileScreenView extends GetView<ProfileScreenController> {
         backgroundColor: const Color(0xFFE92027),
         title: Text("Profile Saya", style: GoogleFonts.plusJakartaSans(textStyle: const TextStyle(fontSize: 22, fontWeight: FontWeight.w600, color: Colors.white)),),
         // -- Back Button
-        leading: IconButton(onPressed: () => Navigator.of(context).pop(), icon: Icon(FluentIcons.arrow_left_20_regular, color: Colors.white,)),
+         leading: IconButton(onPressed: () => Navigator.of(context).pop(), icon: Icon(FluentIcons.arrow_left_20_regular, color: Colors.white,)),
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -56,9 +53,12 @@ class ProfileScreenView extends GetView<ProfileScreenController> {
                     children: [
                       const SizedBox(width: 5,),
                       CircleAvatar(
-                        radius: 33,
+                        radius: 28,
                         backgroundColor: Colors.grey.shade800,
-                        backgroundImage: const AssetImage(BaroImages.kemalas),
+                        child: const Icon(
+                          FluentIcons.person_20_regular,
+                        color: Colors.white,
+                        ),
                       ),
                       const SizedBox(width: 16,),
                       Column(

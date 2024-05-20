@@ -30,7 +30,10 @@ class BaroEditProfile extends StatelessWidget {
               CircleAvatar(
                 radius: 65,
                 backgroundColor: Colors.grey.shade800,
-                backgroundImage: const AssetImage(BaroImages.kemalas),
+                child: const Icon(
+                  FluentIcons.person_20_regular,
+                color: Colors.white,
+                ),
               ),
               Positioned(
                 top: 80,
@@ -38,11 +41,8 @@ class BaroEditProfile extends StatelessWidget {
                   decoration: const BoxDecoration(
                     boxShadow: [
                       BoxShadow(
-                        color: Colors.black,
-                        spreadRadius: 2,
-                        blurRadius: 1,
                         offset: Offset(1, 2),
-                      )
+                      ),
                     ],
                     shape: BoxShape.circle
                   ),
@@ -51,7 +51,7 @@ class BaroEditProfile extends StatelessWidget {
                       
                     },
                     icon: const Icon(FluentIcons.camera_switch_20_regular),
-                    iconSize: 30,
+                    iconSize: 25,
                     color: Colors.white,
                   ),
                 ),

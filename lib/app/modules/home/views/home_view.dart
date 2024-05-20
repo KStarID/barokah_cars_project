@@ -3,6 +3,7 @@ import 'package:barokah_cars_project/app/modules/home/views/widgets/product_sugg
 import 'package:barokah_cars_project/app/modules/profile_screen/views/profile_screen_view.dart';
 import 'package:barokah_cars_project/app/modules/search_screen/views/search_screen_view.dart';
 import 'package:barokah_cars_project/utils/constants/image_strings.dart';
+import 'package:barokah_cars_project/utils/constants/text_strings.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_database/ui/firebase_animated_list.dart';
@@ -40,7 +41,7 @@ class HomeView extends GetView<HomeController> {
                         children: [
                           const SearchBar(
                             leading: Icon(FluentIcons.search_20_regular),
-                            hintText: "Temukan mobil impian anda.",
+                            hintText: BaroTexts.homeSearchTitle,
                             backgroundColor: MaterialStatePropertyAll(Colors.white),
                           ),
                           Positioned.fill(
@@ -62,7 +63,7 @@ class HomeView extends GetView<HomeController> {
                       child: CircleAvatar(
                         radius: 28,
                         backgroundColor: Colors.grey.shade800,
-                        child: Icon(
+                        child: const Icon(
                           FluentIcons.person_20_regular,
                           color: Colors.white,
                         ),
@@ -74,10 +75,10 @@ class HomeView extends GetView<HomeController> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text("Brands", style: GoogleFonts.plusJakartaSans(textStyle: const TextStyle(fontSize: 19, fontWeight: FontWeight.w700, color: Colors.black)),),
+                    Text(BaroTexts.brandTitle, style: GoogleFonts.plusJakartaSans(textStyle: const TextStyle(fontSize: 19, fontWeight: FontWeight.w700, color: Colors.black)),),
                     TextButton(
                       onPressed: (){}, 
-                      child: Text("View all", style: GoogleFonts.plusJakartaSans(textStyle: const TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Color(0xFFE82027))),)),
+                      child: Text(BaroTexts.viewAll, style: GoogleFonts.plusJakartaSans(textStyle: const TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Color(0xFFE82027))),)),
                   ],
                 ),
                 const SizedBox(height: 16,),
@@ -109,7 +110,7 @@ class HomeView extends GetView<HomeController> {
                 ),
                 const SizedBox(height: 16,),
 
-                Text("Offers", style: GoogleFonts.plusJakartaSans(textStyle: const TextStyle(fontSize: 19, fontWeight: FontWeight.w700, color: Colors.black)),),
+                Text(BaroTexts.offersTitle, style: GoogleFonts.plusJakartaSans(textStyle: const TextStyle(fontSize: 19, fontWeight: FontWeight.w700, color: Colors.black)),),
                 const SizedBox(height: 8,),
                 Container(
                   width: double.infinity,
@@ -180,10 +181,10 @@ class HomeView extends GetView<HomeController> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text("Suggestions", style: GoogleFonts.plusJakartaSans(textStyle: const TextStyle(fontSize: 19, fontWeight: FontWeight.w700, color: Colors.black)),),
+                    Text(BaroTexts.suggestionsTitle, style: GoogleFonts.plusJakartaSans(textStyle: const TextStyle(fontSize: 19, fontWeight: FontWeight.w700, color: Colors.black)),),
                     TextButton(
                       onPressed: (){}, 
-                      child: Text("View all", style: GoogleFonts.plusJakartaSans(textStyle: const TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Color(0xFFE82027))),)),
+                      child: Text(BaroTexts.viewAll, style: GoogleFonts.plusJakartaSans(textStyle: const TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Color(0xFFE82027))),)),
                   ],
                 ),
                 const SizedBox(height: 16,),
@@ -207,10 +208,10 @@ class HomeView extends GetView<HomeController> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text("Recent Visits", style: GoogleFonts.plusJakartaSans(textStyle: const TextStyle(fontSize: 19, fontWeight: FontWeight.w700, color: Colors.black)),),
+                    Text(BaroTexts.recentVisitsTitle, style: GoogleFonts.plusJakartaSans(textStyle: const TextStyle(fontSize: 19, fontWeight: FontWeight.w700, color: Colors.black)),),
                     TextButton(
                       onPressed: (){}, 
-                      child: Text("View all", style: GoogleFonts.plusJakartaSans(textStyle: const TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Color(0xFFE82027))),)),
+                      child: Text(BaroTexts.viewAll, style: GoogleFonts.plusJakartaSans(textStyle: const TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Color(0xFFE82027))),)),
                   ],
                 ),
                 const SizedBox(height: 16,),

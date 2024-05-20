@@ -22,10 +22,10 @@
               borderRadius: BorderRadius.circular(100)
             ),
             destinations: const [
-              NavigationDestination(icon: Icon(FluentIcons.home_20_regular, size: 25,), label: '', selectedIcon: Icon(FluentIcons.home_20_filled, size: 28, color: Color(0xFFE92027),),),
-              NavigationDestination(icon: Icon(FluentIcons.search_20_filled, size: 25,), label: '', selectedIcon: Icon(FluentIcons.search_20_filled, size: 28, color: Color(0xFFE92027)),),
-              NavigationDestination(icon: Icon(FluentIcons.receipt_20_regular, size: 25,), label: '', selectedIcon: Icon(FluentIcons.receipt_20_filled, size: 28, color: Color(0xFFE92027)),),
-              NavigationDestination(icon: Icon(FluentIcons.person_20_regular, size: 25,), label: '', selectedIcon: Icon(FluentIcons.person_20_filled, size: 28, color: Color(0xFFE92027)),),
+              NavigationDestination(icon: Icon(FluentIcons.home_20_regular, size: 25,), label: 'Home', selectedIcon: Icon(FluentIcons.home_20_filled, size: 28, color: Color(0xFFE92027),),),
+              NavigationDestination(icon: Icon(FluentIcons.search_20_filled, size: 25,), label: 'Search', selectedIcon: Icon(FluentIcons.search_20_filled, size: 28, color: Color(0xFFE92027)),),
+              NavigationDestination(icon: Icon(FluentIcons.receipt_20_regular, size: 25,), label: 'BaroNews', selectedIcon: Icon(FluentIcons.receipt_20_filled, size: 28, color: Color(0xFFE92027)),),
+              NavigationDestination(icon: Icon(FluentIcons.person_20_regular, size: 25,), label: 'Saya', selectedIcon: Icon(FluentIcons.person_20_filled, size: 28, color: Color(0xFFE92027)),),
             ]
             ),
         ),

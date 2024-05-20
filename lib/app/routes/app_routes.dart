@@ -14,6 +14,7 @@ abstract class Routes {
   static const ALL_BRAND = _Paths.ALL_BRAND;
   static const NAVIGATION_BAR = _Paths.NAVIGATION_BAR;
   static const FORGET_PASSWORD = _Paths.FORGET_PASSWORD;
+  static const CAR_NEWS = _Paths.CAR_NEWS;
 }
 
 abstract class _Paths {
@@ -29,4 +30,5 @@ abstract class _Paths {
   static const ALL_BRAND = '/all-brand';
   static const NAVIGATION_BAR = '/navigation-bar';
   static const FORGET_PASSWORD = '/forget-password';
+  static const CAR_NEWS = '/car-news';
 }

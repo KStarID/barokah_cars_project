@@ -17,7 +17,7 @@ class ForgetPasswordView extends GetView<ForgetPasswordController> {
       backgroundColor: const Color(0xFFF2F1F6),
       appBar: AppBar(
         backgroundColor: const Color(0xFFF2F1F6),
-        title: const Text('Lupa Password'),
+        title: const Text(BaroTexts.forgetPasswordTitle),
         centerTitle: true,
       ),
       body: Padding(
@@ -52,7 +52,7 @@ class ForgetPasswordView extends GetView<ForgetPasswordController> {
                     const SizedBox(height: 40,),
 
                     BaroWidgetButton(
-                      buttonName: 'Masuk',
+                      buttonName: BaroTexts.forgetPasswordButton,
                       onPressed: () async {
                         Get.dialog(
                             const Center(
