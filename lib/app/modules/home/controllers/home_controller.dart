@@ -40,6 +40,9 @@ class HomeController extends GetxController {
     });
   }
 
+  void filterCars(String query) {
+  }
+
   String formatTime(int seconds) {
     final hours = (seconds ~/ 3600) % 24;
     final minutes = (seconds ~/ 60) % 60;

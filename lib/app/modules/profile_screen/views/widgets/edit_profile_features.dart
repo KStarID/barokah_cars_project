@@ -4,11 +4,12 @@ import 'package:google_fonts/google_fonts.dart';
 
 class EditProfileFeatures extends StatelessWidget {
   const EditProfileFeatures({
-    super.key, required this.text, required this.icon,
+    super.key, required this.text, required this.icon, this.continueIcon,
   });
 
   final String text;
   final IconData icon;
+  final IconData? continueIcon;
 
   @override
   Widget build(BuildContext context) {
@@ -20,18 +21,20 @@ class EditProfileFeatures extends StatelessWidget {
         color: const Color.fromARGB(31, 142, 142, 142)
       ),
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 8),
+        padding: const EdgeInsets.only(left: 10, right: 6),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Row(
               children: [
                 Icon(icon, color: Colors.black),
-                const SizedBox(width: 12,),
+                const SizedBox(width: 16,),
                 Text(text, style: GoogleFonts.plusJakartaSans(textStyle: const TextStyle(fontSize: 15, fontWeight: FontWeight.w500, color: Colors.black))),
               ],
             ),
-            const Icon(FluentIcons.ios_arrow_rtl_24_regular, color: Colors.black)
+            IconButton(
+              onPressed: (){},
+              icon: Icon(continueIcon, color: Colors.black)),
           ],
         ),
       ),

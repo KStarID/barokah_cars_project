@@ -25,7 +25,7 @@ part 'app_routes.dart';
 class AppPages {
   AppPages._();
 
-  static const INITIAL = Routes.SPLASH_SCREEN;
+  static const INITIAL = Routes.NAVIGATION_BAR;
 
   static final routes = [
     GetPage(
@@ -55,7 +55,7 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.PROFILE_SCREEN,
-      page: () => const ProfileScreenView(),
+      page: () => ProfileScreenView(),
       binding: ProfileScreenBinding(),
     ),
     GetPage(

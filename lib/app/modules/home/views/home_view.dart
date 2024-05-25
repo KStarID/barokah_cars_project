@@ -1,16 +1,11 @@
 import 'package:barokah_cars_project/app/modules/home/views/widgets/brand_card.dart';
 import 'package:barokah_cars_project/app/modules/home/views/widgets/product_suggestions_card.dart';
 import 'package:barokah_cars_project/app/modules/profile_screen/views/profile_screen_view.dart';
-import 'package:barokah_cars_project/app/modules/search_screen/views/search_screen_view.dart';
 import 'package:barokah_cars_project/utils/constants/image_strings.dart';
 import 'package:barokah_cars_project/utils/constants/text_strings.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_database/firebase_database.dart';
-import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../controllers/home_controller.dart';
@@ -18,7 +13,8 @@ import '../controllers/home_controller.dart';
 class HomeView extends GetView<HomeController> {
   HomeView({super.key});
 
-  final databaseReferences = FirebaseDatabase.instance.ref("cars");
+  final databaseReferences = FirebaseDatabase.instance.ref('cars');
+
   
   @override
   Widget build(BuildContext context) {
@@ -39,19 +35,56 @@ class HomeView extends GetView<HomeController> {
                       width: 325,
                       child: Stack(
                         children: [
-                          const SearchBar(
-                            leading: Icon(FluentIcons.search_20_regular),
-                            hintText: BaroTexts.homeSearchTitle,
-                            backgroundColor: MaterialStatePropertyAll(Colors.white),
+                          Container(
+                            height: 55,
+                            width: double.infinity,
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(50),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.black.withOpacity(0.25),
+                                  spreadRadius: 1,
+                                  offset: const Offset(0, 1)
+                                )
+                              ]
+                            ),
+                            padding: const EdgeInsets.all(12),
+                            child: Row(
+                              children: [
+                                const Icon(
+                                  FluentIcons.search_20_regular,
+                                  color: Colors.black45,
+                                ),
+                                const SizedBox(width: 10),
+                                Expanded(
+                                  child: TextField(
+                                    onChanged: controller.filterCars,
+                                    decoration: const InputDecoration(
+                                      hintText: 'Search',
+                                      border: InputBorder.none,
+                                      isDense: true,
+                                      contentPadding: EdgeInsets.zero,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
-                          Positioned.fill(
-                            child: Material(
-                              color: Colors.transparent,
-                              child: InkWell(
-                                onTap: () => Get.to(() => const SearchScreenView()),
-                              ),
-                            )
-                            )
+
+                          // const SearchBar(
+                          //   leading: Icon(FluentIcons.search_20_regular),
+                          //   hintText: BaroTexts.homeSearchTitle,
+                          //   backgroundColor: MaterialStatePropertyAll(Colors.white),
+                          // ),
+                          // Positioned.fill(
+                          //   child: Material(
+                          //     color: Colors.transparent,
+                          //     child: InkWell(
+                          //       onTap: () => Get.to(() => const SearchScreenView()),
+                          //     ),
+                          //   )
+                          //   )
                         ],
                       ),
                     ),
@@ -59,7 +92,7 @@ class HomeView extends GetView<HomeController> {
                     // -- Foto
                     const SizedBox(width: 15,),
                     GestureDetector(
-                      onTap: () => Get.to(() => const ProfileScreenView()),
+                      onTap: () => Get.to(() => ProfileScreenView()),
                       child: CircleAvatar(
                         radius: 28,
                         backgroundColor: Colors.grey.shade800,
@@ -71,7 +104,22 @@ class HomeView extends GetView<HomeController> {
                     ),
                   ],
                 ),
-                const SizedBox(height: 46,),
+                const SizedBox(height: 30,),
+
+                // -- Study Realtime Database
+                // Expanded(
+                //   child: FirebaseAnimatedList(
+                //     query: databaseReferences, 
+                //     itemBuilder: (context, snapshot, animation, index){
+                //       return ListTile(
+                //         title: Text(snapshot.child('deskripsi').value.toString()),
+                //         subtitle: Text(snapshot.child('kondisi').value.toString()),
+                //       );
+                //     }
+                //     ),
+                //   ),
+            
+                // -- Brands
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -109,7 +157,7 @@ class HomeView extends GetView<HomeController> {
                   ),
                 ),
                 const SizedBox(height: 16,),
-
+            
                 Text(BaroTexts.offersTitle, style: GoogleFonts.plusJakartaSans(textStyle: const TextStyle(fontSize: 19, fontWeight: FontWeight.w700, color: Colors.black)),),
                 const SizedBox(height: 8,),
                 Container(

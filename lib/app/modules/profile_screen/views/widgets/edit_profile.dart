@@ -1,6 +1,6 @@
 import 'package:barokah_cars_project/app/modules/navigation_bar/views/navigation_bar_view.dart';
+import 'package:barokah_cars_project/app/modules/profile_screen/controllers/profile_screen_controller.dart';
 import 'package:barokah_cars_project/app/modules/profile_screen/views/widgets/edit_profile_features.dart';
-import 'package:barokah_cars_project/utils/constants/image_strings.dart';
 import 'package:barokah_cars_project/utils/widgets/widget_button.dart';
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
@@ -14,6 +14,8 @@ class BaroEditProfile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final editProfileController = Get.put(ProfileScreenController());
+
     return Scaffold(
       backgroundColor: const Color(0xFFF2F1F6),
       appBar: AppBar(
@@ -66,28 +68,70 @@ class BaroEditProfile extends StatelessWidget {
 
               // -- Name
 
-              const EditProfileFeatures(text: "Kemalaz Hakim Ramadhan", icon: FluentIcons.person_20_regular,),
+              Obx(() => EditProfileFeatures(text: editProfileController.name.value, icon: FluentIcons.person_20_regular, continueIcon: FluentIcons.ios_arrow_rtl_24_regular,)),
               const SizedBox(height: 20,),
 
               // -- Email
 
-              const EditProfileFeatures(text: "mkemalashakim@gmail.com", icon: FluentIcons.mail_20_regular),
+              Obx(() => EditProfileFeatures(text: editProfileController.email.value, icon: FluentIcons.mail_20_regular, continueIcon: FluentIcons.ios_arrow_rtl_24_regular,)),
               const SizedBox(height: 20,),
+
+            // Update Data
 
               // -- Phone number
 
-              const EditProfileFeatures(text: "082839431768", icon: FluentIcons.phone_20_regular),
+              const EditProfileFeatures(text: "+62-822-4869-6800", icon: FluentIcons.phone_20_regular),
+              
+              // Row(
+              //   children: [
+              //     Expanded(
+              //       child: TextFormField(
+              //         controller: editProfileController.phoneNumberController,
+              //         focusNode: _phoneNumberFocusNode,
+              //         style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w500, color: Colors.black),
+              //         decoration: InputDecoration(
+              //           hintText: 'Masukkan Nomor Telepon',
+              //           border: InputBorder.none,
+              //           // Atur warna border
+              //           enabledBorder: const UnderlineInputBorder(
+              //             borderSide: BorderSide(color: Colors.transparent),
+              //           ),
+              //           // Atur warna border saat fokus
+              //           focusedBorder: const UnderlineInputBorder(
+              //             borderSide: BorderSide(color: Colors.transparent),
+              //           ),
+              //           // Atur warna background
+              //           filled: true,
+              //           fillColor: const Color.fromARGB(31, 142, 142, 142),
+
+              //           prefixIcon: const Icon(FluentIcons.phone_20_regular),
+
+              //           suffixIcon: 
+              //           IconButton(
+              //             onPressed: (){
+              //               _phoneNumberFocusNode.requestFocus();
+              //             },
+              //             icon: const Icon(FluentIcons.edit_20_regular, color: Colors.black),
+              //           ),
+              //         ),
+              //       ),
+              //     ),
+              //   ],
+              // ),
               const SizedBox(height: 20,),
 
-              // -- Phone number
+              // -- Location
 
-              const EditProfileFeatures(text: "Jakarta Selatan, Jawa Barat", icon: FluentIcons.phone_20_regular),
+              // LocationDropdown(),
+
+              const EditProfileFeatures(text: "Jakarta Selatan, Jawa Barat", icon: FluentIcons.location_20_regular, continueIcon: FluentIcons.chevron_down_20_regular,),
               const SizedBox(height: 40,),
 
               // -- Save Changes Button
               BaroWidgetButton(
                 buttonName: "Simpan", 
                 onPressed: () async {
+                  editProfileController.saveUserData();
                     Get.dialog(
                         const Center(
                           child: SizedBox(
@@ -108,7 +152,7 @@ class BaroEditProfile extends StatelessWidget {
                         transition: Transition.fadeIn,
                         duration: const Duration(seconds: 1),
                       );
-                    Get.snackbar("Informasi Pribadi Diperbarui", "Perubahan pada informasi anda telah berhasil disimpan.", backgroundColor: const Color(0xFFE92027), colorText: Colors.white);
+                    Get.snackbar("Informasi Pribadi Diperbarui", "Perubahan pada informasi anda telah berhasil disimpan.", backgroundColor: const Color(0xFFE92027), snackPosition: SnackPosition.BOTTOM, colorText: Colors.white);
                   }, 
               ),
             ],
