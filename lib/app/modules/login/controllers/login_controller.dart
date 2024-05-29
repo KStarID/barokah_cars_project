@@ -1,4 +1,3 @@
-import 'package:barokah_cars_project/app/modules/home/views/home_view.dart';
 import 'package:barokah_cars_project/app/modules/navigation_bar/views/navigation_bar_view.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
