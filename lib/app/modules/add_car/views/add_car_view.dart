@@ -29,7 +29,7 @@ class AddCarView extends GetView<CarNewsController> {
                   children: [
                     Text("Your List Cars", style: GoogleFonts.plusJakartaSans(textStyle: const TextStyle(fontSize: 22, fontWeight: FontWeight.w600, color: Colors.black)),),
                     GestureDetector(
-                      onTap: () => Get.to(() => AddCarWidget()),
+                      onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => AddCarWidget())),
                       child: Container(
                         width: 75,
                         height: 30,
