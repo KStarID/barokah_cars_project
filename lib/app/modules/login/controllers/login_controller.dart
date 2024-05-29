@@ -1,3 +1,4 @@
+import 'package:barokah_cars_project/app/modules/home/views/home_view.dart';
 import 'package:barokah_cars_project/app/modules/navigation_bar/views/navigation_bar_view.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -57,11 +58,14 @@ class LoginController extends GetxController {
     if (isValidCredentials) {
       Get.snackbar('Success', 'Anda berhasil melakukan login',
           backgroundColor: const Color(0xFFE92027), colorText: const Color(0xffffffff));
+
       Get.off(
         () => const NavigationBarView(),
         transition: Transition.cupertinoDialog,
         duration: const Duration(milliseconds: 500),
       );
+
+      clearForm();
     } else {
       Get.snackbar('Error', 'Email atau Password salah',
           backgroundColor: Color(0xFFE92027), colorText: const Color(0xffffffff));
@@ -72,4 +76,5 @@ class LoginController extends GetxController {
     emailController.clear();
     passwordController.clear();
   }
+  
 }

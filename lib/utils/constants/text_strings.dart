@@ -5,6 +5,7 @@ class BaroTexts {
   // -- Authentication Heading
   static const String loginTitle = 'Selamat Datang!';
   static const String registerTitle = 'Buat Akun';
+  static const String forgetPasswordTitle = 'Lupa Password';
   static const String loginDesc = 'Silahkan masuk untuk memulai.';
   static const String registerDesc = 'Silahkan mengisi form berikut dengan benar.';
 
@@ -14,6 +15,7 @@ class BaroTexts {
   static const String password = 'Password';
   static const String confirmPasswordRegister = 'Konfirmasi Password';
   static const String forgetPassword = 'Lupa password?';
+  static const String forgetPasswordButton = 'Kirim Email';
   static const String login = 'Masuk';
   static const String register = 'Daftar';
   static const String or = 'Atau';
@@ -32,4 +34,12 @@ class BaroTexts {
 
   static const String buttonTitle = "Selanjutnya";
   static const String lastButtonTitle = "Mulai Sekarang";
+
+  // -- Home Texts
+  static const String homeSearchTitle = "Temukan mobil impian anda.";
+  static const String brandTitle = "Brands";
+  static const String offersTitle = "Offers";
+  static const String suggestionsTitle = "Suggestions";
+  static const String recentVisitsTitle = "Recent Visits";
+  static const String viewAll = "View All";
 }

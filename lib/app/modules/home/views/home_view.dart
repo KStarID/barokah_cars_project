@@ -1,16 +1,21 @@
-import 'package:barokah_cars_project/app/modules/home/views/widgets/brand_card.dart';
-import 'package:barokah_cars_project/app/modules/home/views/widgets/product_suggestions_card.dart';
-import 'package:barokah_cars_project/app/modules/profile_screen/views/profile_screen_view.dart';
+import 'package:barokah_cars_project/app/modules/home/views/widgets/home_header.dart';
+import 'package:barokah_cars_project/app/modules/home/views/widgets/promo_slider.dart';
+import 'package:barokah_cars_project/app/modules/home/views/widgets/search_bar_screen.dart';
+import 'package:barokah_cars_project/app/modules/profile_screen/controllers/profile_screen_controller.dart';
 import 'package:barokah_cars_project/utils/constants/image_strings.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../controllers/home_controller.dart';
 
 class HomeView extends GetView<HomeController> {
-  const HomeView({super.key});
+  HomeView({super.key});
+
+  final databaseReferences = FirebaseDatabase.instance.ref('cars');
+  final profileScreenController = Get.put(ProfileScreenController());
+
   
   @override
   Widget build(BuildContext context) {
@@ -19,197 +24,111 @@ class HomeView extends GetView<HomeController> {
       backgroundColor: const Color(0xFFF2F1F6),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16),
-        child: SafeArea(
-          child: SingleChildScrollView(
-            scrollDirection: Axis.vertical,
+        child: SingleChildScrollView(
+          scrollDirection: Axis.vertical,
+          child: SafeArea(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                const BaroHomeHeader(),
+                const SizedBox(height: 30,),
+                Obx(() => Text("Hello, ${profileScreenController.name.value}", style: GoogleFonts.plusJakartaSans(textStyle: const TextStyle(fontSize: 19, fontWeight: FontWeight.w700, color: Colors.black)),)),
+                const SizedBox(height: 5,),
+                Text("Selamat Datang di Barocars", style: GoogleFonts.plusJakartaSans(textStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500, color: Colors.grey)),),
+                const SizedBox(height: 30,),
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const SizedBox(
-                      width: 325,
-                      child: SearchBar(
-                        leading: Icon(FluentIcons.search_20_regular),
-                        hintText: "Temukan mobil impian anda.",
-                        backgroundColor: MaterialStatePropertyAll(Colors.white),
-                      ),
-                    ),
-                    // -- Foto
-                    const SizedBox(width: 15,),
+                    SearchBarScreen(controller: controller),
                     GestureDetector(
-                      onTap: () => Get.to(() => const ProfileScreenView()),
-                      child: CircleAvatar(
-                        radius: 28,
-                        backgroundColor: Colors.grey.shade800,
-                        backgroundImage: const AssetImage(BaroImages.kemalas),
+                      onTap: (){},
+                      child: Container(
+                        width: 60,
+                        height: 60,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20),
+                          color: Colors.red
+                        ),
+                        child: const Icon(FluentIcons.filter_20_regular, size: 32, color: Colors.white,),
                       ),
-                    ),
+                    )
                   ],
                 ),
-                const SizedBox(height: 46,),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text("Brands", style: GoogleFonts.plusJakartaSans(textStyle: const TextStyle(fontSize: 19, fontWeight: FontWeight.w700, color: Colors.black)),),
-                    TextButton(
-                      onPressed: (){}, 
-                      child: Text("View all", style: GoogleFonts.plusJakartaSans(textStyle: const TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Color(0xFFE82027))),)),
-                  ],
+                const SizedBox(height: 10,),
+                  
+                const Padding(
+                  padding: EdgeInsets.all(24),
+                  child: BaroPromoSlider(banners: [BaroImages.productBanners1, BaroImages.productBanners2, BaroImages.productBanners3, BaroImages.productBanners4, BaroImages.productBanners5],),
                 ),
-                const SizedBox(height: 16,),
-                
-                SizedBox(
-                  height: 85,
-                  width: double.infinity,
-                  child: ListView(
-                    clipBehavior: Clip.none,
-                    scrollDirection: Axis.horizontal,
-                    children: const [
-                      BrandCustomCard(brand: 'Toyota', stock: '12', image: BaroImages.toyota,),
-                      SizedBox(width: 10,),
-                      BrandCustomCard(brand: 'Nissan', stock: '8', image: BaroImages.nissan,),
-                      SizedBox(width: 10,),
-                      BrandCustomCard(brand: 'Mercedez', stock: '6', image: BaroImages.mercedezBenz,),
-                      SizedBox(width: 10,),
-                      BrandCustomCard(brand: 'Lexus', stock: '11', image: BaroImages.lexus,),
-                      SizedBox(width: 10,),
-                      BrandCustomCard(brand: 'Toyota', stock: '12', image: BaroImages.toyota,),
-                      SizedBox(width: 10,),
-                      BrandCustomCard(brand: 'Nissan', stock: '8', image: BaroImages.nissan,),
-                      SizedBox(width: 10,),
-                      BrandCustomCard(brand: 'Mercedez', stock: '6', image: BaroImages.mercedezBenz,),
-                      SizedBox(width: 10,),
-                      BrandCustomCard(brand: 'Lexus', stock: '11', image: BaroImages.lexus,),
-                    ],
-                  ),
-                ),
-                const SizedBox(height: 16,),
-
-                Text("Offers", style: GoogleFonts.plusJakartaSans(textStyle: const TextStyle(fontSize: 19, fontWeight: FontWeight.w700, color: Colors.black)),),
+                  
+                const SizedBox(height: 10,),
+            
+                // Car List
+                Text("Car List", style: GoogleFonts.plusJakartaSans(textStyle: const TextStyle(fontSize: 19, fontWeight: FontWeight.w700, color: Colors.black)),),
                 const SizedBox(height: 8,),
-                Container(
-                  width: double.infinity,
-                  height: 150,
-                  decoration: BoxDecoration(
-                    border: Border.all(width: 1, color: const Color(0xFFE82027),),
-                    borderRadius: BorderRadius.circular(10)
-                  ),
-                  child: Padding(padding: const EdgeInsets.all(8),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Row(
-                        children: [
-                          const SizedBox(
-                            width: 25,
-                            height: 16,
-                            child: Image(image: AssetImage(BaroImages.toyota))),
-                          const SizedBox(width: 8,),
-                          Text("2016 Toyota Avanza Veloz", style: GoogleFonts.plusJakartaSans(textStyle: const TextStyle(fontSize: 15, fontWeight: FontWeight.w600, color: Colors.black)),)
-                        ],
-                      ),
-                      const SizedBox(height: 35,),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  Text("Rp288.700.000", style: GoogleFonts.plusJakartaSans(textStyle: const TextStyle(fontSize: 15, fontWeight: FontWeight.w600, color: Color(0xFFB0B0B0), decoration: TextDecoration.lineThrough)),),
-                                  const SizedBox(width: 7,),
-                                  Container(
-                                    width: 25,
-                                    height: 15,
-                                    decoration: BoxDecoration(
-                                      color: const Color(0xFFE82027),
-                                      border: Border.all(color: const Color(0XFFE82027),),
-                                      borderRadius: BorderRadius.circular(20),
-                                    ),
-                                    child: Text("5%", style: GoogleFonts.plusJakartaSans(textStyle: const TextStyle(fontSize: 10, fontWeight: FontWeight.w600, color: Color(0xFFF2F1F6)),), textAlign: TextAlign.center,),
+                ListView.builder(
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  itemCount: 4,
+                  itemBuilder: (context, index) {
+                    int firstIndex = index * 2;
+                    int secondIndex = firstIndex + 1;
+                    return Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Expanded(
+                          child: Container(
+                            margin: const EdgeInsets.symmetric(vertical: 8.0),
+                            child: Center(
+                              child: Container(
+                                width: 180,
+                                height: 170,
+                                decoration: BoxDecoration(
+                                  border: Border.all(
+                                    color: const Color(0xFFE82027),
                                   ),
-                                ],
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                child: Center(
+                                  child: Text(
+                                    "Ini Contoh $firstIndex",
+                                    style: const TextStyle(fontSize: 16),
+                                  ),
+                                ),
                               ),
-                              Text("Rp274.265.000", style: GoogleFonts.plusJakartaSans(textStyle: const TextStyle(fontSize: 18, fontWeight: FontWeight.w600, color: Colors.black)),),
-                              const SizedBox(height: 10,),
-                            ],
+                            ),
                           ),
-                          const Image(image: AssetImage("assets/images/avanza.png")),
-                        ],
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          const SizedBox(width: 12,),
-                          const Icon(FluentIcons.timer_20_regular, size: 15,),
-                          const SizedBox(width: 3,),
-                          Obx(() => Text(controller.formatTime(controller.seconds.value), style: GoogleFonts.plusJakartaSans(textStyle: const TextStyle(fontSize: 11, fontWeight: FontWeight.w600, color: Color(0xFFB0B0B0))),))
-                        ],
-                      ),
-                    ],
-                  ),
-                  )
-                ),
-                const SizedBox(height: 32,),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text("Suggestions", style: GoogleFonts.plusJakartaSans(textStyle: const TextStyle(fontSize: 19, fontWeight: FontWeight.w700, color: Colors.black)),),
-                    TextButton(
-                      onPressed: (){}, 
-                      child: Text("View all", style: GoogleFonts.plusJakartaSans(textStyle: const TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Color(0xFFE82027))),)),
-                  ],
-                ),
-                const SizedBox(height: 16,),
-                
-                SizedBox(
-                  height: 108,
-                  width: double.infinity,
-                  child: ListView(
-                    clipBehavior: Clip.none,
-                    scrollDirection: Axis.horizontal,
-                    children: const [
-                      ProductCustomCard(image: BaroImages.bmwM2, name: "BMW M2", price: "Rp1.767.000.000"),
-                      SizedBox(width: 12,),
-                      ProductCustomCard(image: BaroImages.fordMustang, name: "Ford Mustang 2018", price: "Rp2.850.000.000"),
-                      SizedBox(width: 12,),
-                      ProductCustomCard(image: BaroImages.toyotaCHR, name: "Toyota C-HR 2023", price: "Rp602.000.000"),
-                    ],
-                  ),
-                ),
-                const SizedBox(height: 28,),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text("Recent Visits", style: GoogleFonts.plusJakartaSans(textStyle: const TextStyle(fontSize: 19, fontWeight: FontWeight.w700, color: Colors.black)),),
-                    TextButton(
-                      onPressed: (){}, 
-                      child: Text("View all", style: GoogleFonts.plusJakartaSans(textStyle: const TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Color(0xFFE82027))),)),
-                  ],
-                ),
-                const SizedBox(height: 16,),
-                
-                SizedBox(
-                  height: 108,
-                  width: double.infinity,
-                  child: ListView(
-                    clipBehavior: Clip.none,
-                    scrollDirection: Axis.horizontal,
-                    children: const [
-                      ProductCustomCard(image: BaroImages.toyotaCHR, name: "Toyota C-HR 2023", price: "Rp1.767.000.000"),
-                      SizedBox(width: 12,),
-                      ProductCustomCard(image: BaroImages.bmwM2, name: "BMW M2", price: "Rp2.850.000.000"),
-                      SizedBox(width: 12,),
-                      ProductCustomCard(image: BaroImages.fordMustang, name: "Ford Mustang 2018", price: "Rp602.000.000"),
-                    ],
-                  ),
+                        ),
+                        Expanded(
+                          child: Container(
+                            margin: const EdgeInsets.symmetric(vertical: 8.0),
+                            child: Center(
+                              child: Container(
+                                width: 180,
+                                height: 170,
+                                decoration: BoxDecoration(
+                                  border: Border.all(
+                                    color: const Color(0xFFE82027),
+                                  ),
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                child: Center(
+                                  child: Text(
+                                    "Ini Contoh $secondIndex",
+                                    style: const TextStyle(fontSize: 16),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    );
+                  }
                 ),
               ],
             ),
-          )
+          ),
         ),
       ),
     );

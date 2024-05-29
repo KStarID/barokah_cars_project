@@ -1,7 +1,6 @@
+import 'package:barokah_cars_project/app/modules/forget_password/bindings/forget_password_binding.dart';
+import 'package:barokah_cars_project/app/modules/forget_password/views/forget_password_view.dart';
 import 'package:get/get.dart';
-
-import '../modules/all_brand/bindings/all_brand_binding.dart';
-import '../modules/all_brand/views/all_brand_view.dart';
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
 import '../modules/login/bindings/login_binding.dart';
@@ -14,8 +13,6 @@ import '../modules/profile_screen/bindings/profile_screen_binding.dart';
 import '../modules/profile_screen/views/profile_screen_view.dart';
 import '../modules/register/bindings/register_binding.dart';
 import '../modules/register/views/register_view.dart';
-import '../modules/search_screen/bindings/search_screen_binding.dart';
-import '../modules/search_screen/views/search_screen_view.dart';
 import '../modules/splash_screen/bindings/splash_screen_binding.dart';
 import '../modules/splash_screen/views/splash_screen_view.dart';
 
@@ -24,12 +21,13 @@ part 'app_routes.dart';
 class AppPages {
   AppPages._();
 
-  static const INITIAL = Routes.SPLASH_SCREEN;
+  // ignore: constant_identifier_names
+  static const INITIAL = Routes.NAVIGATION_BAR;
 
   static final routes = [
     GetPage(
       name: _Paths.HOME,
-      page: () => const HomeView(),
+      page: () => HomeView(),
       binding: HomeBinding(),
     ),
     GetPage(
@@ -54,23 +52,18 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.PROFILE_SCREEN,
-      page: () => const ProfileScreenView(),
+      page: () => ProfileScreenView(),
       binding: ProfileScreenBinding(),
-    ),
-    GetPage(
-      name: _Paths.SEARCH_SCREEN,
-      page: () => const SearchScreenView(),
-      binding: SearchScreenBinding(),
-    ),
-    GetPage(
-      name: _Paths.ALL_BRAND,
-      page: () => const AllBrandView(),
-      binding: AllBrandBinding(),
     ),
     GetPage(
       name: _Paths.NAVIGATION_BAR,
       page: () => const NavigationBarView(),
       binding: NavigationBarBinding(),
+    ),
+    GetPage(
+      name: _Paths.FORGET_PASSWORD,
+      page: () => const ForgetPasswordView(),
+      binding: ForgetPasswordBinding(),
     ),
   ];
 }

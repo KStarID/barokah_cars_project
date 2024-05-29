@@ -22,7 +22,15 @@ class BaroImages {
   static const String toyotaCHR = "assets/images/toyota_chr.png";
 
   // -- OnBoarding Animation
-  static const String onBoardingAnimation1 = "assets/onboardings/onboarding_animation1.json";
-  static const String onBoardingAnimation2 = "assets/onboardings/onboarding_animation2.json";
-  static const String onBoardingAnimation3 = "assets/onboardings/onboarding_animation3.json";
+  static const String onBoardingAnimation1 = "assets/animations/onboarding_animation1.json";
+  static const String onBoardingAnimation2 = "assets/animations/onboarding_animation2.json";
+  static const String onBoardingAnimation3 = "assets/animations/onboarding_animation3.json";
+  static const String forgetPasswordAnimation = "assets/animations/forgetPassword_animation.json";
+
+  // -- Product Banners
+  static const String productBanners1 = "assets/banners/banner-1.png";
+  static const String productBanners2 = "assets/banners/banner-2.png";
+  static const String productBanners3 = "assets/banners/banner-3.png";
+  static const String productBanners4 = "assets/banners/banner-4.png";
+  static const String productBanners5 = "assets/banners/banner-5.png";
 }

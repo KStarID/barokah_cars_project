@@ -13,6 +13,7 @@ class HomeController extends GetxController {
 
   RxInt seconds = 0.obs;
   int totalSeconds = 86400;
+  final carouselCurrentIndex = 0.obs;
   
   Timer? _timer;
 
@@ -40,6 +41,9 @@ class HomeController extends GetxController {
     });
   }
 
+  void filterCars(String query) {
+  }
+
   String formatTime(int seconds) {
     final hours = (seconds ~/ 3600) % 24;
     final minutes = (seconds ~/ 60) % 60;
@@ -61,13 +65,20 @@ class HomeController extends GetxController {
           nameController.text = userData['name'] ?? '';
           emailController.text = userData['email'] ?? '';
         } else {
+          // ignore: avoid_print
           print('No user data found.');
         }
       } else {
+        // ignore: avoid_print
         print('No user logged in.');
       }
     } catch (e) {
+      // ignore: avoid_print
       print('Error fetching user data: $e');
     }
+  }
+
+  void updatePageIndicator(index){
+    carouselCurrentIndex.value = index;
   }
 }
