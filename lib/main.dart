@@ -10,7 +10,7 @@ void main() async{
   runApp(
     GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      title: "Barocars Application",
+      title: "BaroCars",
       initialRoute: AppPages.INITIAL,
       getPages: AppPages.routes,
       home: const Scaffold(

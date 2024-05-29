@@ -69,82 +69,31 @@ class BaroEditProfile extends StatelessWidget {
               // -- Name
 
               Obx(() => EditProfileFeatures(text: editProfileController.name.value, icon: FluentIcons.person_20_regular, continueIcon: FluentIcons.ios_arrow_rtl_24_regular,)),
-              const SizedBox(height: 20,),
+              const SizedBox(height: 40,),
 
               // -- Email
 
               Obx(() => EditProfileFeatures(text: editProfileController.email.value, icon: FluentIcons.mail_20_regular, continueIcon: FluentIcons.ios_arrow_rtl_24_regular,)),
-              const SizedBox(height: 20,),
+              const SizedBox(height: 300,),
 
-            // Update Data
-
-              // -- Phone number
-
-              const EditProfileFeatures(text: "+62-822-4869-6800", icon: FluentIcons.phone_20_regular),
-              
-              // Row(
-              //   children: [
-              //     Expanded(
-              //       child: TextFormField(
-              //         controller: editProfileController.phoneNumberController,
-              //         focusNode: _phoneNumberFocusNode,
-              //         style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w500, color: Colors.black),
-              //         decoration: InputDecoration(
-              //           hintText: 'Masukkan Nomor Telepon',
-              //           border: InputBorder.none,
-              //           // Atur warna border
-              //           enabledBorder: const UnderlineInputBorder(
-              //             borderSide: BorderSide(color: Colors.transparent),
-              //           ),
-              //           // Atur warna border saat fokus
-              //           focusedBorder: const UnderlineInputBorder(
-              //             borderSide: BorderSide(color: Colors.transparent),
-              //           ),
-              //           // Atur warna background
-              //           filled: true,
-              //           fillColor: const Color.fromARGB(31, 142, 142, 142),
-
-              //           prefixIcon: const Icon(FluentIcons.phone_20_regular),
-
-              //           suffixIcon: 
-              //           IconButton(
-              //             onPressed: (){
-              //               _phoneNumberFocusNode.requestFocus();
-              //             },
-              //             icon: const Icon(FluentIcons.edit_20_regular, color: Colors.black),
-              //           ),
-              //         ),
-              //       ),
-              //     ),
-              //   ],
-              // ),
-              const SizedBox(height: 20,),
-
-              // -- Location
-
-              // LocationDropdown(),
-
-              const EditProfileFeatures(text: "Jakarta Selatan, Jawa Barat", icon: FluentIcons.location_20_regular, continueIcon: FluentIcons.chevron_down_20_regular,),
-              const SizedBox(height: 40,),
 
               // -- Save Changes Button
               BaroWidgetButton(
                 buttonName: "Simpan", 
                 onPressed: () async {
-                  editProfileController.saveUserData();
                     Get.dialog(
-                        const Center(
-                          child: SizedBox(
-                            height: 100,
-                            width: 100,
-                            child: CircularProgressIndicator(
-                              valueColor: AlwaysStoppedAnimation<Color>(Color(0xFFE92027),),
-                              strokeWidth: 5,
-                            ),
+                      const Center(
+                        child: SizedBox(
+                          height: 100,
+                          width: 100,
+                          child: CircularProgressIndicator(
+                            valueColor: AlwaysStoppedAnimation<Color>(Color(0xFFE92027),),
+                            strokeWidth: 5,
                           ),
                         ),
-                        barrierDismissible: false,
-                      );
+                      ),
+                      barrierDismissible: false,
+                    );
 
                       await Future.delayed(const Duration(seconds: 2));
                       Get.to(

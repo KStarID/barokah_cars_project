@@ -1,8 +1,6 @@
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
 
-import 'package:flutter/material.dart';
-
 class LocationDropdown extends StatelessWidget {
   @override
   Widget build(BuildContext context) {

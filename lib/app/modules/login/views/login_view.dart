@@ -106,7 +106,7 @@ class LoginView extends GetView<LoginController> {
                         barrierDismissible: false,
                       );
 
-                      await Future.delayed(const Duration(seconds: 2));
+                      await Future.delayed(const Duration(seconds: 3));
 
                       loginController.loginValidation();
 

@@ -4,10 +4,7 @@ import 'package:barokah_cars_project/app/modules/onboarding_screen/views/widgets
 import 'package:barokah_cars_project/utils/constants/image_strings.dart';
 import 'package:barokah_cars_project/utils/constants/text_strings.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import '../controllers/onboarding_screen_controller.dart';
 
 class OnboardingScreenView extends GetView<OnboardingScreenController> {

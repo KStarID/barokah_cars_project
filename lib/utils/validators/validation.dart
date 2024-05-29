@@ -55,4 +55,97 @@ class BaroValidator {
     }
     return null;
   }
+
+  // -- Merk Validation
+  static String? merkValidation(String? value){
+    if (value == null || value.isEmpty){
+      return 'Merk tidak boleh kosong';
+    } else if (value.length <= 2 ){
+      return 'Merk mobil harus terdiri dari minimal 2 karakter';
+    }
+    return null;
+  }
+
+  // -- Model Validation
+  static String? modelValidation(String? value){
+    if (value == null || value.isEmpty){
+      return 'Model tidak boleh kosong';
+    } else if (value.length <= 2){
+      return 'Model harus terdiri dari minimal 2 karakter';
+    }
+    final validCharacters = RegExp(r'^[a-zA-Z0-9\s\-]+$');
+    if (!validCharacters.hasMatch(value)) {
+      return 'Model mobil hanya boleh mengandung huruf, angka, spasi, dan tanda hubung';
+    }
+    return null;
+  }
+
+  // -- Bahan Bakar Validation
+  static String? bahanBakarValidation (String? value){
+    if (value == null || value.isEmpty){
+      return 'Bahan bakar tidak boleh kosong';
+    }
+    return null;
+  }
+
+  // -- Transmisi Validation
+  static String? transmisiValidation (String? value){
+    if (value == null || value.isEmpty){
+      return 'Bahan bakar tidak boleh kosong';
+    }
+    return null;
+  }
+
+  // -- Harga Jual Validation
+  static String? hargaJualValidate(String? value){
+    if (value == null || value.isEmpty){
+      return 'Harga jual tidak boleh kosong';
+    }
+    final price = int.tryParse(value);
+    if (price == null || price <= 0){
+      return 'Harga jual harus berupa angka';
+    }
+    return null;
+  }
+
+  // -- Narahubung Validation
+  static String? narahubungValidation (String? value){
+    if (value == null || value.isEmpty){
+      return 'Narahubung tidak boleh kosong';
+    } else if (value.length < 10 || value.length > 15){
+      return 'Kontak harus terdiri dari 10 hingga 15 karakter';
+    }final validCharacters = RegExp(r'^[0-9]+$');
+    if (!validCharacters.hasMatch(value)) {
+      return 'Kontak penjual hanya boleh mengandung angka';
+    }
+    return null;
+  }
+
+  // -- Deskripsi Validation
+  static String? deskripsiValidation (String? value){
+    if (value == null || value.isEmpty){
+      return 'Deskripsi tidak boleh kosong';
+    }
+    return null;
+  }
+
+  // -- Tahun Pembuatan Validation
+  static String? tahunPembuatanValidation (String? value){
+    if (value == null || value.isEmpty){
+      return 'Tahun Pembuatan tidak boleh kosong';
+    } else if (value.length != 4){
+      return 'Format tahun yang anda masukkan tidak valid';
+    }
+    return null;
+  }
+
+  // -- Warna Validation
+  static String? warnaValidation (String? value){
+    if (value == null || value.isEmpty){
+      return 'Tahun Pembuatan tidak boleh kosong';
+    } else if (value.length <= 3){
+      return 'Warna terdiri dari minimal 3 karakter';
+    }
+    return null;
+  }
 }

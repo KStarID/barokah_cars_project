@@ -46,19 +46,4 @@ class ProfileScreenController extends GetxController {
       print('Error fetching user data: $e');
     }
   }
-
-  Future<void> saveUserData() async {
-  try {
-    User? user = _auth.currentUser;
-    if (user != null) {
-      await _userCollection.doc(user.uid).update({
-        'phoneNumber': phoneNumberController.text,
-        'location': locationController.text,
-      });
-    }
-  } catch (e) {
-    print('Error saving user data: $e');
-  }
-}
-
 }
