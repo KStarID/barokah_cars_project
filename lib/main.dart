@@ -1,4 +1,3 @@
-import 'package:barokah_cars_project/app/modules/navigation_bar/views/navigation_bar_view.dart';
 import 'package:barokah_cars_project/firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -16,9 +15,7 @@ void main() async{
       title: "BaroCars",
       initialRoute: AppPages.INITIAL,
       getPages: AppPages.routes,
-      home: const Scaffold(
-        bottomNavigationBar: NavigationBarView(),
-      ),
+      home: const Scaffold(),
     ),
   );
 }

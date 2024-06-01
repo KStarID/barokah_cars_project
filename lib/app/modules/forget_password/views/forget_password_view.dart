@@ -12,7 +12,7 @@ class ForgetPasswordView extends GetView<ForgetPasswordController> {
   const ForgetPasswordView({super.key});
   @override
   Widget build(BuildContext context) {
-    final controller = ForgetPasswordController();
+    final controller = Get.put(ForgetPasswordController());
     return Scaffold(
       backgroundColor: const Color(0xFFF2F1F6),
       appBar: AppBar(
@@ -69,6 +69,10 @@ class ForgetPasswordView extends GetView<ForgetPasswordController> {
                           );
 
                           await Future.delayed(const Duration(seconds: 2));
+
+                          controller.resetPassword(controller.emailController.text);
+
+                          Get.back();
                       },
                     ),
                   ],

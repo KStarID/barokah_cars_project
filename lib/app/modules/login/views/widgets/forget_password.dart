@@ -15,8 +15,8 @@ class BaroLupaPassword extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.end,
       children: [
         TextButton(
-          onPressed: () => Get.to(() => const ForgetPasswordView()), 
-          child: Text(BaroTexts.forgetPasswordTitle, style: GoogleFonts.plusJakartaSans(textStyle: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: Color(0xFF3D3D3D)))),
+          onPressed: () => Get.to(() => ForgetPasswordView()), 
+          child: Text(BaroTexts.forgetPasswordQuestion, style: GoogleFonts.plusJakartaSans(textStyle: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: Color(0xFF3D3D3D)))),
           )
       ],
     );

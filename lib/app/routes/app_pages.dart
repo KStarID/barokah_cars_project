@@ -22,7 +22,7 @@ class AppPages {
   AppPages._();
 
   // ignore: constant_identifier_names
-  static const INITIAL = Routes.NAVIGATION_BAR;
+  static const INITIAL = Routes.SPLASH_SCREEN;
 
   static final routes = [
     GetPage(
@@ -62,7 +62,7 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.FORGET_PASSWORD,
-      page: () => const ForgetPasswordView(),
+      page: () => ForgetPasswordView(),
       binding: ForgetPasswordBinding(),
     ),
   ];

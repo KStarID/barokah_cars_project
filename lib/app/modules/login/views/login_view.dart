@@ -86,6 +86,8 @@ class LoginView extends GetView<LoginController> {
                     ),
                   ),
                 ),
+
+                // -- Forget Password
                 const BaroLupaPassword(),
 
                 // -- Login Button

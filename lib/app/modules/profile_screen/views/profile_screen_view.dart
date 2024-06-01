@@ -1,6 +1,8 @@
 import 'package:barokah_cars_project/app/modules/login/views/login_view.dart';
 import 'package:barokah_cars_project/app/modules/profile_screen/views/widgets/edit_profile.dart';
 import 'package:barokah_cars_project/app/modules/profile_screen/views/widgets/profile_features.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -132,12 +134,14 @@ class ProfileScreenView extends StatelessWidget {
                     );
 
                     await Future.delayed(const Duration(seconds: 2));
+                    await FirebaseAuth.instance.signOut();
                     Get.offAll(
                       () => LoginView(),
                       transition: Transition.fadeIn,
                       duration: const Duration(seconds: 1),
                     );
                     Get.snackbar("Logout Berhasil", "Terima kasih atas kepercayaan anda menggunakan BaroCars.", backgroundColor: Color(0xFFE92027), colorText: Colors.white);
+                    
                   },
                   child: Row(
                     children: [
