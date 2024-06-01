@@ -105,7 +105,7 @@ class CarNewsView extends GetView<CarNewsController> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Image(image: AssetImage("assets/images/baronews_1.png"),
+                      const Image(image: AssetImage("assets/images/baronews_1.png"),
                       ),
                       const SizedBox(height: 2,),
                       Padding(
@@ -116,16 +116,16 @@ class CarNewsView extends GetView<CarNewsController> {
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text("Cars Event", style: GoogleFonts.plusJakartaSans(textStyle: TextStyle(fontSize: 22, fontWeight: FontWeight.w600, color: Colors.black)),),
-                                Text("3 Jam yang lalu", style: GoogleFonts.plusJakartaSans(textStyle: TextStyle(fontSize: 10, fontWeight: FontWeight.w600, color: Colors.black)),),
+                                Text("Cars Event", style: GoogleFonts.plusJakartaSans(textStyle: const TextStyle(fontSize: 22, fontWeight: FontWeight.w600, color: Colors.black)),),
+                                Text("3 Jam yang lalu", style: GoogleFonts.plusJakartaSans(textStyle: const TextStyle(fontSize: 10, fontWeight: FontWeight.w600, color: Colors.black)),),
                               ],
                             ),
                             ElevatedButton(
                               onPressed: (){},
                               style: ElevatedButton.styleFrom(
-                                backgroundColor: Color(0xFFE82027),
+                                backgroundColor: const Color(0xFFE82027),
                               ),
-                              child: Text("Read Now", style: GoogleFonts.plusJakartaSans(textStyle: TextStyle(fontSize: 12, fontWeight: FontWeight.w600, color: Colors.white)),),
+                              child: Text("Read Now", style: GoogleFonts.plusJakartaSans(textStyle: const TextStyle(fontSize: 12, fontWeight: FontWeight.w600, color: Colors.white)),),
                             )
                           ],
                         ),
@@ -148,7 +148,7 @@ class CarNewsView extends GetView<CarNewsController> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Image(image: AssetImage("assets/images/baronews_2.png"),
+                      const Image(image: AssetImage("assets/images/baronews_2.png"),
                       ),
                       const SizedBox(height: 2,),
                       Padding(
@@ -159,16 +159,16 @@ class CarNewsView extends GetView<CarNewsController> {
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text("Cars Event", style: GoogleFonts.plusJakartaSans(textStyle: TextStyle(fontSize: 22, fontWeight: FontWeight.w600, color: Colors.black)),),
-                                Text("3 Jam yang lalu", style: GoogleFonts.plusJakartaSans(textStyle: TextStyle(fontSize: 10, fontWeight: FontWeight.w600, color: Colors.black)),),
+                                Text("Cars Event", style: GoogleFonts.plusJakartaSans(textStyle: const TextStyle(fontSize: 22, fontWeight: FontWeight.w600, color: Colors.black)),),
+                                Text("3 Jam yang lalu", style: GoogleFonts.plusJakartaSans(textStyle: const TextStyle(fontSize: 10, fontWeight: FontWeight.w600, color: Colors.black)),),
                               ],
                             ),
                             ElevatedButton(
                               onPressed: (){},
                               style: ElevatedButton.styleFrom(
-                                backgroundColor: Color(0xFFE82027),
+                                backgroundColor: const Color(0xFFE82027),
                               ),
-                              child: Text("Read Now", style: GoogleFonts.plusJakartaSans(textStyle: TextStyle(fontSize: 12, fontWeight: FontWeight.w600, color: Colors.white)),),
+                              child: Text("Read Now", style: GoogleFonts.plusJakartaSans(textStyle: const TextStyle(fontSize: 12, fontWeight: FontWeight.w600, color: Colors.white)),),
                             )
                           ],
                         ),

@@ -122,7 +122,7 @@ class LoginView extends GetView<LoginController> {
                 const SizedBox(height: 20,),
 
                 // -- Continue with Google
-                const BaroContinueWithGoogle(),
+                //const BaroContinueWithGoogle(),
               ],
             ),
           ),
