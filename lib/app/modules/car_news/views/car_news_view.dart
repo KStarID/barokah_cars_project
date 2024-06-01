@@ -90,6 +90,11 @@ class CarNewsView extends GetView<CarNewsController> {
                   ],
                 ),
                 const SizedBox(height: 10,),
+
+                Container(
+                  width: double.infinity,
+                  height: 260,
+                )
               ],
             )
             ),
