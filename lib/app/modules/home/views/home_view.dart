@@ -13,13 +13,13 @@ import '../controllers/home_controller.dart';
 class HomeView extends GetView<HomeController> {
   HomeView({super.key});
 
-  final databaseReferences = FirebaseDatabase.instance.ref('cars');
-  final profileScreenController = Get.put(ProfileScreenController());
+  final DatabaseReference databaseReference = FirebaseDatabase.instance.reference().child('cars');
+  final ProfileScreenController profileScreenController = Get.put(ProfileScreenController());
 
-  
   @override
   Widget build(BuildContext context) {
-    final controller = Get.put(HomeController());
+    final HomeController controller = Get.put(HomeController());
+    
     return Scaffold(
       backgroundColor: const Color(0xFFF2F1F6),
       body: Padding(
@@ -32,9 +32,19 @@ class HomeView extends GetView<HomeController> {
               children: [
                 const BaroHomeHeader(),
                 const SizedBox(height: 30,),
-                Obx(() => Text("Hello, ${profileScreenController.name.value}", style: GoogleFonts.plusJakartaSans(textStyle: const TextStyle(fontSize: 19, fontWeight: FontWeight.w700, color: Colors.black)),)),
+                Obx(() => Text(
+                  "Hello, ${profileScreenController.name.value}",
+                  style: GoogleFonts.plusJakartaSans(
+                    textStyle: const TextStyle(fontSize: 19, fontWeight: FontWeight.w700, color: Colors.black),
+                  ),
+                )),
                 const SizedBox(height: 5,),
-                Text("Selamat Datang di Barocars", style: GoogleFonts.plusJakartaSans(textStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500, color: Colors.grey)),),
+                Text(
+                  "Selamat Datang di Barocars",
+                  style: GoogleFonts.plusJakartaSans(
+                    textStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500, color: Colors.grey),
+                  ),
+                ),
                 const SizedBox(height: 30,),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -64,67 +74,93 @@ class HomeView extends GetView<HomeController> {
                 const SizedBox(height: 10,),
             
                 // Car List
-                Text("Car List", style: GoogleFonts.plusJakartaSans(textStyle: const TextStyle(fontSize: 19, fontWeight: FontWeight.w700, color: Colors.black)),),
+                Text(
+                  "Car List",
+                  style: GoogleFonts.plusJakartaSans(
+                    textStyle: const TextStyle(fontSize: 19, fontWeight: FontWeight.w700, color: Colors.black),
+                  ),
+                ),
                 const SizedBox(height: 8,),
-                ListView.builder(
-                  shrinkWrap: true,
-                  physics: const NeverScrollableScrollPhysics(),
-                  itemCount: 4,
-                  itemBuilder: (context, index) {
-                    int firstIndex = index * 2;
-                    int secondIndex = firstIndex + 1;
-                    return Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Expanded(
-                          child: Container(
-                            margin: const EdgeInsets.symmetric(vertical: 8.0),
-                            child: Center(
-                              child: Container(
-                                width: 180,
-                                height: 170,
-                                decoration: BoxDecoration(
-                                  border: Border.all(
-                                    color: const Color(0xFFE82027),
-                                  ),
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
-                                child: Center(
-                                  child: Text(
-                                    "Ini Contoh $firstIndex",
-                                    style: const TextStyle(fontSize: 16),
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                        Expanded(
-                          child: Container(
-                            margin: const EdgeInsets.symmetric(vertical: 8.0),
-                            child: Center(
-                              child: Container(
-                                width: 180,
-                                height: 170,
-                                decoration: BoxDecoration(
-                                  border: Border.all(
-                                    color: const Color(0xFFE82027),
-                                  ),
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
-                                child: Center(
-                                  child: Text(
-                                    "Ini Contoh $secondIndex",
-                                    style: const TextStyle(fontSize: 16),
+                StreamBuilder(
+                  stream: databaseReference.onValue,
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return Center(child: CircularProgressIndicator());
+                    } else if (snapshot.hasError) {
+                      return Center(child: Text('Error: ${snapshot.error}'));
+                    } else if (snapshot.hasData && snapshot.data!.snapshot.value != null) {
+                      Map<dynamic, dynamic>? data = snapshot.data!.snapshot.value as Map<dynamic, dynamic>?;
+                      List<Map<dynamic, dynamic>> cars = [];
+                      data?.forEach((key, value) {
+                        Map<dynamic, dynamic> car = value;
+                        car['key'] = key;
+                        cars.add(car);
+                      });
+                      
+                      return ListView.builder(
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        itemCount: cars.length,
+                        itemBuilder: (context, index) {
+                          Map<dynamic, dynamic> car = cars[index];
+                          return Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Expanded(
+                                child: Container(
+                                  margin: const EdgeInsets.symmetric(vertical: 8.0),
+                                  child: Center(
+                                    child: Container(
+                                      width: 180,
+                                      height: 170,
+                                      decoration: BoxDecoration(
+                                        border: Border.all(
+                                          color: const Color(0xFFE82027),
+                                        ),
+                                        borderRadius: BorderRadius.circular(10),
+                                      ),
+                                      child: ListTile(
+                                        leading: car['image'] != null
+                                          ? Image.network(car['image'], width: 50, height: 50, fit: BoxFit.cover)
+                                          : CircleAvatar(child: Icon(Icons.car_rental)),
+                                        title: Text(car['model'] ?? 'Unknown Model'),
+                                        subtitle: Text(car['merk'] ?? 'Unknown Merk'),
+                                      ),
+                                    ),
                                   ),
                                 ),
                               ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    );
-                  }
+                              Expanded(
+                                child: Container(
+                                  margin: const EdgeInsets.symmetric(vertical: 8.0),
+                                  child: Center(
+                                    child: Container(
+                                      width: 180,
+                                      height: 170,
+                                      decoration: BoxDecoration(
+                                        border: Border.all(
+                                          color: const Color(0xFFE82027),
+                                        ),
+                                        borderRadius: BorderRadius.circular(10),
+                                      ),
+                                      child: Center(
+                                        child: Text(
+                                          "Ini Contoh ${index * 2 + 1}",
+                                          style: const TextStyle(fontSize: 16),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          );
+                        },
+                      );
+                    } else {
+                      return Center(child: Text('No data available'));
+                    }
+                  },
                 ),
               ],
             ),
