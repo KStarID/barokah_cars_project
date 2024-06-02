@@ -1,4 +1,6 @@
+import 'package:barokah_cars_project/app/modules/forget_password/views/waiting_to_reset.dart';
 import 'package:barokah_cars_project/app/modules/login/views/login_view.dart';
+import 'package:barokah_cars_project/app/modules/register/views/register_view.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/widgets.dart';
@@ -8,33 +10,30 @@ class ForgetPasswordController extends GetxController {
   
   // -- Variables
   TextEditingController emailController = TextEditingController();
-  GlobalKey<FormState> forgetPasswordFormKey = GlobalKey<FormState>();
   FirebaseAuth auth = FirebaseAuth.instance;
 
   void resetPassword(String email) async {
     if(email.isNotEmpty && GetUtils.isEmail(email)){
       try{
         await auth.sendPasswordResetEmail(email: email);
-        Get.defaultDialog(
-          title: "Berhasil",
-          middleText: "Link reset password telah dikirimkan ke email $email",
-          onConfirm: (){
-            Get.back();
-            Get.back();
-          },
-          textConfirm: "Kembali"
-        );
+        Get.to(const WaitingToReset());
       }catch(e){
-        Get.defaultDialog(
-        title: "Terjadi Kesalahan",
-        middleText: "Tidak dapat mengirimkan reset password $e"
-      );
+        Get.snackbar('Terjadi Kesalahan', 'Tidak dapat mengirimkan tautan reset password',
+          backgroundColor: Color(0xFFE92027), colorText: const Color(0xFFFFFFFF)
+        );
       }
     } else {
       Get.defaultDialog(
         title: "Terjadi Kesalahan",
         middleText: "Email tidak valid"
       );
+      Get.snackbar('Terjadi Kesalahan', 'Email yang anda masukkan tidak valid',
+          backgroundColor: Color(0xFFE92027), colorText: const Color(0xFFFFFFFF)
+        );
     }
   } 
+
+  void clearForm(){
+    emailController.clear();
+  }
 }

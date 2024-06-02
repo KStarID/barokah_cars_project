@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:barokah_cars_project/app/modules/add_car/controllers/add_car_controller.dart';
 import 'package:barokah_cars_project/app/modules/home/views/widgets/home_header.dart';
 import 'package:barokah_cars_project/app/modules/navigation_bar/views/navigation_bar_view.dart';
@@ -307,7 +305,6 @@ class AddCarWidget extends StatelessWidget {
                         onPressed: () async {
                           String id = randomAlphaNumeric(10);
                           Map<String, dynamic> carInfoMap={
-                            "Id": id,
                             "Merk": addCarController.merkController.text,
                             "Model": addCarController.modelController.text,
                             "Bahan Bakar": addCarController.bahanBakarValue.value,
@@ -346,8 +343,8 @@ class AddCarWidget extends StatelessWidget {
                         duration: const Duration(seconds: 1),
                       );
                       Get.snackbar('Add Cars Success', 'Mobil anda telah berhasil ditambahkan.', colorText: Colors.white, backgroundColor: const Color(0xFFE82027),);
-                        }
-                      ),
+                      }
+                    ),
                     ],
                   )
                 )

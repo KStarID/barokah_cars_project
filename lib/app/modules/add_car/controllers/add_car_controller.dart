@@ -1,8 +1,10 @@
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
+import 'package:random_string/random_string.dart';
 
 class AddCarController extends GetxController {
   final TextEditingController merkController = TextEditingController();
@@ -30,12 +32,14 @@ class AddCarController extends GetxController {
     kondisiValue.value = 'Baru';
   }
 
-  Future addCarDetails(
-    Map<String, dynamic> carInfoMap, String id) async {
-      return await FirebaseFirestore.instance
-      .collection("cars")
-      .doc(id)
-      .set(carInfoMap);
+  Future<void> addCarDetails(Map<String, dynamic> carInfoMap, String id) async {
+      DatabaseReference databaseReferences = FirebaseDatabase.instance.ref().child('cars').child(randomString(19));
+      try {
+        await databaseReferences.set(carInfoMap);
+        print('Mobil berhasil ditambahkan');
+      } catch (e) {
+        print('Terjadi kesalahan, idak dapat menambahkan mobil');
+      }
     }
 
   // Metode untuk mengunggah gambar
@@ -44,8 +48,8 @@ class AddCarController extends GetxController {
       // Mendapatkan referensi penyimpanan di Firebase Storage
       firebase_storage.Reference ref = firebase_storage.FirebaseStorage.instance
           .ref()
-          .child('car_images')
-          .child('${DateTime.now().millisecondsSinceEpoch}.jpg');
+          .child('cars')
+          .child('/${DateTime.now().millisecondsSinceEpoch}.jpg');
 
       // Mengunggah gambar ke Firebase Storage
       await ref.putFile(image);

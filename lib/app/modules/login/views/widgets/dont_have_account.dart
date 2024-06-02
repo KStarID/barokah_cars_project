@@ -14,8 +14,27 @@ class BaroDontHaveAccount extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Text(BaroTexts.dontHaveAccount, style: GoogleFonts.plusJakartaSans(textStyle: const TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Color(0xFF3D3D3D))),),
-        TextButton(onPressed: () => Get.toNamed(Routes.REGISTER), child: Text(BaroTexts.registerHere, style: GoogleFonts.plusJakartaSans(textStyle: const TextStyle(fontSize: 14, fontWeight: FontWeight.w700, color: Color(0xFFE82027))),))
+        Text(
+          BaroTexts.dontHaveAccount, 
+          style: GoogleFonts.plusJakartaSans(
+            textStyle: const TextStyle(
+              fontSize: 14, 
+              fontWeight: FontWeight.w400, 
+              color: Color(0xFF3D3D3D)
+            ),
+          ),
+        ),
+        TextButton(
+          onPressed: () => Get.toNamed(Routes.REGISTER), 
+          child: Text(BaroTexts.registerHere, 
+          style: GoogleFonts.plusJakartaSans(
+            textStyle: const TextStyle(
+              fontSize: 14, 
+              fontWeight: FontWeight.w700, 
+              color: Color(0xFFE82027)
+            ),
+          ),),
+        ),
       ],
     );
   }
