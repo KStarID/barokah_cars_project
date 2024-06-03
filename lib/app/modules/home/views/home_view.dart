@@ -51,7 +51,7 @@ class HomeView extends GetView<HomeController> {
                 ),
                 const SizedBox(height: 30,),
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Flexible(
                       child: TextField(
@@ -70,7 +70,7 @@ class HomeView extends GetView<HomeController> {
                       onChanged: (String? newValue) {
                         controller.toggleFilter();
                       },
-                      underline: const SizedBox(),
+                      underline: SizedBox(),
                       icon: Container(
                         width: 60,
                         height: 60,
