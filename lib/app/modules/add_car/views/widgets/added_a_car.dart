@@ -7,6 +7,7 @@ import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:random_string/random_string.dart';
 
 class AddCarWidget extends StatelessWidget {
   const AddCarWidget({super.key});
@@ -116,6 +117,8 @@ class AddCarWidget extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(height: 16,),
+
+                      // -- Kondisi
                       Text("Kondisi", style: GoogleFonts.plusJakartaSans(textStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600, color: Colors.black)),),
                       const SizedBox(height: 30,),
                       Container(
@@ -125,21 +128,25 @@ class AddCarWidget extends StatelessWidget {
                           borderRadius: BorderRadius.circular(8),
                           color: const Color(0xFFF6F6F6),
                         ),
-                        child: DropdownButtonFormField<String>(
-                          value: addCarController.kondisiValue.value,
-                          onChanged: (newValue) {
-                            addCarController.kondisiValue.value = newValue!;
-                          },
-                          items: ['Baru', 'Bekas'].map<DropdownMenuItem<String>>((String value) {
-                            return DropdownMenuItem<String>(
-                              value: value,
-                              child: Text(value),
-                            );
-                          }).toList()
+                        child: Obx(
+                          () => DropdownButtonFormField<String>(
+                            value: addCarController.kondisiValue.value,
+                            onChanged: (newValue) {
+                              addCarController.kondisiValue.value = newValue!;
+                            },
+                            items: ['Baru', 'Bekas'].map<DropdownMenuItem<String>>((String value) {
+                              return DropdownMenuItem<String>(
+                                value: value,
+                                child: Text(value),
+                              );
+                            }).toList()
+                          ),
                         ),
                       ),
 
                       const SizedBox(height: 16,),
+
+                      // -- Bahan Bakar
                       Text("Bahan Bakar", style: GoogleFonts.plusJakartaSans(textStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600, color: Colors.black)),),
                       const SizedBox(height: 30,),
                       Container(
@@ -149,20 +156,25 @@ class AddCarWidget extends StatelessWidget {
                           borderRadius: BorderRadius.circular(8),
                           color: const Color(0xFFF6F6F6),
                         ),
-                        child: DropdownButtonFormField<String>(
-                          value: addCarController.bahanBakarValue.value,
-                          onChanged: (newValue) {
-                            addCarController.bahanBakarValue.value = newValue!;
-                          },
-                          items: ['Bensin (Gasoline)', 'Solar (Diesel)', 'Gas alam (CNG)', 'Listrik (Electricity)'].map<DropdownMenuItem<String>>((String value) {
-                            return DropdownMenuItem<String>(
-                              value: value,
-                              child: Text(value),
-                            );
-                          }).toList()
+                        child: Obx(
+                          () => DropdownButtonFormField<String>(
+                            value: addCarController.bahanBakarValue.value,
+                            onChanged: (newValue) {
+                              addCarController.bahanBakarValue.value = newValue!;
+                            },
+                            items: ['Bensin (Gasoline)', 'Solar (Diesel)', 'Gas alam (CNG)', 'Listrik (Electricity)'].map<DropdownMenuItem<String>>((String value) {
+                              return DropdownMenuItem<String>(
+                                value: value,
+                                child: Text(value),
+                              );
+                            }).toList()
+                          ),
                         ),
                       ),
                       const SizedBox(height: 16,),
+
+                      // -- Transmisi
+
                       Text("Transmisi", style: GoogleFonts.plusJakartaSans(textStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600, color: Colors.black)),),
                       const SizedBox(height: 30,),
                       Container(
@@ -172,19 +184,22 @@ class AddCarWidget extends StatelessWidget {
                           borderRadius: BorderRadius.circular(8),
                           color: const Color(0xFFF6F6F6),
                         ),
-                        child: DropdownButtonFormField<String>(
-                          value: addCarController.transmisiValue.value,
-                          onChanged: (newValue) {
-                            addCarController.transmisiValue.value = newValue!;
-                          },
-                          items: ['Manual', 'Matic'].map<DropdownMenuItem<String>>((String value) {
-                            return DropdownMenuItem<String>(
-                              value: value,
-                              child: Text(value),
-                            );
-                          }).toList()
+                        child: Obx(
+                          () => DropdownButtonFormField<String>(
+                            value: addCarController.transmisiValue.value,
+                            onChanged: (newValue) {
+                              addCarController.transmisiValue.value = newValue!;
+                            },
+                            items: ['Manual', 'Matic'].map<DropdownMenuItem<String>>((String value) {
+                              return DropdownMenuItem<String>(
+                                value: value,
+                                child: Text(value),
+                              );
+                            }).toList()
+                          ),
                         ),
                       ),
+                      const SizedBox(height: 16,),
 
                       // --   Warna
 
@@ -259,6 +274,9 @@ class AddCarWidget extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(height: 16,),
+
+                      // -- Deskripsi
+
                       Text("Deskripsi Tambahan", style: GoogleFonts.plusJakartaSans(textStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600, color: Colors.black)),),
                       const SizedBox(height: 30,),
                       TextFormField(
@@ -280,32 +298,53 @@ class AddCarWidget extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(height: 60,),
+
+                      // -- Button Add
                       BaroWidgetButton(
                         buttonName: "Tambahkan Mobil", 
                         onPressed: () async {
-                          Get.dialog(
-                      const Center(
-                        child: SizedBox(
-                          height: 100,
-                          width: 100,
-                          child: CircularProgressIndicator(
-                            valueColor: AlwaysStoppedAnimation<Color>(Color(0xFFE92027),),
-                            strokeWidth: 5,
-                          ),
-                        ),
-                      ),
-                      barrierDismissible: false,
-                    );
+                          String id = randomAlphaNumeric(10);
+                          Map<String, dynamic> carInfoMap={
+                            "Merk": addCarController.merkController.text,
+                            "Model": addCarController.modelController.text,
+                            "Bahan Bakar": addCarController.bahanBakarValue.value,
+                            "Transmisi": addCarController.transmisiValue.value,
+                            "Kondisi": addCarController.kondisiValue.value,
+                            "Harga Jual": addCarController.hargaJualController.text,
+                            "Narahubung": addCarController.narahubungController.text,
+                            "Deskripsi": addCarController.deskripsiController.text,
+                            "Tahun Pembuatan": addCarController.tahunPembuatanController.text,
+                            "Warna": addCarController.warnaController.text,
+                          };
+                          await addCarController.addCarDetails(carInfoMap, id).then((value) {
+                            Get.dialog(
+                              const Center(
+                                child: SizedBox(
+                                  height: 100,
+                                  width: 100,
+                                  child: CircularProgressIndicator(
+                                    valueColor: AlwaysStoppedAnimation<Color>(Color(0xFFE92027),),
+                                    strokeWidth: 5,
+                                  ),
+                                ),
+                              ),
+                              barrierDismissible: false,
+                            );
+                          });
+                          
 
                       await Future.delayed(const Duration(seconds: 2));
+
+                      addCarController.clearForm();
+
                       Get.to(
                         () => const NavigationBarView(),
                         transition: Transition.fadeIn,
                         duration: const Duration(seconds: 1),
                       );
                       Get.snackbar('Add Cars Success', 'Mobil anda telah berhasil ditambahkan.', colorText: Colors.white, backgroundColor: const Color(0xFFE82027),);
-                        }
-                      ),
+                      }
+                    ),
                     ],
                   )
                 )

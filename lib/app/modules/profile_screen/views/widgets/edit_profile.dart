@@ -20,37 +20,46 @@ class BaroEditProfile extends StatelessWidget {
       backgroundColor: const Color(0xFFF2F1F6),
       appBar: AppBar(
         backgroundColor: const Color(0xFFF2F1F6),
-        title: Text("Informasi Pribadi", style: GoogleFonts.plusJakartaSans(textStyle: const TextStyle(fontSize: 18, fontWeight: FontWeight.w600, color: Color(0xFF232323))),),
+        title: Text(
+          "Informasi Pribadi",
+          style: GoogleFonts.plusJakartaSans(
+              textStyle: const TextStyle(
+                  fontSize: 18, fontWeight: FontWeight.w600, color: Color(0xFF232323))),
+        ),
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          const SizedBox(height: 16,),
+          const SizedBox(height: 16),
           Stack(
             alignment: Alignment.center,
             children: [
               CircleAvatar(
                 radius: 65,
                 backgroundColor: Colors.grey.shade800,
-                child: const Icon(
-                  FluentIcons.person_20_regular,
-                color: Colors.white,
-                ),
+                backgroundImage: editProfileController.profileImageUrl.value.isNotEmpty
+                    ? NetworkImage(editProfileController.profileImageUrl.value)
+                    : null,
+                child: editProfileController.profileImageUrl.value.isEmpty
+                    ? const Icon(
+                        FluentIcons.person_20_regular,
+                        color: Colors.white,
+                      )
+                    : null,
               ),
               Positioned(
                 top: 80,
                 child: Container(
                   decoration: const BoxDecoration(
-                    boxShadow: [
-                      BoxShadow(
-                        offset: Offset(1, 2),
-                      ),
-                    ],
-                    shape: BoxShape.circle
-                  ),
+                      boxShadow: [
+                        BoxShadow(
+                          offset: Offset(1, 2),
+                        ),
+                      ],
+                      shape: BoxShape.circle),
                   child: IconButton(
                     onPressed: () {
-                      
+                      editProfileController.pickImage();
                     },
                     icon: const Icon(FluentIcons.camera_switch_20_regular),
                     iconSize: 25,
@@ -60,34 +69,73 @@ class BaroEditProfile extends StatelessWidget {
               ),
             ],
           ),
-          const SizedBox(height: 50,),
-          Padding(padding: const EdgeInsets.symmetric(horizontal: 16),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
+          const SizedBox(height: 50),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                // -- Name
+                Obx(() => GestureDetector(
+                      onTap: () {
+                        Get.dialog(
+                          AlertDialog(
+                            title: const Text("Ubah Nama"),
+                            content: TextField(
+                              controller: TextEditingController(
+                                  text: editProfileController.name.value),
+                              decoration: const InputDecoration(
+                                  labelText: "Nama Baru",
+                                  hintText: "Masukkan nama baru"),
+                              onChanged: (value) {
+                                editProfileController.name.value = value;
+                              },
+                            ),
+                            actions: [
+                              TextButton(
+                                  onPressed: () {
+                                    Get.back();
+                                  },
+                                  child: const Text("Batal")),
+                              TextButton(
+                                  onPressed: () {
+                                    editProfileController.updateName(
+                                        editProfileController.name.value);
+                                    Get.back();
+                                  },
+                                  child: const Text("Simpan")),
+                            ],
+                          ),
+                        );
+                      },
+                      child: EditProfileFeatures(
+                        text: editProfileController.name.value,
+                        icon: FluentIcons.person_20_regular,
+                        continueIcon: FluentIcons.ios_arrow_rtl_24_regular,
+                      ),
+                    )),
+                const SizedBox(height: 40),
+                // -- Email
+                Obx(() => EditProfileFeatures(
+                      text: editProfileController.email.value,
+                      icon: FluentIcons.mail_20_regular,
+                      continueIcon: null,
+                    )),
+                const SizedBox(height: 300),
 
-              // -- Name
-
-              Obx(() => EditProfileFeatures(text: editProfileController.name.value, icon: FluentIcons.person_20_regular, continueIcon: FluentIcons.ios_arrow_rtl_24_regular,)),
-              const SizedBox(height: 40,),
-
-              // -- Email
-
-              Obx(() => EditProfileFeatures(text: editProfileController.email.value, icon: FluentIcons.mail_20_regular, continueIcon: FluentIcons.ios_arrow_rtl_24_regular,)),
-              const SizedBox(height: 300,),
-
-
-              // -- Save Changes Button
-              BaroWidgetButton(
-                buttonName: "Simpan", 
-                onPressed: () async {
+                // -- Save Changes Button
+                BaroWidgetButton(
+                  buttonName: "Simpan",
+                  onPressed: () async {
                     Get.dialog(
                       const Center(
                         child: SizedBox(
                           height: 100,
                           width: 100,
                           child: CircularProgressIndicator(
-                            valueColor: AlwaysStoppedAnimation<Color>(Color(0xFFE92027),),
+                            valueColor: AlwaysStoppedAnimation<Color>(
+                              Color(0xFFE92027),
+                            ),
                             strokeWidth: 5,
                           ),
                         ),
@@ -95,21 +143,24 @@ class BaroEditProfile extends StatelessWidget {
                       barrierDismissible: false,
                     );
 
-                      await Future.delayed(const Duration(seconds: 2));
-                      Get.to(
-                        () => const NavigationBarView(),
-                        transition: Transition.fadeIn,
-                        duration: const Duration(seconds: 1),
-                      );
-                    Get.snackbar("Informasi Pribadi Diperbarui", "Perubahan pada informasi anda telah berhasil disimpan.", backgroundColor: const Color(0xFFE92027), snackPosition: SnackPosition.BOTTOM, colorText: Colors.white);
-                  }, 
-              ),
-            ],
-          ),
+                    await Future.delayed(const Duration(seconds: 2));
+                    Get.to(
+                      () => const NavigationBarView(),
+                      transition: Transition.fadeIn,
+                      duration: const Duration(seconds: 1),
+                    );
+                    Get.snackbar("Informasi Pribadi Diperbarui",
+                        "Perubahan pada informasi anda telah berhasil disimpan.",
+                        backgroundColor: const Color(0xFFE92027),
+                        snackPosition: SnackPosition.BOTTOM,
+                        colorText: Colors.white);
+                  },
+                ),
+              ],
+            ),
           )
         ],
-      )
+      ),
     );
   }
 }
-

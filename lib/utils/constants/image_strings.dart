@@ -33,4 +33,7 @@ class BaroImages {
   static const String productBanners3 = "assets/banners/banner-3.png";
   static const String productBanners4 = "assets/banners/banner-4.png";
   static const String productBanners5 = "assets/banners/banner-5.png";
+
+  // -- Forget Password
+  static const String waitingResetPassword = "assets/animations/waiting_reset_password.json";
 }

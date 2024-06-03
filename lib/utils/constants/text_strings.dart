@@ -6,6 +6,7 @@ class BaroTexts {
   static const String loginTitle = 'Selamat Datang!';
   static const String registerTitle = 'Buat Akun';
   static const String forgetPasswordTitle = 'Lupa Password';
+  static const String forgetPasswordQuestion = 'Lupa Password?';
   static const String loginDesc = 'Silahkan masuk untuk memulai.';
   static const String registerDesc = 'Silahkan mengisi form berikut dengan benar.';
 
@@ -42,4 +43,6 @@ class BaroTexts {
   static const String suggestionsTitle = "Suggestions";
   static const String recentVisitsTitle = "Recent Visits";
   static const String viewAll = "View All";
+  static const String carNewsTitle = 'Berita Terkait Mobil';
+  static const String carNewsSubtitle = 'Jelajahi berbagai berita terkait Event Mobil di indonesia';
 }

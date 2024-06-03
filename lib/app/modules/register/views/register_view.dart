@@ -192,42 +192,62 @@ class RegisterView extends GetView<RegisterController> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text("Sudah memiliki akun?", style: GoogleFonts.plusJakartaSans(textStyle: const TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Color(0xFF3D3D3D))),),
+                  Text(
+                    "Sudah memiliki akun?", 
+                    style: GoogleFonts.plusJakartaSans(
+                      textStyle: const TextStyle(
+                        fontSize: 14, 
+                        fontWeight: FontWeight.w400, 
+                        color: Color(0xFF3D3D3D)
+                      )
+                    ),
+                  ),
                   TextButton(
-                    onPressed: () => Get.toNamed(Routes.LOGIN), child: Text("Masuk", style: GoogleFonts.plusJakartaSans(textStyle: const TextStyle(fontSize: 14, fontWeight: FontWeight.w700, color: Color(0xFFE82027))),)),
+                    onPressed: () => Get.toNamed(Routes.LOGIN),
+                    child: Text(
+                      "Masuk", 
+                      style: GoogleFonts.plusJakartaSans(
+                        textStyle: const TextStyle(
+                          fontSize: 14, 
+                          fontWeight: FontWeight.w700, 
+                          color: Color(0xFFE82027)
+                        )
+                      ),
+                    )
+                  ),
                 ],
               ),
-              Row(
+              const Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Expanded(child: Divider(thickness: 2, endIndent: 20, color: Color(0xFFE7E7E7),)),
-                  Text("Atau", style: GoogleFonts.plusJakartaSans(textStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600, color: Color(0xFFD1D1D1))),),
-                  const Expanded(child: Divider(thickness: 2, indent: 20, endIndent: 0, color: Color(0xFFE7E7E7),)),
+                  Expanded(child: Divider(thickness: 2, endIndent: 20, color: Color(0xFFE7E7E7),)),
+                  //Text("Atau", style: GoogleFonts.plusJakartaSans(textStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600, color: Color(0xFFD1D1D1))),),
+                  Expanded(child: Divider(thickness: 2, indent: 20, endIndent: 0, color: Color(0xFFE7E7E7),)),
                 ],
               ),
-              const SizedBox(height: 20,),
-                SizedBox(
-                  width: double.infinity,
-                  height: 52,
-                  child: ElevatedButton(
-                    onPressed: (){},
-                    style: ButtonStyle(
-                      shape: MaterialStatePropertyAll<RoundedRectangleBorder>(
-                        RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10)
-                        ),
-                      ),
-                      backgroundColor: const MaterialStatePropertyAll(Color(0xFFFFFFFF))
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const Image(image: AssetImage("assets/icons/google.png"), height: 20,),
-                        const SizedBox(width: 16,),
-                        Text("Lanjutkan dengan Google", style: GoogleFonts.plusJakartaSans(textStyle: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: Color(0xFF3D3D3D))),),
-                      ],
-                    )),
-                )
+              // const SizedBox(height: 20,),
+              //   SizedBox(
+              //     width: double.infinity,
+              //     height: 52,
+              //     child: ElevatedButton(
+              //       onPressed: (){},
+              //       style: ButtonStyle(
+              //         shape: MaterialStatePropertyAll<RoundedRectangleBorder>(
+              //           RoundedRectangleBorder(
+              //             borderRadius: BorderRadius.circular(10)
+              //           ),
+              //         ),
+              //         backgroundColor: const MaterialStatePropertyAll(Color(0xFFFFFFFF))
+              //       ),
+              //       child: Row(
+              //         mainAxisAlignment: MainAxisAlignment.center,
+              //         children: [
+              //           const Image(image: AssetImage("assets/icons/google.png"), height: 20,),
+              //           const SizedBox(width: 16,),
+              //           Text("Lanjutkan dengan Google", style: GoogleFonts.plusJakartaSans(textStyle: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: Color(0xFF3D3D3D))),),
+              //         ],
+              //       )),
+              //   )
             ],
           ),
           ),
