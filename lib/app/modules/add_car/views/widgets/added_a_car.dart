@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:barokah_cars_project/app/modules/add_car/controllers/add_car_controller.dart';
 import 'package:barokah_cars_project/app/modules/home/views/widgets/home_header.dart';
 import 'package:barokah_cars_project/app/modules/navigation_bar/views/navigation_bar_view.dart';
@@ -15,6 +17,7 @@ class AddCarWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final addCarController = Get.put(AddCarController());
+    File? file;
     return Scaffold(
       backgroundColor: const Color(0xFFF2F1F6),
       body: Padding(
@@ -42,6 +45,35 @@ class AddCarWidget extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+
+                      // -- Upload image
+                      Center(
+                        child: Container(
+                          height: 150,
+                          width: 150,
+                          child: Obx((){
+                            return addCarController.selectedImage.value == null ? IconButton(
+                              icon: const Icon(FluentIcons.camera_switch_20_regular, size: 70, color: Colors.black,),
+                              onPressed: (){
+                                addCarController.getImage();
+                              },
+                            )
+                            : MaterialButton(
+                              height: 100,
+                              child: Image.file(
+                                addCarController.selectedImage.value!,
+                                fit: BoxFit.fill,
+                              ),
+                              onPressed: (){
+                                addCarController.getImage();
+                              }
+                            );
+                          }
+                            
+                          )
+                        ), 
+                      ),
+                      const SizedBox(height: 8,),
 
                       // -- Merk
 
@@ -303,18 +335,23 @@ class AddCarWidget extends StatelessWidget {
                       BaroWidgetButton(
                         buttonName: "Tambahkan Mobil", 
                         onPressed: () async {
+                          await addCarController.uploadFile();
+
                           String id = randomAlphaNumeric(10);
                           Map<String, dynamic> carInfoMap={
-                            "Merk": addCarController.merkController.text,
-                            "Model": addCarController.modelController.text,
-                            "Bahan Bakar": addCarController.bahanBakarValue.value,
-                            "Transmisi": addCarController.transmisiValue.value,
-                            "Kondisi": addCarController.kondisiValue.value,
-                            "Harga Jual": addCarController.hargaJualController.text,
-                            "Narahubung": addCarController.narahubungController.text,
-                            "Deskripsi": addCarController.deskripsiController.text,
-                            "Tahun Pembuatan": addCarController.tahunPembuatanController.text,
-                            "Warna": addCarController.warnaController.text,
+                            "merk": addCarController.merkController.text,
+                            "model": addCarController.modelController.text,
+                            "bahan_bakar": addCarController.bahanBakarValue.value,
+                            "transmisi": addCarController.transmisiValue.value,
+                            "kondisi": addCarController.kondisiValue.value,
+                            "harga": addCarController.hargaJualController.text,
+                            "kontak_penjual": addCarController.narahubungController.text,
+                            "deskripsi": addCarController.deskripsiController.text,
+                            "tahun_pembuatan ": addCarController.tahunPembuatanController.text,
+                            "Upload_timestamp": ,
+                            "email_penjual": ,
+                            "image": ,
+                            "warna": addCarController.warnaController.text,
                           };
                           await addCarController.addCarDetails(carInfoMap, id).then((value) {
                             Get.dialog(

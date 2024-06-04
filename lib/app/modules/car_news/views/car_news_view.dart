@@ -1,6 +1,5 @@
 import 'package:barokah_cars_project/app/modules/car_news/controllers/car_news_controller.dart';
 import 'package:barokah_cars_project/app/modules/home/views/widgets/home_header.dart';
-import 'package:barokah_cars_project/app/modules/home/views/widgets/search_bar_screen.dart';
 import 'package:barokah_cars_project/utils/constants/text_strings.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';

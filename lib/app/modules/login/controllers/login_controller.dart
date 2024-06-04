@@ -13,20 +13,7 @@ class LoginController extends GetxController {
   // final CollectionReference _userCollection =
   //     FirebaseFirestore.instance.collection('user');
   final FirebaseAuth _auth = FirebaseAuth.instance;
-
-  // Future<bool> checkCredentials(String email, String password) async {
-  //   try {
-  //     await _auth.signInWithEmailAndPassword(
-  //       email: email,
-  //       password: password,
-  //     );
-  //     QuerySnapshot querySnapshot =
-  //         await _userCollection.where('email', isEqualTo: email).get();
-  //     return querySnapshot.docs.isNotEmpty;
-  //   } catch (e) {
-  //     return false;
-  //   }
-  // }
+  
   Future<bool> checkCredentials(String email, String password) async {
   try {
     // Mencoba untuk login dengan email dan password
