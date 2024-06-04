@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:barokah_cars_project/app/modules/navigation_bar/views/navigation_bar_view.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
@@ -7,6 +8,7 @@ import 'package:get/get.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:image_picker/image_picker.dart';
 import 'package:random_string/random_string.dart';
+import 'package:intl/intl.dart';
 
 class AddCarController extends GetxController {
   final TextEditingController merkController = TextEditingController();
@@ -14,7 +16,8 @@ class AddCarController extends GetxController {
   final TextEditingController hargaJualController = TextEditingController();
   final TextEditingController narahubungController = TextEditingController();
   final TextEditingController deskripsiController = TextEditingController();
-  final TextEditingController tahunPembuatanController = TextEditingController();
+  final TextEditingController tahunPembuatanController =
+      TextEditingController();
   final TextEditingController warnaController = TextEditingController();
   var bahanBakarValue = 'Bensin (Gasoline)'.obs;
   var transmisiValue = 'Manual'.obs;
@@ -22,8 +25,8 @@ class AddCarController extends GetxController {
   RxString imageUrl = ''.obs;
   ImagePicker image = ImagePicker();
   Rx<File?> selectedImage = Rx<File?>(null);
-  
-  void clearForm(){
+
+  void clearForm() {
     merkController.clear();
     modelController.clear();
     hargaJualController.clear();
@@ -38,14 +41,15 @@ class AddCarController extends GetxController {
   }
 
   Future<void> addCarDetails(Map<String, dynamic> carInfoMap, String id) async {
-      DatabaseReference databaseReferences = FirebaseDatabase.instance.ref().child('cars').child(randomString(19));
-      try {
-        await databaseReferences.set(carInfoMap);
-        print('Mobil berhasil ditambahkan');
-      } catch (e) {
-        print('Terjadi kesalahan, idak dapat menambahkan mobil');
-      }
+    DatabaseReference databaseReferences =
+        FirebaseDatabase.instance.ref().child('cars').child(randomString(19));
+    try {
+      await databaseReferences.set(carInfoMap);
+      print('Mobil berhasil ditambahkan');
+    } catch (e) {
+      print('Terjadi kesalahan, idak dapat menambahkan mobil');
     }
+  }
 
   // Metode untuk mengunggah gambar
   Future<void> uploadImage(File image) async {
@@ -77,6 +81,8 @@ class AddCarController extends GetxController {
   }
 
   Future<void> uploadFile() async {
+    User? user = FirebaseAuth.instance.currentUser;
+    String? email_penjual = user?.email;
     if (selectedImage.value != null) {
       try {
         var imagefile = FirebaseStorage.instance
@@ -89,15 +95,27 @@ class AddCarController extends GetxController {
         imageUrl.value = downloadUrl;
 
         if (imageUrl.value.isNotEmpty) {
+          String formattedTimestamp =
+              DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.now());
           Map<String, String> contact = {
             'merk': merkController.text,
             'model': modelController.text,
+            'bahan_bakar': bahanBakarValue.value,
+            'transmisi': transmisiValue.value,
+            'kondisi': kondisiValue.value,
             'harga': hargaJualController.text,
-            'url': imageUrl.value,
+            'kontak_penjual': narahubungController.text,
+            'deskripsi': deskripsiController.text,
+            'tahun_pembuatan': tahunPembuatanController.text,
+            'warna': warnaController.text,
+            'image': imageUrl.value,
+            'upload_timestamp': formattedTimestamp,
+            'email_penjual': email_penjual!,
             // Add other fields as necessary
           };
 
-          DatabaseReference dbRef = FirebaseDatabase.instance.ref().child('cars');
+          DatabaseReference dbRef =
+              FirebaseDatabase.instance.ref().child('cars');
           await dbRef.push().set(contact);
         }
       } on Exception catch (e) {
