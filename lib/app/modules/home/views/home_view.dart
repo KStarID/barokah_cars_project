@@ -90,15 +90,27 @@ class HomeView extends GetView<HomeController> {
                     ),
                   ],
                 ),
-                const SizedBox(height: 10,),
-                  
+                const SizedBox(
+                  height: 10,
+                ),
+
                 const Padding(
                   padding: EdgeInsets.all(24),
-                  child: BaroPromoSlider(banners: [BaroImages.productBanners1, BaroImages.productBanners2, BaroImages.productBanners3, BaroImages.productBanners4, BaroImages.productBanners5],),
+                  child: BaroPromoSlider(
+                    banners: [
+                      BaroImages.productBanners1,
+                      BaroImages.productBanners2,
+                      BaroImages.productBanners3,
+                      BaroImages.productBanners4,
+                      BaroImages.productBanners5
+                    ],
+                  ),
                 ),
-                  
-                const SizedBox(height: 10,),
-            
+
+                const SizedBox(
+                  height: 10,
+                ),
+
                 // Car List
                 Text(
                   "Car List",
