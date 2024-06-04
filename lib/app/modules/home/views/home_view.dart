@@ -1,19 +1,16 @@
+import 'package:barokah_cars_project/app/modules/home/views/widgets/car_detail_page.dart';
 import 'package:barokah_cars_project/app/modules/home/views/widgets/home_header.dart';
 import 'package:barokah_cars_project/app/modules/home/views/widgets/promo_slider.dart';
 import 'package:barokah_cars_project/app/modules/profile_screen/controllers/profile_screen_controller.dart';
 import 'package:barokah_cars_project/utils/constants/image_strings.dart';
-import 'package:firebase_database/firebase_database.dart';
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../controllers/home_controller.dart';
 
 class HomeView extends GetView<HomeController> {
   HomeView({super.key});
-
-  final DatabaseReference databaseReference = FirebaseDatabase.instance.ref().child('cars');
   final ProfileScreenController profileScreenController = Get.put(ProfileScreenController());
 
   @override
@@ -70,7 +67,7 @@ class HomeView extends GetView<HomeController> {
                       onChanged: (String? newValue) {
                         controller.toggleFilter();
                       },
-                      underline: SizedBox(),
+                      underline: const SizedBox(),
                       icon: Container(
                         width: 60,
                         height: 60,
@@ -121,7 +118,7 @@ class HomeView extends GetView<HomeController> {
                 const SizedBox(height: 8,),
                 Obx(() {
                   if (controller.filteredCars.isEmpty) {
-                    return Center(child: Text('No cars found'));
+                    return const Center(child: Text('No cars found'));
                   }
 
                   // Data dibagi du bagian
@@ -135,60 +132,66 @@ class HomeView extends GetView<HomeController> {
                       Expanded(
                         child: Column(
                           children: cars1.map((car) {
-                            return Container(
-                              margin: const EdgeInsets.symmetric(vertical: 8.0),
-                              child: Center(
-                                child: Container(
-                                  width: double.infinity, // Mengatur lebar agar memenuhi ruang yang tersedia
-                                  height: 170,
-                                  padding: const EdgeInsets.all(8.0),
-                                  decoration: BoxDecoration(
-                                    border: Border.all(
-                                      color: const Color(0xFFE82027),
+                            return GestureDetector(
+                              onTap: (){
+                                Navigator.push(context, MaterialPageRoute(builder: (context) => CarDetailPage(car: car,)));
+                              },
+                              child: Container(
+                                margin: const EdgeInsets.symmetric(vertical: 8.0),
+                                child: Center(
+                                  child: Container(
+                                    width: double.infinity,
+                                    height: 170,
+                                    padding: const EdgeInsets.all(8.0),
+                                    decoration: BoxDecoration(
+                                      border: Border.all(
+                                        color: const Color(0xFFE82027),
+                                      ),
+                                      borderRadius: BorderRadius.circular(10),
                                     ),
-                                    borderRadius: BorderRadius.circular(10),
-                                  ),
-                                  child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      Center(
-                                        child: car['image'] != null
-                                          ? Image.network(car['image'], width: 190, height: 80, fit: BoxFit.cover)
-                                          : CircleAvatar(child: Icon(Icons.car_rental)),
-                                      ),
-                                      const SizedBox(width: 8),
-                                                                            Row(
-                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Column(
-                                            crossAxisAlignment: CrossAxisAlignment.start,
-                                            children: [
-                                              const SizedBox(height: 4,),
-                                              Text(car['model'] ?? 'Unknown', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
-                                              Text(car['merk'] ?? 'Unknown', style: TextStyle(color: Colors.grey)),
-                                            ],
-                                          ),
-                                          Container(
-                                            decoration: BoxDecoration(
-                                              color: car['kondisi'] == 'Bekas' ? Colors.blue : Colors.red,
-                                              borderRadius: BorderRadius.circular(8),
+                                    child: Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        Center(
+                                          child: car['image'] != null
+                                            ? Image.network(car['image'], width: 190, height: 80, fit: BoxFit.cover)
+                                            : const CircleAvatar(child: Icon(Icons.car_rental)),
+                                        ),
+                                        const SizedBox(width: 8),
+                                                                              Row(
+                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Column(
+                                              crossAxisAlignment: CrossAxisAlignment.start,
+                                              children: [
+                                                const SizedBox(height: 4,),
+                                                Text(car['model'] ?? 'Unknown', style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+                                                Text(car['merk'] ?? 'Unknown', style: const TextStyle(color: Colors.grey)),
+                                              ],
                                             ),
-                                            child: Text(
-                                              car['kondisi'] ?? 'Unknown', 
-                                              style: TextStyle(
-                                                color: Colors.white),
+                                            Container(
+                                              decoration: BoxDecoration(
+                                                color: car['kondisi'] == 'Bekas' ? Colors.blue : Colors.red,
+                                                borderRadius: BorderRadius.circular(8),
+                                              ),
+                                              child: Text(
+                                                car['kondisi'] ?? 'Unknown', 
+                                                style: const TextStyle(
+                                                  color: Colors.white
+                                                ),
+                                              ),
                                             ),
-                                          ),
-                                        ],
-                                      ),
-                                      const SizedBox(height: 5),
-                                      Row(
-                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Text('Price: Rp${car['harga'] ?? 'N/A'}', style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold)),
-                                        ],
-                                      ),
-                                    ],
+                                          ],
+                                        ),
+                                        const SizedBox(height: 5),
+                                        Row(
+                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Text('Price: Rp${car['harga'] ?? 'N/A'}', style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold)),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
                                   ),
                                 ),
                               ),
@@ -200,60 +203,65 @@ class HomeView extends GetView<HomeController> {
                       Expanded(
                         child: Column(
                           children: cars2.map((car) {
-                            return Container(
-                              margin: const EdgeInsets.symmetric(vertical: 8.0),
-                              child: Center(
-                                child: Container(
-                                  width: double.infinity, // Mengatur lebar agar memenuhi ruang yang tersedia
-                                  height: 170,
-                                  padding: const EdgeInsets.all(8.0),
-                                  decoration: BoxDecoration(
-                                    border: Border.all(
-                                      color: const Color(0xFFE82027),
+                            return GestureDetector(
+                              onTap: () {
+                                Navigator.push(context, MaterialPageRoute(builder: (context) => CarDetailPage(car: car,)));
+                              },
+                              child: Container(
+                                margin: const EdgeInsets.symmetric(vertical: 8.0),
+                                child: Center(
+                                  child: Container(
+                                    width: double.infinity,
+                                    height: 170,
+                                    padding: const EdgeInsets.all(8.0),
+                                    decoration: BoxDecoration(
+                                      border: Border.all(
+                                        color: const Color(0xFFE82027),
+                                      ),
+                                      borderRadius: BorderRadius.circular(10),
                                     ),
-                                    borderRadius: BorderRadius.circular(10),
-                                  ),
-                                  child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      Center(
-                                        child: car['image'] != null
-                                          ? Image.network(car['image'], width: 190, height: 80, fit: BoxFit.cover)
-                                          : CircleAvatar(child: Icon(FluentIcons.vehicle_car_20_regular), backgroundColor: Color(0xFFE82027), foregroundColor: Colors.white,),
-                                      ),
-                                      const SizedBox(width: 8),
-                                      Row(
-                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Column(
-                                            crossAxisAlignment: CrossAxisAlignment.start,
-                                            children: [
-                                              const SizedBox(height: 4),
-                                              Text(car['model'] ?? 'Unknown', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
-                                              Text(car['merk'] ?? 'Unknown', style: TextStyle(color: Colors.grey)),
-                                            ],
-                                          ),
-                                          Container(
-                                            decoration: BoxDecoration(
-                                              color: car['kondisi'] == 'Bekas' ? Colors.blue : Colors.red,
-                                              borderRadius: BorderRadius.circular(8),
+                                    child: Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        Center(
+                                          child: car['image'] != null
+                                            ? Image.network(car['image'], width: 190, height: 80, fit: BoxFit.cover)
+                                            : const CircleAvatar(backgroundColor: Color(0xFFE82027), foregroundColor: Colors.white,child: Icon(FluentIcons.vehicle_car_20_regular),),
+                                        ),
+                                        const SizedBox(width: 8),
+                                        Row(
+                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Column(
+                                              crossAxisAlignment: CrossAxisAlignment.start,
+                                              children: [
+                                                const SizedBox(height: 4),
+                                                Text(car['model'] ?? 'Unknown', style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+                                                Text(car['merk'] ?? 'Unknown', style: const TextStyle(color: Colors.grey)),
+                                              ],
                                             ),
-                                            child: Text(
-                                              car['kondisi'] ?? 'Unknown', 
-                                              style: TextStyle(
-                                                color: Colors.white),
+                                            Container(
+                                              decoration: BoxDecoration(
+                                                color: car['kondisi'] == 'Bekas' ? Colors.blue : Colors.red,
+                                                borderRadius: BorderRadius.circular(8),
+                                              ),
+                                              child: Text(
+                                                car['kondisi'] ?? 'Unknown', 
+                                                style: const TextStyle(
+                                                  color: Colors.white),
+                                              ),
                                             ),
-                                          ),
-                                        ],
-                                      ),
-                                      const SizedBox(height: 5),
-                                      Row(
-                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Text('Price: Rp${car['harga'] ?? 'N/A'}', style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold)),
-                                        ],
-                                      ),
-                                    ],
+                                          ],
+                                        ),
+                                        const SizedBox(height: 5),
+                                        Row(
+                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Text('Price: Rp${car['harga'] ?? 'N/A'}', style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold)),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
                                   ),
                                 ),
                               ),

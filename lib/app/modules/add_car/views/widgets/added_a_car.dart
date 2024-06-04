@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:barokah_cars_project/app/modules/add_car/controllers/add_car_controller.dart';
 import 'package:barokah_cars_project/app/modules/home/views/widgets/home_header.dart';
 import 'package:barokah_cars_project/app/modules/navigation_bar/views/navigation_bar_view.dart';
@@ -9,15 +7,12 @@ import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:random_string/random_string.dart';
-
 class AddCarWidget extends StatelessWidget {
   const AddCarWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
     final addCarController = Get.put(AddCarController());
-    File? file;
     return Scaffold(
       backgroundColor: const Color(0xFFF2F1F6),
       body: Padding(
@@ -63,7 +58,7 @@ class AddCarWidget extends StatelessWidget {
                   children: [
                     // -- Upload image
                     Center(
-                      child: Container(
+                      child: SizedBox(
                           height: 150,
                           width: 150,
                           child: Obx(() {
