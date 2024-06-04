@@ -29,7 +29,7 @@ class WaitingToReset extends StatelessWidget {
                 const SizedBox(height: 5,),
                 Text("Keamanan akun Anda adalah prioritas kami! Kami telah mengirimi Anda tautan reset password untuk mengubah kata sandi Anda dengan aman dan menjaga akun Anda tetap terlindungi.", 
                   textAlign: TextAlign.center,
-                  style: GoogleFonts.plusJakartaSans(textStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Colors.black)),
+                  style: GoogleFonts.plusJakartaSans(textStyle: const TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Colors.black)),
                 ),
                 const SizedBox(height: 32,),
                 Container(

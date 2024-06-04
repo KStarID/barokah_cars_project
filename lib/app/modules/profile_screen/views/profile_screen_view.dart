@@ -2,7 +2,6 @@ import 'package:barokah_cars_project/app/modules/login/views/login_view.dart';
 import 'package:barokah_cars_project/app/modules/profile_screen/views/widgets/edit_profile.dart';
 import 'package:barokah_cars_project/app/modules/profile_screen/views/widgets/profile_features.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -10,13 +9,11 @@ import 'package:google_fonts/google_fonts.dart';
 import '../controllers/profile_screen_controller.dart';
 
 class ProfileScreenView extends StatelessWidget {
-  const ProfileScreenView({Key? key}) : super(key: key);
+  const ProfileScreenView({super.key});
 
   @override
   Widget build(BuildContext context) {
     final ProfileScreenController profileController = Get.put(ProfileScreenController());
-
-    // Panggil fetchUserData di sini
     profileController.fetchUserData();
 
     return Scaffold(
@@ -78,7 +75,6 @@ class ProfileScreenView extends StatelessWidget {
                       ),
                       const SizedBox(width: 16,),
 
-                      // Menampilkan User Data From Firestore
                       Obx(
                           () => Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -108,7 +104,6 @@ class ProfileScreenView extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 16),
             child: Column(
               children: [
-                // -- First Fiturs
                 BaroProfileFeatures(
                   fiturIcon: FluentIcons.text_bullet_list_square_edit_20_regular,
                   fiturName: "Informasi Pribadi",
@@ -116,7 +111,6 @@ class ProfileScreenView extends StatelessWidget {
                 ),
                 const SizedBox(height: 40,),
 
-                // -- Second Fiturs
                 GestureDetector(
                   onTap: () async {
                     Get.dialog(
@@ -140,7 +134,7 @@ class ProfileScreenView extends StatelessWidget {
                       transition: Transition.fadeIn,
                       duration: const Duration(seconds: 1),
                     );
-                    Get.snackbar("Logout Berhasil", "Terima kasih atas kepercayaan anda menggunakan BaroCars.", backgroundColor: Color(0xFFE92027), colorText: Colors.white);
+                    Get.snackbar("Logout Berhasil", "Terima kasih atas kepercayaan anda menggunakan BaroCars.", backgroundColor: const Color(0xFFE92027), colorText: Colors.white);
                     
                   },
                   child: Row(
