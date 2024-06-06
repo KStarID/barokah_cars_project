@@ -1,5 +1,6 @@
 import 'package:barokah_cars_project/app/modules/login/views/login_view.dart';
 import 'package:barokah_cars_project/app/routes/app_pages.dart';
+import 'package:barokah_cars_project/utils/constants/colors.dart';
 import 'package:barokah_cars_project/utils/constants/image_strings.dart';
 import 'package:barokah_cars_project/utils/constants/text_strings.dart';
 import 'package:barokah_cars_project/utils/validators/validation.dart';
@@ -186,7 +187,7 @@ class RegisterView extends GetView<RegisterController> {
                       registerController.clearForm();
                     }
                   }
-                }
+                }, color: BaroColors.primaryColor,
               ),
               // -- sudah punya akun ?
               Row(

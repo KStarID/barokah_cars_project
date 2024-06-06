@@ -1,6 +1,7 @@
 import 'package:barokah_cars_project/app/modules/navigation_bar/views/navigation_bar_view.dart';
 import 'package:barokah_cars_project/app/modules/profile_screen/controllers/profile_screen_controller.dart';
 import 'package:barokah_cars_project/app/modules/profile_screen/views/widgets/edit_profile_features.dart';
+import 'package:barokah_cars_project/utils/constants/colors.dart';
 import 'package:barokah_cars_project/utils/widgets/widget_button.dart';
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
@@ -154,7 +155,7 @@ class BaroEditProfile extends StatelessWidget {
                         backgroundColor: const Color(0xFFE92027),
                         snackPosition: SnackPosition.BOTTOM,
                         colorText: Colors.white);
-                  },
+                  }, color: BaroColors.primaryColor,
                 ),
               ],
             ),

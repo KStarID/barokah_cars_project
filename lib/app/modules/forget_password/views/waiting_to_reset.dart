@@ -1,5 +1,6 @@
 import 'package:barokah_cars_project/app/modules/forget_password/controllers/forget_password_controller.dart';
 import 'package:barokah_cars_project/app/modules/login/views/login_view.dart';
+import 'package:barokah_cars_project/utils/constants/colors.dart';
 import 'package:barokah_cars_project/utils/constants/image_strings.dart';
 import 'package:barokah_cars_project/utils/widgets/widget_button.dart';
 import 'package:flutter/material.dart';
@@ -37,7 +38,8 @@ class WaitingToReset extends StatelessWidget {
                   width: double.infinity,
                   child: BaroWidgetButton(
                     buttonName: "Kembali", 
-                    onPressed: (() => Get.to(() => LoginView()))
+                    onPressed: (() => Get.to(() => LoginView())), 
+                    color: BaroColors.primaryColor,
                   )
                 )
               ],

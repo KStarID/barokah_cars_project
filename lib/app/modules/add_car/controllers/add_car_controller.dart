@@ -5,6 +5,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
+import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:random_string/random_string.dart';
 import 'package:intl/intl.dart';
@@ -15,8 +16,7 @@ class AddCarController extends GetxController {
   final TextEditingController hargaJualController = TextEditingController();
   final TextEditingController narahubungController = TextEditingController();
   final TextEditingController deskripsiController = TextEditingController();
-  final TextEditingController tahunPembuatanController =
-      TextEditingController();
+  final TextEditingController tahunPembuatanController = TextEditingController();
   final TextEditingController warnaController = TextEditingController();
   var bahanBakarValue = 'Bensin (Gasoline)'.obs;
   var transmisiValue = 'Manual'.obs;
@@ -120,6 +120,112 @@ class AddCarController extends GetxController {
       } on Exception catch (e) {
         print(e);
       }
+    }
+  }
+
+  Widget _buildDropdownRow(String label, String value, List<String> options, Function(String) onUpdate) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: [
+        Text(
+          label,
+          style: GoogleFonts.plusJakartaSans(
+            textStyle: const TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.w700,
+              color: Colors.black,
+            ),
+          ),
+        ),
+        const SizedBox(width: 20),
+        Text(
+          ':',
+          style: GoogleFonts.plusJakartaSans(
+            textStyle: const TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.w700,
+              color: Colors.black,
+            ),
+          ),
+        ),
+        const SizedBox(width: 24),
+        Expanded(
+          child: DropdownButtonFormField<String>(
+            value: value,
+            onChanged: (newValue) {
+              if (newValue != null) {
+                onUpdate(newValue);
+              }
+            },
+            items: options.map<DropdownMenuItem<String>>((String option) {
+              return DropdownMenuItem<String>(
+                value: option,
+                child: Text(option, style: GoogleFonts.plusJakartaSans(
+                  textStyle: const TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.w700,
+                    color: Colors.black,
+                  ),
+                )),
+              );
+            }).toList(),
+            decoration: InputDecoration(
+              contentPadding: EdgeInsets.symmetric(vertical: 10, horizontal: 12),
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(5),
+              ),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  void initializeWithCarData(Map<String, dynamic> car) {
+    merkController.text = car['merk'] ?? '';
+    modelController.text = car['model'] ?? '';
+    tahunPembuatanController.text = car['tahun_pembuatan'] ?? '';
+    warnaController.text = car['warna'] ?? '';
+    bahanBakarValue.value = car['bahan_bakar'] ?? 'Bensin (Gasoline)';
+    transmisiValue.value = car['transmisi'] ?? 'Manual';
+    kondisiValue.value = car['kondisi'] ?? 'Baru';
+    hargaJualController.text = car['harga'] ?? '';
+    narahubungController.text = car['kontak_penjual'] ?? '';
+    deskripsiController.text = car['deskripsi'] ?? '';
+    imageUrl.value = car['image'] ?? '';
+  }
+
+  Future<void> updateCarDetails(String carId) async {
+    DatabaseReference databaseReference = FirebaseDatabase.instance.ref().child('cars').child(carId);
+    Map<String, dynamic> updatedCarData = {
+      'merk': merkController.text,
+      'model': modelController.text,
+      'tahun_pembuatan': tahunPembuatanController.text,
+      'warna': warnaController.text,
+      'bahan_bakar': bahanBakarValue.value,
+      'transmisi': transmisiValue.value,
+      'kondisi': kondisiValue.value,
+      'harga': hargaJualController.text,
+      'kontak_penjual': narahubungController.text,
+      'deskripsi': deskripsiController.text,
+      'image': imageUrl.value,
+    };
+
+    try {
+      await databaseReference.update(updatedCarData);
+      print('Data mobil berhasil diperbarui');
+    } catch (e) {
+      print('Terjadi kesalahan, tidak dapat memperbarui data mobil: $e');
+    }
+  }
+
+  Future<void> deleteCar(String carId) async {
+    DatabaseReference databaseReference = FirebaseDatabase.instance.ref().child('cars').child(carId);
+    try {
+      await databaseReference.remove();
+      print('Mobil berhasil dihapus');
+    } catch (e) {
+      print('Terjadi kesalahan, tidak dapat menghapus mobil: $e');
     }
   }
 }

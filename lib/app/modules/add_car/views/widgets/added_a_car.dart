@@ -1,6 +1,7 @@
 import 'package:barokah_cars_project/app/modules/add_car/controllers/add_car_controller.dart';
 import 'package:barokah_cars_project/app/modules/home/views/widgets/home_header.dart';
 import 'package:barokah_cars_project/app/modules/navigation_bar/views/navigation_bar_view.dart';
+import 'package:barokah_cars_project/utils/constants/colors.dart';
 import 'package:barokah_cars_project/utils/validators/validation.dart';
 import 'package:barokah_cars_project/utils/widgets/widget_button.dart';
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
@@ -103,7 +104,7 @@ class AddCarWidget extends StatelessWidget {
                     ),
                     TextFormField(
                       controller: addCarController.merkController,
-                      validator: (value) => BaroValidator.emailValidate(value),
+                      validator: (value) => BaroValidator.merkValidation(value),
                       decoration: InputDecoration(
                           hintText: "Contoh: Lexus",
                           hintStyle: GoogleFonts.plusJakartaSans(
@@ -530,7 +531,8 @@ class AddCarWidget extends StatelessWidget {
                             colorText: Colors.white,
                             backgroundColor: const Color(0xFFE82027),
                           );
-                        }),
+                        }, 
+                        color: BaroColors.primaryColor,),
                   ],
                 ))
               ],

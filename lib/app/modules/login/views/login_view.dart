@@ -2,6 +2,7 @@ import 'package:barokah_cars_project/app/modules/login/views/widgets/dont_have_a
 import 'package:barokah_cars_project/app/modules/login/views/widgets/forget_password.dart';
 import 'package:barokah_cars_project/app/modules/login/views/widgets/login_header.dart';
 import 'package:barokah_cars_project/app/modules/login/views/widgets/login_with.dart';
+import 'package:barokah_cars_project/utils/constants/colors.dart';
 import 'package:barokah_cars_project/utils/constants/text_strings.dart';
 import 'package:barokah_cars_project/utils/validators/validation.dart';
 import 'package:barokah_cars_project/utils/widgets/widget_button.dart';
@@ -112,7 +113,8 @@ class LoginView extends GetView<LoginController> {
                       loginController.loginValidation();
 
                       Get.back();
-                  },
+                  }, 
+                  color: BaroColors.primaryColor,
                 ),
 
                 // -- Belum memiliki Akun

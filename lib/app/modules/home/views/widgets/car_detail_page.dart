@@ -1,4 +1,9 @@
+import 'package:barokah_cars_project/app/modules/add_car/controllers/add_car_controller.dart';
+import 'package:barokah_cars_project/app/modules/home/views/widgets/update_car_detail.dart';
+import 'package:barokah_cars_project/utils/constants/colors.dart';
+import 'package:barokah_cars_project/utils/widgets/widget_button.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class CarDetailPage extends StatelessWidget {
@@ -6,11 +11,15 @@ class CarDetailPage extends StatelessWidget {
 
   const CarDetailPage({
     super.key, 
-    required this.car
+    required this.car, 
+    this.mobilSaya = false,
   });
+
+  final bool mobilSaya;
 
   @override
   Widget build(BuildContext context) {
+    final addCarController = AddCarController();
     return Scaffold(
       backgroundColor: const Color(0xFFF2F1F6),
       appBar: AppBar(
@@ -104,6 +113,28 @@ class CarDetailPage extends StatelessWidget {
               ],
             ),
             const SizedBox(height: 24,),
+
+            if (mobilSaya)
+            Column(
+              children: [
+                BaroWidgetButton(buttonName: "Update", onPressed: () => Get.to(() => BaroUpdateCarDetail(car: car,)), color: BaroColors.secondPrimaryColor),
+                const SizedBox(height: 16,),
+                BaroWidgetButton(
+                  buttonName: "Delete", 
+                  onPressed: () async {
+                    await addCarController.deleteCar(car['id']);
+                    Get.back(); // Go back to the previous screen
+                    Get.snackbar(
+                      'Delete Success',
+                      'Mobil berhasil dihapus.',
+                      colorText: Colors.white,
+                      backgroundColor: const Color(0xFFE82027),
+                    );
+                  }, 
+                  color: BaroColors.primaryColor
+                ),
+              ],
+            ),
           ],
         ),
       ),

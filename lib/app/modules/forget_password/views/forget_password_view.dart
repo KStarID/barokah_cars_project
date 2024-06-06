@@ -1,4 +1,5 @@
 import 'package:barokah_cars_project/app/modules/forget_password/controllers/forget_password_controller.dart';
+import 'package:barokah_cars_project/utils/constants/colors.dart';
 import 'package:barokah_cars_project/utils/constants/image_strings.dart';
 import 'package:barokah_cars_project/utils/constants/text_strings.dart';
 import 'package:barokah_cars_project/utils/validators/validation.dart';
@@ -77,7 +78,7 @@ class ForgetPasswordView extends GetView<ForgetPasswordController> {
                             Get.back();
 
                             controller.clearForm();
-                        },
+                        }, color: BaroColors.primaryColor,
                       ),
                     ],
               ),

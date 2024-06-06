@@ -5,7 +5,6 @@ import 'package:barokah_cars_project/app/modules/home/views/widgets/car_detail_p
 import 'package:barokah_cars_project/app/modules/home/views/widgets/home_header.dart';
 import 'package:barokah_cars_project/app/modules/profile_screen/controllers/profile_screen_controller.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_database/firebase_database.dart';
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -16,8 +15,6 @@ class AddCarView extends GetView<CarNewsController> {
 
   @override
   Widget build(BuildContext context) {
-    final DatabaseReference databaseReference =
-        FirebaseDatabase.instance.ref().child('cars');
     final ProfileScreenController profileScreenController =
         Get.put(ProfileScreenController());
     final HomeController controller = Get.put(HomeController());
@@ -126,6 +123,7 @@ class AddCarView extends GetView<CarNewsController> {
                                     MaterialPageRoute(
                                         builder: (context) => CarDetailPage(
                                               car: car,
+                                              mobilSaya: true,
                                             )));
                               },
                               child: Container(
@@ -229,6 +227,7 @@ class AddCarView extends GetView<CarNewsController> {
                                     MaterialPageRoute(
                                         builder: (context) => CarDetailPage(
                                               car: car,
+                                              mobilSaya: true,
                                             )));
                               },
                               child: Container(
