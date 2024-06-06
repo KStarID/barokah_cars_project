@@ -9,6 +9,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:random_string/random_string.dart';
 import 'package:intl/intl.dart';
+import 'package:barokah_cars_project/app/modules/home/controllers/home_controller.dart';
 
 class AddCarController extends GetxController {
   final TextEditingController merkController = TextEditingController();
@@ -16,7 +17,8 @@ class AddCarController extends GetxController {
   final TextEditingController hargaJualController = TextEditingController();
   final TextEditingController narahubungController = TextEditingController();
   final TextEditingController deskripsiController = TextEditingController();
-  final TextEditingController tahunPembuatanController = TextEditingController();
+  final TextEditingController tahunPembuatanController =
+      TextEditingController();
   final TextEditingController warnaController = TextEditingController();
   var bahanBakarValue = 'Bensin (Gasoline)'.obs;
   var transmisiValue = 'Manual'.obs;
@@ -123,7 +125,8 @@ class AddCarController extends GetxController {
     }
   }
 
-  Widget _buildDropdownRow(String label, String value, List<String> options, Function(String) onUpdate) {
+  Widget _buildDropdownRow(String label, String value, List<String> options,
+      Function(String) onUpdate) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
@@ -160,17 +163,19 @@ class AddCarController extends GetxController {
             items: options.map<DropdownMenuItem<String>>((String option) {
               return DropdownMenuItem<String>(
                 value: option,
-                child: Text(option, style: GoogleFonts.plusJakartaSans(
-                  textStyle: const TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.w700,
-                    color: Colors.black,
-                  ),
-                )),
+                child: Text(option,
+                    style: GoogleFonts.plusJakartaSans(
+                      textStyle: const TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w700,
+                        color: Colors.black,
+                      ),
+                    )),
               );
             }).toList(),
             decoration: InputDecoration(
-              contentPadding: EdgeInsets.symmetric(vertical: 10, horizontal: 12),
+              contentPadding:
+                  EdgeInsets.symmetric(vertical: 10, horizontal: 12),
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(5),
               ),
@@ -196,7 +201,8 @@ class AddCarController extends GetxController {
   }
 
   Future<void> updateCarDetails(String carId) async {
-    DatabaseReference databaseReference = FirebaseDatabase.instance.ref().child('cars').child(carId);
+    DatabaseReference databaseReference =
+        FirebaseDatabase.instance.ref().child('cars').child(carId);
     Map<String, dynamic> updatedCarData = {
       'merk': merkController.text,
       'model': modelController.text,
@@ -220,7 +226,8 @@ class AddCarController extends GetxController {
   }
 
   Future<void> deleteCar(String carId) async {
-    DatabaseReference databaseReference = FirebaseDatabase.instance.ref().child('cars').child(carId);
+    DatabaseReference databaseReference =
+        FirebaseDatabase.instance.ref().child('cars').child(carId);
     try {
       await databaseReference.remove();
       print('Mobil berhasil dihapus');
