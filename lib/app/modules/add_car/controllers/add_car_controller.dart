@@ -120,6 +120,7 @@ class AddCarController extends GetxController {
   }
 
   void initializeWithCarData(Map<String, dynamic> car) {
+  Future.microtask(() {
     merkController.text = car['merk'] ?? '';
     modelController.text = car['model'] ?? '';
     tahunPembuatanController.text = car['tahun_pembuatan'] ?? '';
@@ -131,7 +132,8 @@ class AddCarController extends GetxController {
     narahubungController.text = car['kontak_penjual'] ?? '';
     deskripsiController.text = car['deskripsi'] ?? '';
     imageUrl.value = car['image'] ?? '';
-  }
+  });
+}
 
   Future<void> updateCarDetails(String carId) async {
     DatabaseReference databaseReference =
