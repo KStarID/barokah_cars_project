@@ -5,7 +5,6 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-
 class HomeController extends GetxController {
   final CollectionReference _userCollection =
       FirebaseFirestore.instance.collection('user');
@@ -17,19 +16,19 @@ class HomeController extends GetxController {
   int totalSeconds = 86400;
   final carouselCurrentIndex = 0.obs;
   String? filterCondition;
-  
+
   Timer? _timer;
 
   RxList<Map<String, dynamic>> allCars = <Map<String, dynamic>>[].obs;
   RxList<Map<String, dynamic>> filteredCars = <Map<String, dynamic>>[].obs;
-  
+
   @override
   void onInit() {
     super.onInit();
     startTimer();
     fetchAllCars();
   }
-  
+
   @override
   void onClose() {
     _timer?.cancel();
@@ -49,10 +48,12 @@ class HomeController extends GetxController {
   }
 
   void fetchAllCars() async {
-    final DatabaseReference databaseReference = FirebaseDatabase.instance.ref().child('cars');
+    final DatabaseReference databaseReference =
+        FirebaseDatabase.instance.ref().child('cars');
     databaseReference.once().then((snapshot) {
       if (snapshot.snapshot.value != null) {
-        Map<dynamic, dynamic> data = snapshot.snapshot.value as Map<dynamic, dynamic>;
+        Map<dynamic, dynamic> data =
+            snapshot.snapshot.value as Map<dynamic, dynamic>;
         List<Map<String, dynamic>> cars = [];
         data.forEach((key, value) {
           Map<String, dynamic> car = Map<String, dynamic>.from(value);
@@ -63,6 +64,10 @@ class HomeController extends GetxController {
         filteredCars.assignAll(cars);
       }
     });
+  }
+
+  void loadCars() {
+    fetchAllCars();
   }
 
   String formatTime(int seconds) {
@@ -99,11 +104,11 @@ class HomeController extends GetxController {
     }
   }
 
-  void updatePageIndicator(index){
+  void updatePageIndicator(index) {
     carouselCurrentIndex.value = index;
   }
 
-   void toggleFilter() {
+  void toggleFilter() {
     if (filterCondition == null) {
       // Set filterCondition ke "Baru" jika null
       filterCondition = "Baru";
@@ -135,10 +140,12 @@ class HomeController extends GetxController {
       // Jika ada query, filter berdasarkan query dan kondisi mobil
       filteredCars.assignAll(
         allCars.where((car) =>
-          (car['model'] != null && car['model'].toLowerCase().contains(query.toLowerCase())) &&
-          (filterCondition == null || car['kondisi'] != null && car['kondisi'].toLowerCase() == filterCondition!.toLowerCase())
-        ).toList()
-      );
+            (car['model'] != null &&
+                car['model'].toLowerCase().contains(query.toLowerCase())) &&
+            (filterCondition == null ||
+                car['kondisi'] != null &&
+                    car['kondisi'].toLowerCase() ==
+                        filterCondition!.toLowerCase())).toList());
     }
   }
 }

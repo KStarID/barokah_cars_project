@@ -1,4 +1,5 @@
 import 'package:barokah_cars_project/app/modules/add_car/controllers/add_car_controller.dart';
+import 'package:barokah_cars_project/app/modules/home/controllers/home_controller.dart';
 import 'package:barokah_cars_project/app/modules/home/views/widgets/home_header.dart';
 import 'package:barokah_cars_project/app/modules/navigation_bar/views/navigation_bar_view.dart';
 import 'package:barokah_cars_project/utils/constants/colors.dart';
@@ -513,26 +514,26 @@ class AddCarWidget extends StatelessWidget {
 
                     // -- Button Add
                     BaroWidgetButton(
-                        buttonName: "Tambahkan Mobil",
-                        onPressed: () async {
-                          await addCarController.uploadFile();
-                          await Future.delayed(const Duration(seconds: 2));
-
-                          addCarController.clearForm();
-
-                          Get.to(
-                            () => const NavigationBarView(),
-                            transition: Transition.fadeIn,
-                            duration: const Duration(seconds: 1),
-                          );
-                          Get.snackbar(
-                            'Add Cars Success',
-                            'Mobil anda telah berhasil ditambahkan.',
-                            colorText: Colors.white,
-                            backgroundColor: const Color(0xFFE82027),
-                          );
-                        }, 
-                        color: BaroColors.primaryColor,),
+                      buttonName: "Tambahkan Mobil",
+                      onPressed: () async {
+                        await addCarController.uploadFile();
+                        await Future.delayed(const Duration(seconds: 2));
+                        addCarController.clearForm();
+                        Get.find<HomeController>().loadCars();
+                        Get.to(
+                          () => const NavigationBarView(),
+                          transition: Transition.fadeIn,
+                          duration: const Duration(seconds: 1),
+                        );
+                        Get.snackbar(
+                          'Add Cars Success',
+                          'Mobil anda telah berhasil ditambahkan.',
+                          colorText: Colors.white,
+                          backgroundColor: const Color(0xFFE82027),
+                        );
+                      },
+                      color: BaroColors.primaryColor,
+                    ),
                   ],
                 ))
               ],

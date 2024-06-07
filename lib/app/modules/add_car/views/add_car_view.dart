@@ -94,7 +94,6 @@ class AddCarView extends GetView<CarNewsController> {
                     return const Center(child: Text('No user is logged in'));
                   }
 
-                  // Filter cars based on the email of the logged-in user
                   var filteredCars = controller.filteredCars.where((car) {
                     return car['email_penjual'] == userEmail;
                   }).toList();
@@ -103,7 +102,6 @@ class AddCarView extends GetView<CarNewsController> {
                     return const Center(child: Text('No cars found'));
                   }
 
-                  // Data dibagi dua bagian
                   int halfLength = (filteredCars.length / 2).ceil();
                   List<Map<String, dynamic>> cars1 =
                       filteredCars.sublist(0, halfLength);

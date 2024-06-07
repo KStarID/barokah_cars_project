@@ -8,7 +8,7 @@ import 'package:image_picker/image_picker.dart';
 
 class ProfileScreenController extends GetxController {
   final CollectionReference _userCollection =
-      FirebaseFirestore.instance.collection('user'); // Pastikan nama koleksinya benar
+      FirebaseFirestore.instance.collection('user');
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
   var name = ''.obs;

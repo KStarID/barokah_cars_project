@@ -1,15 +1,15 @@
-import 'dart:io';
+import 'package:barokah_cars_project/app/modules/home/controllers/home_controller.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
+import 'dart:io';
 import 'package:random_string/random_string.dart';
 import 'package:intl/intl.dart';
-import 'package:barokah_cars_project/app/modules/home/controllers/home_controller.dart';
 
 class AddCarController extends GetxController {
   final TextEditingController merkController = TextEditingController();
@@ -48,26 +48,18 @@ class AddCarController extends GetxController {
       await databaseReferences.set(carInfoMap);
       print('Mobil berhasil ditambahkan');
     } catch (e) {
-      print('Terjadi kesalahan, idak dapat menambahkan mobil');
+      print('Terjadi kesalahan, tidak dapat menambahkan mobil');
     }
   }
 
-  // Metode untuk mengunggah gambar
   Future<void> uploadImage(File image) async {
     try {
-      // Mendapatkan referensi penyimpanan di Firebase Storage
       firebase_storage.Reference ref = firebase_storage.FirebaseStorage.instance
           .ref()
           .child('cars')
           .child('/${DateTime.now().millisecondsSinceEpoch}.jpg');
-
-      // Mengunggah gambar ke Firebase Storage
       await ref.putFile(image);
-
-      // Mendapatkan URL gambar yang diunggah
       String downloadURL = await ref.getDownloadURL();
-
-      // Menyimpan URL gambar ke variabel imageUrl
       imageUrl.value = downloadURL;
     } catch (e) {
       print(e.toString());
@@ -112,78 +104,19 @@ class AddCarController extends GetxController {
             'image': imageUrl.value,
             'upload_timestamp': formattedTimestamp,
             'email_penjual': emailPenjual!,
-            // Add other fields as necessary
           };
 
           DatabaseReference dbRef =
               FirebaseDatabase.instance.ref().child('cars');
           await dbRef.push().set(contact);
+
+          // Reload cars after adding new one
+          Get.find<HomeController>().loadCars();
         }
       } on Exception catch (e) {
         print(e);
       }
     }
-  }
-
-  Widget _buildDropdownRow(String label, String value, List<String> options,
-      Function(String) onUpdate) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.start,
-      children: [
-        Text(
-          label,
-          style: GoogleFonts.plusJakartaSans(
-            textStyle: const TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.w700,
-              color: Colors.black,
-            ),
-          ),
-        ),
-        const SizedBox(width: 20),
-        Text(
-          ':',
-          style: GoogleFonts.plusJakartaSans(
-            textStyle: const TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.w700,
-              color: Colors.black,
-            ),
-          ),
-        ),
-        const SizedBox(width: 24),
-        Expanded(
-          child: DropdownButtonFormField<String>(
-            value: value,
-            onChanged: (newValue) {
-              if (newValue != null) {
-                onUpdate(newValue);
-              }
-            },
-            items: options.map<DropdownMenuItem<String>>((String option) {
-              return DropdownMenuItem<String>(
-                value: option,
-                child: Text(option,
-                    style: GoogleFonts.plusJakartaSans(
-                      textStyle: const TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.w700,
-                        color: Colors.black,
-                      ),
-                    )),
-              );
-            }).toList(),
-            decoration: InputDecoration(
-              contentPadding:
-                  EdgeInsets.symmetric(vertical: 10, horizontal: 12),
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(5),
-              ),
-            ),
-          ),
-        ),
-      ],
-    );
   }
 
   void initializeWithCarData(Map<String, dynamic> car) {
@@ -220,6 +153,9 @@ class AddCarController extends GetxController {
     try {
       await databaseReference.update(updatedCarData);
       print('Data mobil berhasil diperbarui');
+
+      // Reload cars after updating one
+      Get.find<HomeController>().loadCars();
     } catch (e) {
       print('Terjadi kesalahan, tidak dapat memperbarui data mobil: $e');
     }
@@ -231,6 +167,9 @@ class AddCarController extends GetxController {
     try {
       await databaseReference.remove();
       print('Mobil berhasil dihapus');
+
+      // Reload cars after deleting one
+      Get.find<HomeController>().loadCars();
     } catch (e) {
       print('Terjadi kesalahan, tidak dapat menghapus mobil: $e');
     }

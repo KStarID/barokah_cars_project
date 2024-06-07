@@ -1,4 +1,5 @@
 import 'package:barokah_cars_project/app/modules/add_car/controllers/add_car_controller.dart';
+import 'package:barokah_cars_project/app/modules/home/controllers/home_controller.dart';
 import 'package:barokah_cars_project/app/modules/home/views/widgets/update_car_detail.dart';
 import 'package:barokah_cars_project/utils/constants/colors.dart';
 import 'package:barokah_cars_project/utils/widgets/widget_button.dart';
@@ -284,7 +285,7 @@ class CarDetailPage extends StatelessWidget {
                         style: GoogleFonts.plusJakartaSans(
                             textStyle: const TextStyle(
                           fontSize: 18,
-                          fontWeight: FontWeight.w700,
+                          fontWeight: FontWeight.w600,
                           color: Colors.black,
                         )))),
               ],
@@ -305,18 +306,20 @@ class CarDetailPage extends StatelessWidget {
                     height: 16,
                   ),
                   BaroWidgetButton(
-                      buttonName: "Delete",
-                      onPressed: () async {
-                        await addCarController.deleteCar(car['key']);
-                        Get.back(); // Go back to the previous screen
-                        Get.snackbar(
-                          'Delete Success',
-                          'Mobil berhasil dihapus.',
-                          colorText: Colors.white,
-                          backgroundColor: const Color(0xFFE82027),
-                        );
-                      },
-                      color: BaroColors.primaryColor),
+                    buttonName: "Delete",
+                    onPressed: () async {
+                      await addCarController.deleteCar(car['key']);
+                      Get.find<HomeController>().loadCars();
+                      Get.back(); // Go back to the previous screen
+                      Get.snackbar(
+                        'Delete Success',
+                        'Mobil berhasil dihapus.',
+                        colorText: Colors.white,
+                        backgroundColor: const Color(0xFFE82027),
+                      );
+                    },
+                    color: BaroColors.primaryColor,
+                  ),
                 ],
               ),
           ],
