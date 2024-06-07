@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:barokah_cars_project/utils/constants/text_strings.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
@@ -7,7 +8,7 @@ import 'package:get/get.dart';
 
 class HomeController extends GetxController {
   final CollectionReference _userCollection =
-      FirebaseFirestore.instance.collection('user');
+      FirebaseFirestore.instance.collection(BaroTexts.user);
   final FirebaseAuth _auth = FirebaseAuth.instance;
   TextEditingController nameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
@@ -49,7 +50,7 @@ class HomeController extends GetxController {
 
   void fetchAllCars() async {
     final DatabaseReference databaseReference =
-        FirebaseDatabase.instance.ref().child('cars');
+        FirebaseDatabase.instance.ref().child(BaroTexts.cars);
     databaseReference.once().then((snapshot) {
       if (snapshot.snapshot.value != null) {
         Map<dynamic, dynamic> data =
@@ -57,7 +58,7 @@ class HomeController extends GetxController {
         List<Map<String, dynamic>> cars = [];
         data.forEach((key, value) {
           Map<String, dynamic> car = Map<String, dynamic>.from(value);
-          car['key'] = key;
+          car[BaroTexts.key] = key;
           cars.add(car);
         });
         allCars.assignAll(cars);
@@ -88,19 +89,19 @@ class HomeController extends GetxController {
             await _userCollection.doc(user.uid).get();
         if (userSnapshot.exists) {
           var userData = userSnapshot.data() as Map<String, dynamic>;
-          nameController.text = userData['name'] ?? '';
-          emailController.text = userData['email'] ?? '';
+          nameController.text = userData[BaroTexts.name] ?? '';
+          emailController.text = userData[BaroTexts.emailFirebase] ?? '';
         } else {
           // ignore: avoid_print
-          print('No user data found.');
+          print(BaroTexts.noUserDataFound);
         }
       } else {
         // ignore: avoid_print
-        print('No user logged in.');
+        print(BaroTexts.noUserLoggedIn);
       }
     } catch (e) {
       // ignore: avoid_print
-      print('Error fetching user data: $e');
+      print('${BaroTexts.errorFetchingUserData} $e');
     }
   }
 
@@ -111,10 +112,10 @@ class HomeController extends GetxController {
   void toggleFilter() {
     if (filterCondition == null) {
       // Set filterCondition ke "Baru" jika null
-      filterCondition = "Baru";
-    } else if (filterCondition == "Baru") {
+      filterCondition = BaroTexts.baruFilterCondition;
+    } else if (filterCondition == BaroTexts.baruFilterCondition) {
       // Ubah filterCondition ke "Bekas" jika sedang "Baru"
-      filterCondition = "Bekas";
+      filterCondition = BaroTexts.bekasFilterCondition;
     } else {
       // Kembalikan filterCondition ke null jika sedang "Bekas"
       filterCondition = null;
@@ -133,18 +134,18 @@ class HomeController extends GetxController {
       } else {
         // Tampilkan mobil sesuai kondisi filter
         filteredCars.assignAll(allCars.where((car) =>
-            car['kondisi'] != null &&
-            car['kondisi'].toLowerCase() == filterCondition!.toLowerCase()));
+            car[BaroTexts.kondisi] != null &&
+            car[BaroTexts.kondisi].toLowerCase() == filterCondition!.toLowerCase()));
       }
     } else {
       // Jika ada query, filter berdasarkan query dan kondisi mobil
       filteredCars.assignAll(
         allCars.where((car) =>
-            (car['model'] != null &&
-                car['model'].toLowerCase().contains(query.toLowerCase())) &&
+            (car[BaroTexts.model] != null &&
+                car[BaroTexts.model].toLowerCase().contains(query.toLowerCase())) &&
             (filterCondition == null ||
-                car['kondisi'] != null &&
-                    car['kondisi'].toLowerCase() ==
+                car[BaroTexts.kondisi] != null &&
+                    car[BaroTexts.kondisi].toLowerCase() ==
                         filterCondition!.toLowerCase())).toList());
     }
   }

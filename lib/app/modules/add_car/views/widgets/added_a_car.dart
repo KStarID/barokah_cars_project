@@ -3,6 +3,7 @@ import 'package:barokah_cars_project/app/modules/home/controllers/home_controlle
 import 'package:barokah_cars_project/app/modules/home/views/widgets/home_header.dart';
 import 'package:barokah_cars_project/app/modules/navigation_bar/views/navigation_bar_view.dart';
 import 'package:barokah_cars_project/utils/constants/colors.dart';
+import 'package:barokah_cars_project/utils/constants/text_strings.dart';
 import 'package:barokah_cars_project/utils/validators/validation.dart';
 import 'package:barokah_cars_project/utils/widgets/widget_button.dart';
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
@@ -16,7 +17,7 @@ class AddCarWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final addCarController = Get.put(AddCarController());
     return Scaffold(
-      backgroundColor: const Color(0xFFF2F1F6),
+      backgroundColor: BaroColors.backgroundColor,
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16),
         child: SingleChildScrollView(
@@ -29,10 +30,10 @@ class AddCarWidget extends StatelessWidget {
                   children: [
                     IconButton(
                         onPressed: (() => Get.back()),
-                        icon: const Icon(
+                        icon: Icon(
                           FluentIcons.arrow_left_20_regular,
                           size: 30,
-                          color: Color(0xFFE82027),
+                          color: BaroColors.primaryColor,
                         )),
                     const SizedBox(
                       width: 16,
@@ -44,12 +45,12 @@ class AddCarWidget extends StatelessWidget {
                   height: 36,
                 ),
                 Text(
-                  "Add New Car",
+                  BaroTexts.addNewCars,
                   style: GoogleFonts.plusJakartaSans(
-                      textStyle: const TextStyle(
+                      textStyle: TextStyle(
                           fontSize: 22,
                           fontWeight: FontWeight.w600,
-                          color: Colors.black)),
+                          color: BaroColors.blackColor)),
                 ),
                 const SizedBox(
                   height: 30,
@@ -66,10 +67,10 @@ class AddCarWidget extends StatelessWidget {
                           child: Obx(() {
                             return addCarController.selectedImage.value == null
                                 ? IconButton(
-                                    icon: const Icon(
+                                    icon: Icon(
                                       FluentIcons.camera_switch_20_regular,
                                       size: 70,
-                                      color: Colors.black,
+                                      color: BaroColors.blackColor,
                                     ),
                                     onPressed: () {
                                       addCarController.getImage();
@@ -93,12 +94,12 @@ class AddCarWidget extends StatelessWidget {
                     // -- Merk
 
                     Text(
-                      "Merk",
+                      BaroTexts.merk,
                       style: GoogleFonts.plusJakartaSans(
-                          textStyle: const TextStyle(
+                          textStyle: TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.w600,
-                              color: Colors.black)),
+                              color: BaroColors.blackColor)),
                     ),
                     const SizedBox(
                       height: 8,
@@ -109,25 +110,25 @@ class AddCarWidget extends StatelessWidget {
                       decoration: InputDecoration(
                           hintText: "Contoh: Lexus",
                           hintStyle: GoogleFonts.plusJakartaSans(
-                              textStyle: const TextStyle(
+                              textStyle: TextStyle(
                                   fontSize: 16,
                                   fontWeight: FontWeight.w500,
-                                  color: Color(0xFFB0B0B0))),
+                                  color: BaroColors.abuabuB0B0B0Color)),
                           labelText: "Merk",
                           labelStyle: GoogleFonts.plusJakartaSans(
-                              textStyle: const TextStyle(
+                              textStyle: TextStyle(
                                   fontSize: 16,
                                   fontWeight: FontWeight.w500,
-                                  color: Color(0xFFB0B0B0))),
-                          fillColor: const Color(0xFFF6F6F6),
+                                  color: BaroColors.abuabuB0B0B0Color)),
+                          fillColor: BaroColors.abuabuF6F6F6Color,
                           filled: true,
                           border: OutlineInputBorder(
                             borderSide: BorderSide.none,
                             borderRadius: BorderRadius.circular(8),
                           ),
-                          focusedBorder: const OutlineInputBorder(
+                          focusedBorder: OutlineInputBorder(
                               borderSide:
-                                  BorderSide(color: Color(0xFFE82027)))),
+                                  BorderSide(color: BaroColors.primaryColor))),
                     ),
                     const SizedBox(
                       height: 16,

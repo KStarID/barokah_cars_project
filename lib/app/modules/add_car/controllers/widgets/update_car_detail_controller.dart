@@ -11,14 +11,13 @@ import 'dart:io';
 import 'package:random_string/random_string.dart';
 import 'package:intl/intl.dart';
 
-class AddCarController extends GetxController {
+class UpdateCarDetailController extends GetxController {
   final TextEditingController merkController = TextEditingController();
   final TextEditingController modelController = TextEditingController();
   final TextEditingController hargaJualController = TextEditingController();
   final TextEditingController narahubungController = TextEditingController();
   final TextEditingController deskripsiController = TextEditingController();
-  final TextEditingController tahunPembuatanController =
-      TextEditingController();
+  final TextEditingController tahunPembuatanController = TextEditingController();
   final TextEditingController warnaController = TextEditingController();
   var bahanBakarValue = BaroTexts.defaultBahanBakar.obs;
   var transmisiValue = BaroTexts.defaultTransmisi.obs;
@@ -107,7 +106,7 @@ class AddCarController extends GetxController {
           };
 
           DatabaseReference dbRef =
-              FirebaseDatabase.instance.ref().child(BaroTexts.cars);
+              FirebaseDatabase.instance.ref().child('cars');
           await dbRef.push().set(contact);
 
           // Reload cars after adding new one
@@ -137,7 +136,7 @@ class AddCarController extends GetxController {
 
   Future<void> updateCarDetails(String carId) async {
     DatabaseReference databaseReference =
-        FirebaseDatabase.instance.ref().child('cars').child(carId);
+        FirebaseDatabase.instance.ref().child(BaroTexts.cars).child(carId);
     Map<String, dynamic> updatedCarData = {
       BaroTexts.merk: merkController.text,
       BaroTexts.model: modelController.text,
@@ -168,7 +167,7 @@ class AddCarController extends GetxController {
         FirebaseDatabase.instance.ref().child(BaroTexts.cars).child(carId);
     try {
       await databaseReference.remove();
-      print(BaroTexts.saveCar);
+      print(BaroTexts.successRemoveCar);
 
       // Reload cars after deleting one
       Get.find<HomeController>().loadCars();

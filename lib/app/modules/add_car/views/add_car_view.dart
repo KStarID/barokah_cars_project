@@ -4,6 +4,8 @@ import 'package:barokah_cars_project/app/modules/home/controllers/home_controlle
 import 'package:barokah_cars_project/app/modules/home/views/widgets/car_detail_page.dart';
 import 'package:barokah_cars_project/app/modules/home/views/widgets/home_header.dart';
 import 'package:barokah_cars_project/app/modules/profile_screen/controllers/profile_screen_controller.dart';
+import 'package:barokah_cars_project/utils/constants/colors.dart';
+import 'package:barokah_cars_project/utils/constants/text_strings.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
@@ -15,11 +17,10 @@ class AddCarView extends GetView<CarNewsController> {
 
   @override
   Widget build(BuildContext context) {
-    final ProfileScreenController profileScreenController =
         Get.put(ProfileScreenController());
     final HomeController controller = Get.put(HomeController());
     return Scaffold(
-      backgroundColor: const Color(0xFFF2F1F6),
+      backgroundColor: BaroColors.backgroundColor,
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16),
         child: SingleChildScrollView(
@@ -36,7 +37,7 @@ class AddCarView extends GetView<CarNewsController> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      "Your List Cars",
+                      BaroTexts.yourListCars,
                       style: GoogleFonts.plusJakartaSans(
                           textStyle: const TextStyle(
                               fontSize: 22,
@@ -56,7 +57,7 @@ class AddCarView extends GetView<CarNewsController> {
                             borderRadius: BorderRadius.circular(8),
                             color: const Color(0xFFE82027)),
                         child: Text(
-                          "Add Cars",
+                          BaroTexts.addCars,
                           style: GoogleFonts.plusJakartaSans(
                               textStyle: const TextStyle(
                                   fontSize: 12,
@@ -91,15 +92,15 @@ class AddCarView extends GetView<CarNewsController> {
                   String? userEmail = user?.email;
 
                   if (userEmail == null) {
-                    return const Center(child: Text('No user is logged in'));
+                    return const Center(child: Text(BaroTexts.noUserLoggedIn));
                   }
 
                   var filteredCars = controller.filteredCars.where((car) {
-                    return car['email_penjual'] == userEmail;
+                    return car[BaroTexts.emailPenjual] == userEmail;
                   }).toList();
 
                   if (filteredCars.isEmpty) {
-                    return const Center(child: Text('No cars found'));
+                    return const Center(child: Text(BaroTexts.noCarsFound));
                   }
 
                   int halfLength = (filteredCars.length / 2).ceil();
@@ -143,8 +144,8 @@ class AddCarView extends GetView<CarNewsController> {
                                           CrossAxisAlignment.start,
                                       children: [
                                         Center(
-                                          child: car['image'] != null
-                                              ? Image.network(car['image'],
+                                          child: car[BaroTexts.image] != null
+                                              ? Image.network(car[BaroTexts.image],
                                                   width: 190,
                                                   height: 80,
                                                   fit: BoxFit.cover)
@@ -164,26 +165,26 @@ class AddCarView extends GetView<CarNewsController> {
                                                 const SizedBox(
                                                   height: 4,
                                                 ),
-                                                Text(car['model'] ?? 'Unknown',
+                                                Text(car[BaroTexts.model] ?? BaroTexts.unknown,
                                                     style: const TextStyle(
                                                         fontSize: 16,
                                                         fontWeight:
                                                             FontWeight.bold)),
-                                                Text(car['merk'] ?? 'Unknown',
+                                                Text(car[BaroTexts.merk] ?? BaroTexts.unknown,
                                                     style: const TextStyle(
                                                         color: Colors.grey)),
                                               ],
                                             ),
                                             Container(
                                               decoration: BoxDecoration(
-                                                color: car['kondisi'] == 'Bekas'
+                                                color: car[BaroTexts.kondisi] == BaroTexts.oldCar
                                                     ? Colors.blue
                                                     : Colors.red,
                                                 borderRadius:
                                                     BorderRadius.circular(8),
                                               ),
                                               child: Text(
-                                                car['kondisi'] ?? 'Unknown',
+                                                car[BaroTexts.kondisi] ?? BaroTexts.unknown,
                                                 style: const TextStyle(
                                                     color: Colors.white),
                                               ),
@@ -196,11 +197,13 @@ class AddCarView extends GetView<CarNewsController> {
                                               MainAxisAlignment.spaceBetween,
                                           children: [
                                             Text(
-                                                'Price: Rp${car['harga'] ?? 'N/A'}',
-                                                style: const TextStyle(
-                                                    fontSize: 14,
-                                                    fontWeight:
-                                                        FontWeight.bold)),
+                                              '${BaroTexts.priceRP}${car[BaroTexts.harga] ?? BaroTexts.na}',
+                                              style: const TextStyle(
+                                                fontSize: 14,
+                                                fontWeight:
+                                                  FontWeight.bold
+                                              )
+                                            ),
                                           ],
                                         ),
                                       ],
@@ -247,8 +250,8 @@ class AddCarView extends GetView<CarNewsController> {
                                           CrossAxisAlignment.start,
                                       children: [
                                         Center(
-                                          child: car['image'] != null
-                                              ? Image.network(car['image'],
+                                          child: car[BaroTexts.image] != null
+                                              ? Image.network(car[BaroTexts.image],
                                                   width: 190,
                                                   height: 80,
                                                   fit: BoxFit.cover)
@@ -270,26 +273,26 @@ class AddCarView extends GetView<CarNewsController> {
                                                   CrossAxisAlignment.start,
                                               children: [
                                                 const SizedBox(height: 4),
-                                                Text(car['model'] ?? 'Unknown',
+                                                Text(car[BaroTexts.model] ?? BaroTexts.unknown,
                                                     style: const TextStyle(
                                                         fontSize: 16,
                                                         fontWeight:
                                                             FontWeight.bold)),
-                                                Text(car['merk'] ?? 'Unknown',
+                                                Text(car[BaroTexts.merk] ?? BaroTexts.unknown,
                                                     style: const TextStyle(
                                                         color: Colors.grey)),
                                               ],
                                             ),
                                             Container(
                                               decoration: BoxDecoration(
-                                                color: car['kondisi'] == 'Bekas'
+                                                color: car[BaroTexts.kondisi] == BaroTexts.oldCar
                                                     ? Colors.blue
                                                     : Colors.red,
                                                 borderRadius:
                                                     BorderRadius.circular(8),
                                               ),
                                               child: Text(
-                                                car['kondisi'] ?? 'Unknown',
+                                                car[BaroTexts.kondisi] ?? BaroTexts.unknown,
                                                 style: const TextStyle(
                                                     color: Colors.white),
                                               ),
@@ -302,7 +305,7 @@ class AddCarView extends GetView<CarNewsController> {
                                               MainAxisAlignment.spaceBetween,
                                           children: [
                                             Text(
-                                                'Price: Rp${car['harga'] ?? 'N/A'}',
+                                                '${BaroTexts.priceRP}${car[BaroTexts.harga] ?? BaroTexts.na}',
                                                 style: const TextStyle(
                                                     fontSize: 14,
                                                     fontWeight:

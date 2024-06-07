@@ -3,6 +3,7 @@ import 'package:barokah_cars_project/app/modules/home/views/widgets/home_header.
 import 'package:barokah_cars_project/app/modules/home/views/widgets/promo_slider.dart';
 import 'package:barokah_cars_project/app/modules/profile_screen/controllers/profile_screen_controller.dart';
 import 'package:barokah_cars_project/utils/constants/image_strings.dart';
+import 'package:barokah_cars_project/utils/constants/text_strings.dart';
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -32,14 +33,14 @@ class HomeView extends GetView<HomeController> {
                 Column(
                   children: [
                     Obx(() => Text(
-                      "Hello, ${profileScreenController.name.value}",
+                      "${BaroTexts.helloToUser} ${profileScreenController.name.value}",
                       style: GoogleFonts.plusJakartaSans(
                         textStyle: const TextStyle(fontSize: 19, fontWeight: FontWeight.w700, color: Colors.black),
                       ),
                     )),
                     const SizedBox(height: 5,),
                     Text(
-                      "Selamat Datang di Barocars",
+                      BaroTexts.welcomeToBaroCars,
                       style: GoogleFonts.plusJakartaSans(
                         textStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500, color: Colors.grey),
                       ),
@@ -54,7 +55,7 @@ class HomeView extends GetView<HomeController> {
                       child: TextField(
                         onChanged: controller.filterCars,
                         decoration: InputDecoration(
-                          hintText: "Search",
+                          hintText: BaroTexts.search,
                           prefixIcon: const Icon(Icons.search),
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(30),

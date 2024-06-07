@@ -1,4 +1,4 @@
-import 'package:barokah_cars_project/app/modules/add_car/controllers/add_car_controller.dart';
+import 'package:barokah_cars_project/app/modules/add_car/controllers/widgets/update_car_detail_controller.dart';
 import 'package:barokah_cars_project/app/modules/navigation_bar/views/navigation_bar_view.dart';
 import 'package:barokah_cars_project/utils/constants/colors.dart';
 import 'package:barokah_cars_project/utils/constants/image_strings.dart';
@@ -19,13 +19,13 @@ class BaroUpdateCarDetail extends StatefulWidget {
 }
 
 class _BaroUpdateCarDetailState extends State<BaroUpdateCarDetail> {
-  late AddCarController addCarController;
+  late UpdateCarDetailController updateCarDetailController;
 
   @override
   void initState() {
     super.initState();
-    addCarController = Get.put(AddCarController());
-    addCarController.initializeWithCarData(widget.car);
+    updateCarDetailController = Get.put(UpdateCarDetailController());
+    updateCarDetailController.initializeWithCarData(widget.car);
   }
 
   @override
@@ -68,8 +68,8 @@ class _BaroUpdateCarDetailState extends State<BaroUpdateCarDetail> {
                           height: 150,
                           width: 150,
                           child: Obx(() {
-                            return addCarController.selectedImage.value == null &&
-                                    addCarController.imageUrl.value.isEmpty
+                            return updateCarDetailController.selectedImage.value == null &&
+                                    updateCarDetailController.imageUrl.value.isEmpty
                                 ? IconButton(
                                     icon: const Icon(
                                       FluentIcons.camera_switch_20_regular,
@@ -77,23 +77,23 @@ class _BaroUpdateCarDetailState extends State<BaroUpdateCarDetail> {
                                       color: Colors.black,
                                     ),
                                     onPressed: () {
-                                      addCarController.getImage();
+                                      updateCarDetailController.getImage();
                                     },
                                   )
                                 : MaterialButton(
                                     height: 100,
-                                    child: addCarController.selectedImage.value !=
+                                    child: updateCarDetailController.selectedImage.value !=
                                             null
                                         ? Image.file(
-                                            addCarController.selectedImage.value!,
+                                            updateCarDetailController.selectedImage.value!,
                                             fit: BoxFit.fill,
                                           )
                                         : Image.network(
-                                            addCarController.imageUrl.value,
+                                            updateCarDetailController.imageUrl.value,
                                             fit: BoxFit.fill,
                                           ),
                                     onPressed: () {
-                                      addCarController.getImage();
+                                      updateCarDetailController.getImage();
                                     },
                                   );
                           }),
@@ -115,7 +115,7 @@ class _BaroUpdateCarDetailState extends State<BaroUpdateCarDetail> {
                         height: 8,
                       ),
                       TextFormField(
-                        controller: addCarController.merkController,
+                        controller: updateCarDetailController.merkController,
                         validator: (value) =>
                             BaroValidator.merkValidation(value),
                         decoration: InputDecoration(
@@ -160,7 +160,7 @@ class _BaroUpdateCarDetailState extends State<BaroUpdateCarDetail> {
                         height: 30,
                       ),
                       TextFormField(
-                        controller: addCarController.modelController,
+                        controller: updateCarDetailController.modelController,
                         validator: (value) =>
                             BaroValidator.modelValidation(value),
                         decoration: InputDecoration(
@@ -206,7 +206,7 @@ class _BaroUpdateCarDetailState extends State<BaroUpdateCarDetail> {
                       ),
                       TextFormField(
                         controller:
-                            addCarController.tahunPembuatanController,
+                            updateCarDetailController.tahunPembuatanController,
                         validator: (value) =>
                             BaroValidator.tahunPembuatanValidation(value),
                         decoration: InputDecoration(
@@ -259,9 +259,9 @@ class _BaroUpdateCarDetailState extends State<BaroUpdateCarDetail> {
                         ),
                         child: Obx(
                           () => DropdownButtonFormField<String>(
-                            value: addCarController.kondisiValue.value,
+                            value: updateCarDetailController.kondisiValue.value,
                             onChanged: (newValue) {
-                              addCarController.kondisiValue.value = newValue!;
+                              updateCarDetailController.kondisiValue.value = newValue!;
                             },
                             items: ['Baru', 'Bekas']
                                 .map<DropdownMenuItem<String>>(
@@ -298,9 +298,9 @@ class _BaroUpdateCarDetailState extends State<BaroUpdateCarDetail> {
                         ),
                         child: Obx(
                           () => DropdownButtonFormField<String>(
-                            value: addCarController.bahanBakarValue.value,
+                            value: updateCarDetailController.bahanBakarValue.value,
                             onChanged: (newValue) {
-                              addCarController.bahanBakarValue.value =
+                              updateCarDetailController.bahanBakarValue.value =
                                   newValue!;
                             },
                             items: [
@@ -341,9 +341,9 @@ class _BaroUpdateCarDetailState extends State<BaroUpdateCarDetail> {
                         ),
                         child: Obx(
                           () => DropdownButtonFormField<String>(
-                            value: addCarController.transmisiValue.value,
+                            value: updateCarDetailController.transmisiValue.value,
                             onChanged: (newValue) {
-                              addCarController.transmisiValue.value = newValue!;
+                              updateCarDetailController.transmisiValue.value = newValue!;
                             },
                             items: ['Manual', 'Matic']
                                 .map<DropdownMenuItem<String>>((String value) {
@@ -371,7 +371,7 @@ class _BaroUpdateCarDetailState extends State<BaroUpdateCarDetail> {
                         height: 30,
                       ),
                       TextFormField(
-                        controller: addCarController.warnaController,
+                        controller: updateCarDetailController.warnaController,
                         validator: (value) =>
                             BaroValidator.warnaValidation(value),
                         decoration: InputDecoration(
@@ -416,7 +416,7 @@ class _BaroUpdateCarDetailState extends State<BaroUpdateCarDetail> {
                         height: 30,
                       ),
                       TextFormField(
-                        controller: addCarController.hargaJualController,
+                        controller: updateCarDetailController.hargaJualController,
                         validator: (value) =>
                             BaroValidator.hargaJualValidate(value),
                         decoration: InputDecoration(
@@ -461,7 +461,7 @@ class _BaroUpdateCarDetailState extends State<BaroUpdateCarDetail> {
                         height: 30,
                       ),
                       TextFormField(
-                        controller: addCarController.narahubungController,
+                        controller: updateCarDetailController.narahubungController,
                         validator: (value) =>
                             BaroValidator.narahubungValidation(value),
                         decoration: InputDecoration(
@@ -506,7 +506,7 @@ class _BaroUpdateCarDetailState extends State<BaroUpdateCarDetail> {
                         height: 30,
                       ),
                       TextFormField(
-                        controller: addCarController.deskripsiController,
+                        controller: updateCarDetailController.deskripsiController,
                         validator: (value) =>
                             BaroValidator.deskripsiValidation(value),
                         decoration: InputDecoration(
@@ -541,7 +541,7 @@ class _BaroUpdateCarDetailState extends State<BaroUpdateCarDetail> {
                 BaroWidgetButton(
                   buttonName: "Update",
                   onPressed: () async {
-                    await addCarController.updateCarDetails(widget.car['key']);
+                    await updateCarDetailController.updateCarDetails(widget.car['key']);
                     Get.to(
                       () => const NavigationBarView(),
                       transition: Transition.fadeIn,
