@@ -23,7 +23,7 @@ class BaroPromoSlider extends StatelessWidget {
           options: CarouselOptions(
             viewportFraction: 1,
             onPageChanged: (index, _) => controller.updatePageIndicator(index),
-        
+            autoPlay: true
           )
         ),
         const SizedBox(height: 16,),

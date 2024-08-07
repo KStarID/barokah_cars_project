@@ -31,9 +31,6 @@ class EditProfileFeatures extends StatelessWidget {
                 Text(text, style: GoogleFonts.plusJakartaSans(textStyle: const TextStyle(fontSize: 15, fontWeight: FontWeight.w500, color: Colors.black))),
               ],
             ),
-            IconButton(
-              onPressed: (){},
-              icon: Icon(continueIcon, color: Colors.black)),
           ],
         ),
       ),
