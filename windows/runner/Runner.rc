@@ -90,12 +90,12 @@ BEGIN
         BLOCK "040904e4"
         BEGIN
             VALUE "CompanyName", "com.example" "\0"
-            VALUE "FileDescription", "barokah_cars_project" "\0"
+            VALUE "FileDescription", "barocars_android" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
-            VALUE "InternalName", "barokah_cars_project" "\0"
+            VALUE "InternalName", "barocars_android" "\0"
             VALUE "LegalCopyright", "Copyright (C) 2024 com.example. All rights reserved." "\0"
-            VALUE "OriginalFilename", "barokah_cars_project.exe" "\0"
-            VALUE "ProductName", "barokah_cars_project" "\0"
+            VALUE "OriginalFilename", "barocars_android.exe" "\0"
+            VALUE "ProductName", "barocars_android" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END
     END

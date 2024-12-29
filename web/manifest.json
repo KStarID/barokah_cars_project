@@ -1,6 +1,6 @@
 {
-    "name": "barokah_cars_project",
-    "short_name": "barokah_cars_project",
+    "name": "barocars_android",
+    "short_name": "barocars_android",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
