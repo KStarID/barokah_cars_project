@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../navigation_bar/navigation_bar_view.dart';
 import '../profile_screen/widgets/edit_profile.dart';
@@ -11,10 +12,42 @@ class LoginController extends GetxController {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final hidePassword = true.obs;
+  final rememberMe = false.obs;
+  final SharedPreferences? prefs;
 
   final CollectionReference _userCollection =
       FirebaseFirestore.instance.collection('user');
   final FirebaseAuth _auth = FirebaseAuth.instance;
+
+  LoginController() : prefs = null {
+    _initSharedPreferences();
+  }
+
+  void _initSharedPreferences() async {
+    final sharedPrefs = await SharedPreferences.getInstance();
+    final savedEmail = sharedPrefs.getString('saved_email') ?? '';
+    final savedPassword = sharedPrefs.getString('saved_password') ?? '';
+    final isRemembered = sharedPrefs.getBool('remember_me') ?? false;
+
+    if (isRemembered) {
+      emailController.text = savedEmail;
+      passwordController.text = savedPassword;
+      rememberMe.value = true;
+    }
+  }
+
+  Future<void> saveCredentials() async {
+    final sharedPrefs = await SharedPreferences.getInstance();
+    if (rememberMe.value) {
+      await sharedPrefs.setString('saved_email', emailController.text);
+      await sharedPrefs.setString('saved_password', passwordController.text);
+      await sharedPrefs.setBool('remember_me', true);
+    } else {
+      await sharedPrefs.remove('saved_email');
+      await sharedPrefs.remove('saved_password');
+      await sharedPrefs.setBool('remember_me', false);
+    }
+  }
 
   Future<bool> checkCredentials(String email, String password) async {
     try {
@@ -48,6 +81,9 @@ class LoginController extends GetxController {
         password: password,
       );
 
+      // Simpan kredensial jika remember me dicentang
+      await saveCredentials();
+
       // Cek data user di Firestore
       DocumentSnapshot userDoc =
           await _userCollection.doc(userCredential.user!.uid).get();
@@ -60,7 +96,7 @@ class LoginController extends GetxController {
             'Perhatian', 'Silakan lengkapi data profil Anda terlebih dahulu',
             backgroundColor: const Color(0xFFE92027), colorText: Colors.white);
 
-        Get.off(
+        Get.offAll(
           () => const BaroEditProfile(),
           transition: Transition.cupertinoDialog,
           duration: const Duration(milliseconds: 500),
@@ -70,7 +106,7 @@ class LoginController extends GetxController {
         Get.snackbar('Success', 'Anda berhasil melakukan login',
             backgroundColor: const Color(0xFFE92027), colorText: Colors.white);
 
-        Get.off(
+        Get.offAll(
           () => const NavigationBarView(),
           transition: Transition.cupertinoDialog,
           duration: const Duration(milliseconds: 500),
@@ -87,5 +123,12 @@ class LoginController extends GetxController {
   void clearForm() {
     emailController.clear();
     passwordController.clear();
+  }
+
+  @override
+  void onClose() {
+    emailController.dispose();
+    passwordController.dispose();
+    super.onClose();
   }
 }

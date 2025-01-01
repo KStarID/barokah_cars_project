@@ -22,7 +22,7 @@ class OnboardingScreenController extends GetxController {
   // -- Update Current Index & Jump to next page
   void nextPage(){
     if(currentPageindex.value == 2){
-      Get.toNamed(Routes.LOGIN);
+      Get.offAllNamed(Routes.LOGIN);
     }else{
       int page = currentPageindex.value + 1;
       pageController.jumpToPage(page);
