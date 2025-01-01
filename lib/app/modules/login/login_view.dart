@@ -93,8 +93,48 @@ class LoginView extends GetView<LoginController> {
                   ),
                 ),
 
-                // -- Forget Password
-                const BaroLupaPassword(),
+                const SizedBox(height: 8),
+                Row(
+                  children: [
+                    InkWell(
+                      onTap: () {
+                        loginController.rememberMe.value =
+                            !loginController.rememberMe.value;
+                      },
+                      child: Row(
+                        children: [
+                          Obx(() => Checkbox(
+                                value: loginController.rememberMe.value,
+                                onChanged: (value) {
+                                  loginController.rememberMe.value =
+                                      value ?? false;
+                                },
+                                activeColor: const Color(0xFFE82027),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(4),
+                                ),
+                              )),
+                          GestureDetector(
+                            onTap: () {
+                              loginController.rememberMe.value =
+                                  !loginController.rememberMe.value;
+                            },
+                            child: Text(
+                              'Ingat Saya',
+                              style: GoogleFonts.plusJakartaSans(
+                                fontSize: 14,
+                                color: const Color(0xFF232323),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    const Spacer(),
+                    // Forget Password widget
+                    const BaroLupaPassword(),
+                  ],
+                ),
 
                 // -- Login Button
                 BaroWidgetButton(

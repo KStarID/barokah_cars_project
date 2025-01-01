@@ -36,26 +36,52 @@ class HomeView extends GetView<HomeController> {
                 ),
                 Column(
                   children: [
-                    Obx(() => Text(
-                          "${BaroTexts.helloToUser} ${profileScreenController.name.value}",
-                          style: GoogleFonts.plusJakartaSans(
-                            textStyle: const TextStyle(
-                                fontSize: 19,
-                                fontWeight: FontWeight.w700,
-                                color: Colors.black),
-                          ),
-                        )),
+                    Row(
+                      children: [
+                        Obx(() => CircleAvatar(
+                              radius: 20,
+                              backgroundColor: Colors.grey.shade200,
+                              backgroundImage: profileScreenController
+                                      .profileImageUrl.isNotEmpty
+                                  ? NetworkImage(profileScreenController
+                                      .profileImageUrl.value)
+                                  : null,
+                              child: profileScreenController
+                                      .profileImageUrl.isEmpty
+                                  ? const Icon(
+                                      FluentIcons.person_32_regular,
+                                      size: 20,
+                                      color: Colors.grey,
+                                    )
+                                  : null,
+                            )),
+                        const SizedBox(width: 10),
+                        Obx(() => Text(
+                              "${BaroTexts.helloToUser} ${profileScreenController.name.value}",
+                              style: GoogleFonts.plusJakartaSans(
+                                textStyle: const TextStyle(
+                                    fontSize: 19,
+                                    fontWeight: FontWeight.w700,
+                                    color: Colors.black),
+                              ),
+                            )),
+                      ],
+                    ),
                     const SizedBox(
                       height: 5,
                     ),
-                    Text(
-                      BaroTexts.welcomeToBaroCars,
-                      style: GoogleFonts.plusJakartaSans(
-                        textStyle: const TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w500,
-                            color: Colors.grey),
-                      ),
+                    Row(
+                      children: [
+                        Text(
+                          BaroTexts.welcomeToBaroCars,
+                          style: GoogleFonts.plusJakartaSans(
+                            textStyle: const TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w500,
+                                color: Colors.grey),
+                          ),
+                        ),
+                      ],
                     ),
                   ],
                 ),

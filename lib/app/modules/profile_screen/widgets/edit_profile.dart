@@ -2,6 +2,7 @@ import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import '../../../routes/app_pages.dart';
 import '../profile_screen_controller.dart';
 
 class BaroEditProfile extends StatelessWidget {
@@ -19,15 +20,10 @@ class BaroEditProfile extends StatelessWidget {
         title: Text(
           "Edit Profil",
           style: GoogleFonts.plusJakartaSans(
-            fontSize: 20,
+            fontSize: 24,
             fontWeight: FontWeight.w600,
             color: Colors.white,
           ),
-        ),
-        leading: IconButton(
-          icon: const Icon(FluentIcons.arrow_left_20_regular,
-              color: Colors.white),
-          onPressed: () => Get.back(),
         ),
       ),
       body: SingleChildScrollView(
@@ -156,8 +152,7 @@ class BaroEditProfile extends StatelessWidget {
 
                                 await Future.delayed(
                                     const Duration(seconds: 1));
-                                Get.back();
-                                Get.back();
+                                Get.offAllNamed(Routes.LOGIN);
                                 Get.snackbar(
                                   "Berhasil",
                                   "Profil berhasil diperbarui",
