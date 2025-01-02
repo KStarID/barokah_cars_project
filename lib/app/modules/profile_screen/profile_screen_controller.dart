@@ -73,12 +73,20 @@ class ProfileScreenController extends GetxController {
         barrierDismissible: false,
       );
 
+      // Tambahkan metadata untuk keamanan
+      final metadata = firebase_storage.SettableMetadata(
+        contentType: 'image/jpeg',
+        customMetadata: {
+          'uploadedBy': _auth.currentUser?.uid ?? '',
+        },
+      );
+
       firebase_storage.Reference ref = firebase_storage.FirebaseStorage.instance
           .ref()
           .child('profile_images')
-          .child('${DateTime.now().millisecondsSinceEpoch}.jpg');
+          .child('${_auth.currentUser?.uid}_${DateTime.now().millisecondsSinceEpoch}.jpg');
 
-      await ref.putFile(image);
+      await ref.putFile(image, metadata);
 
       String imageUrl = await ref.getDownloadURL();
 

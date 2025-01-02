@@ -104,7 +104,7 @@ class LoginController extends GetxController {
       } else {
         // Jika data lengkap, arahkan ke halaman utama
         Get.snackbar('Success', 'Anda berhasil melakukan login',
-            backgroundColor: const Color(0xFFE92027), colorText: Colors.white);
+            backgroundColor: Colors.green, colorText: Colors.white);
 
         Get.offAll(
           () => const NavigationBarView(),
@@ -115,7 +115,7 @@ class LoginController extends GetxController {
 
       clearForm();
     } catch (e) {
-      Get.snackbar('Error', 'Email atau Password salah',
+      Get.snackbar('Error', 'Email atau Password salah $e',
           backgroundColor: Color(0xFFE92027), colorText: Colors.white);
     }
   }

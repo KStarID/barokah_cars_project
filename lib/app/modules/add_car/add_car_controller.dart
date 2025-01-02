@@ -57,16 +57,30 @@ class AddCarController extends GetxController {
 
   Future<void> uploadImage(File image) async {
     try {
+      final metadata = firebase_storage.SettableMetadata(
+        contentType: 'image/jpeg',
+        customMetadata: {
+          'uploadedBy': FirebaseAuth.instance.currentUser?.uid ?? '',
+          'uploadedAt': DateTime.now().toString(),
+        },
+      );
+
       firebase_storage.Reference ref = firebase_storage.FirebaseStorage.instance
           .ref()
-          .child(BaroTexts.cars)
-          .child(
-              '/${DateTime.now().millisecondsSinceEpoch}.${BaroTexts.photoJpgFormat}');
-      await ref.putFile(image);
+          .child('images')
+          .child('${DateTime.now().millisecondsSinceEpoch}.jpg');
+
+      await ref.putFile(image, metadata);
       String downloadURL = await ref.getDownloadURL();
       imageUrl.value = downloadURL;
     } catch (e) {
-      print(e.toString());
+      print('Error uploading image: $e');
+      Get.snackbar(
+        'Error',
+        'Gagal mengupload gambar',
+        backgroundColor: Colors.red,
+        colorText: Colors.white,
+      );
     }
   }
 
@@ -79,47 +93,154 @@ class AddCarController extends GetxController {
 
   Future<void> uploadFile() async {
     User? user = FirebaseAuth.instance.currentUser;
-    String? emailPenjual = user?.email;
+
+    if (user == null) {
+      Get.snackbar(
+        'Error',
+        'Anda harus login terlebih dahulu',
+        backgroundColor: Colors.red,
+        colorText: Colors.white,
+      );
+      return;
+    }
+
     if (selectedImage.value != null) {
       try {
+        // Tampilkan loading dialog yang lebih informatif
+        Get.dialog(
+          WillPopScope(
+            onWillPop: () async => false, // Prevent closing with back button
+            child: Dialog(
+              backgroundColor: Colors.white,
+              child: Padding(
+                padding: const EdgeInsets.all(20),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    const CircularProgressIndicator(
+                      valueColor:
+                          AlwaysStoppedAnimation<Color>(Color(0xFFE92027)),
+                    ),
+                    const SizedBox(height: 15),
+                    const Text(
+                      'Sedang mengupload gambar...',
+                      style: TextStyle(fontSize: 16),
+                    ),
+                    const SizedBox(height: 5),
+                    StreamBuilder<TaskSnapshot>(
+                      stream: uploadTask?.snapshotEvents,
+                      builder: (context, snapshot) {
+                        if (snapshot.hasData) {
+                          final progress = snapshot.data!.bytesTransferred /
+                              snapshot.data!.totalBytes;
+                          final percentage =
+                              (progress * 100).toStringAsFixed(1);
+                          return Text(
+                            '$percentage%',
+                            style: const TextStyle(fontSize: 14),
+                          );
+                        }
+                        return const SizedBox();
+                      },
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+          barrierDismissible: false,
+        );
+
+        // Upload gambar
         var imagefile = FirebaseStorage.instance
             .ref()
-            .child(BaroTexts.storageImage)
-            .child("/${randomString(13)}.${BaroTexts.photoJpgFormat}");
-        UploadTask task = imagefile.putFile(selectedImage.value!);
-        TaskSnapshot snapshot = await task;
-        String downloadUrl = await snapshot.ref.getDownloadURL();
-        imageUrl.value = downloadUrl;
+            .child("images")
+            .child("${user.uid}_${DateTime.now().millisecondsSinceEpoch}.jpg");
 
-        if (imageUrl.value.isNotEmpty) {
-          String formattedTimestamp =
-              DateFormat(BaroTexts.dateFormat).format(DateTime.now());
-          Map<String, String> contact = {
-            BaroTexts.merk: merkController.text,
-            BaroTexts.model: modelController.text,
-            BaroTexts.bahanBakar: bahanBakarValue.value,
-            BaroTexts.transmisi: transmisiValue.value,
-            BaroTexts.kondisi: kondisiValue.value,
-            BaroTexts.harga: hargaJualController.text,
-            BaroTexts.kontakPenjual: narahubungController.text,
-            BaroTexts.deskripsi: deskripsiController.text,
-            BaroTexts.tahunPembuatan: tahunPembuatanController.text,
-            BaroTexts.warna: warnaController.text,
-            BaroTexts.image: imageUrl.value,
-            BaroTexts.uploadTimestamp: formattedTimestamp,
-            BaroTexts.emailPenjual: emailPenjual!,
-          };
+        // Simpan reference upload task untuk progress monitoring
+        uploadTask = imagefile.putFile(selectedImage.value!);
 
-          DatabaseReference dbRef =
-              FirebaseDatabase.instance.ref().child(BaroTexts.cars);
-          await dbRef.push().set(contact);
+        try {
+          TaskSnapshot snapshot = await uploadTask!;
+          String downloadUrl = await snapshot.ref.getDownloadURL();
+          imageUrl.value = downloadUrl;
 
-          // Reload cars after adding new one
-          Get.find<HomeController>().loadCars();
+          if (imageUrl.value.isNotEmpty) {
+            String formattedTimestamp =
+                DateFormat(BaroTexts.dateFormat).format(DateTime.now());
+
+            Map<String, String> carData = {
+              BaroTexts.merk: merkController.text,
+              BaroTexts.model: modelController.text,
+              BaroTexts.bahanBakar: bahanBakarValue.value,
+              BaroTexts.transmisi: transmisiValue.value,
+              BaroTexts.kondisi: kondisiValue.value,
+              BaroTexts.harga: hargaJualController.text,
+              BaroTexts.kontakPenjual: narahubungController.text,
+              BaroTexts.deskripsi: deskripsiController.text,
+              BaroTexts.tahunPembuatan: tahunPembuatanController.text,
+              BaroTexts.warna: warnaController.text,
+              BaroTexts.image: imageUrl.value,
+              BaroTexts.uploadTimestamp: formattedTimestamp,
+              BaroTexts.emailPenjual: user.email!,
+            };
+
+            // Update loading message
+            Get.back();
+            Get.dialog(
+              const Dialog(
+                backgroundColor: Colors.white,
+                child: Padding(
+                  padding: EdgeInsets.all(20),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      CircularProgressIndicator(
+                        valueColor:
+                            AlwaysStoppedAnimation<Color>(Color(0xFFE92027)),
+                      ),
+                      SizedBox(height: 15),
+                      Text(
+                        'Menyimpan data mobil...',
+                        style: TextStyle(fontSize: 16),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              barrierDismissible: false,
+            );
+
+            DatabaseReference dbRef =
+                FirebaseDatabase.instance.ref().child(BaroTexts.cars);
+            await dbRef.push().set(carData);
+
+            Get.back(); // Tutup loading
+
+            // Clear form setelah berhasil
+            clearForm();
+          }
+        } catch (e) {
+          Get.back(); // Tutup loading
+          throw e;
         }
-      } on Exception catch (e) {
-        print(e);
+      } catch (e) {
+        Get.back(); // Tutup loading
+        print('Error: $e');
+        Get.snackbar(
+          'Error',
+          'Gagal menambahkan data mobil',
+          backgroundColor: Colors.red,
+          colorText: Colors.white,
+        );
       }
+    } else {
+      Get.snackbar(
+        'Error',
+        'Silakan pilih gambar terlebih dahulu',
+        backgroundColor: Colors.red,
+        colorText: Colors.white,
+      );
     }
   }
 
@@ -183,3 +304,6 @@ class AddCarController extends GetxController {
     }
   }
 }
+
+// Tambahkan variable untuk tracking upload task
+UploadTask? uploadTask;

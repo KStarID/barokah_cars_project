@@ -37,10 +37,6 @@ class AddCarWidget extends StatelessWidget {
                           size: 30,
                           color: BaroColors.primaryColor,
                         )),
-                    const SizedBox(
-                      width: 16,
-                    ),
-                    const BaroHomeHeader(),
                   ],
                 ),
                 const SizedBox(
@@ -520,13 +516,11 @@ class AddCarWidget extends StatelessWidget {
                       buttonName: "Tambahkan Mobil",
                       onPressed: () async {
                         await addCarController.uploadFile();
-                        await Future.delayed(const Duration(seconds: 2));
                         addCarController.clearForm();
                         Get.find<HomeController>().loadCars();
                         Get.to(
                           () => const NavigationBarView(),
                           transition: Transition.fadeIn,
-                          duration: const Duration(seconds: 1),
                         );
                         Get.snackbar(
                           'Add Cars Success',
@@ -536,6 +530,9 @@ class AddCarWidget extends StatelessWidget {
                         );
                       },
                       color: BaroColors.primaryColor,
+                    ),
+                    const SizedBox(
+                      height: 20,
                     ),
                   ],
                 ))
