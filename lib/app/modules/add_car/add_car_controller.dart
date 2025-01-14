@@ -154,7 +154,7 @@ class AddCarController extends GetxController {
         // Upload gambar
         var imagefile = FirebaseStorage.instance
             .ref()
-            .child("images")
+            .child("Images")
             .child("${user.uid}_${DateTime.now().millisecondsSinceEpoch}.jpg");
 
         // Simpan reference upload task untuk progress monitoring

@@ -9,7 +9,6 @@ import '../../../utils/validators/validation.dart';
 import '../../../utils/widgets/widget_button.dart';
 import '../../home/home_controller.dart';
 import '../../navigation_bar/navigation_bar_view.dart';
-import '../../home/widgets/home_header.dart';
 import '../add_car_controller.dart';
 
 class AddCarWidget extends StatelessWidget {
